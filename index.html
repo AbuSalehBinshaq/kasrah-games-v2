@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة ألعاب كسرة</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f0f; color: #ffffff; text-align: center; padding: 40px 20px; margin: 0; }
+        h1 { color: #ffcc00; font-size: 3em; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        .subtitle { color: #888; margin-bottom: 50px; font-size: 1.2em; }
+        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .game-card { background: linear-gradient(145deg, #1e1e1e, #121212); padding: 40px 20px; border-radius: 20px; text-decoration: none; color: #fff; font-weight: bold; font-size: 1.3em; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid #2a2a2a; display: flex; align-items: center; justify-content: center; min-height: 100px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
+        .game-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,204,0,0.1), transparent); transition: 0.5s; }
+        .game-card:hover::before { left: 100%; }
+        .game-card:hover { transform: translateY(-10px); border-color: #ffcc00; color: #ffcc00; box-shadow: 0 15px 30px rgba(255, 204, 0, 0.15); }
+        .loading { font-style: italic; color: #555; grid-column: 1/-1; padding: 50px; }
+    </style>
+</head>
+<body>
+    <h1>بوابة ألعاب كسرة</h1>
+    <p class="subtitle">استمتع بأفضل الألعاب المجانية في مكان واحد</p>
+    
+    <div class="game-grid" id="game-container">
+        <div class="loading">جاري اكتشاف الألعاب المتاحة...</div>
+    </div>
+
+    <script>
+        // قائمة الألعاب التي سيتم التحقق منها
+        const potentialGames = [
+            "bloxd-io",
+            "drift-boss",
+            "2048",
+            "egg-car",
+            "1v1-lol",
+            "basketball-stars",
+            "among-us",
+            "agar-io",
+            "bitlife",
+            "moto-x3m",
+            "subway-surfers"
+        ];
+
+        const container = document.getElementById('game-container');
+        
+        async function init() {
+            container.innerHTML = '';
+            let found = 0;
+
+            for (const game of potentialGames) {
+                try {
+                    const res = await fetch(`games/${game}/index.html`, { method: 'HEAD' });
+                    if (res.ok) {
+                        const name = game.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                        const card = document.createElement('a');
+                        card.href = `games/${game}/index.html`;
+                        card.className = 'game-card';
+                        card.textContent = name;
+                        container.appendChild(card);
+                        found++;
+                    }
+                } catch (e) {}
+            }
+
+            if (found === 0) {
+                container.innerHTML = '<div class="loading">لم يتم العثور على ألعاب مرفوعة. تأكد من رفعها في مجلد games/</div>';
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
