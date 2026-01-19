@@ -26,16 +26,16 @@
         
         .game-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
             gap: 20px; 
-            max-width: 1100px; 
+            max-width: 1200px; 
             margin: 0 auto; 
             padding: 20px;
         }
         
         .game-card { 
             background: var(--card-bg); 
-            padding: 30px 15px; 
+            padding: 25px 10px; 
             border-radius: 15px; 
             text-decoration: none; 
             color: #fff; 
@@ -46,7 +46,7 @@
             flex-direction: column;
             align-items: center; 
             justify-content: center; 
-            min-height: 80px;
+            min-height: 100px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         
@@ -58,7 +58,7 @@
         }
 
         .game-card .icon {
-            font-size: 2em;
+            font-size: 2.2em;
             margin-bottom: 10px;
         }
 
@@ -73,14 +73,13 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* تحسين الأداء: إخفاء العناصر حتى تصبح جاهزة */
         .hidden { display: none; }
     </style>
 </head>
 <body>
     <header>
         <h1>بوابة ألعاب كسرة</h1>
-        <p class="subtitle">ألعاب خفيفة وسريعة للكمبيوتر والجوال</p>
+        <p class="subtitle">أفضل الألعاب المشهورة والخفيفة في مكان واحد</p>
     </header>
     
     <div id="loader" class="loading-spinner"></div>
@@ -90,47 +89,53 @@
     </div>
 
     <script>
-        // قائمة الألعاب مع أيقونات تعبيرية لتحسين الشكل بدون صور ثقيلة
+        // قائمة الألعاب المعاد إضافتها (مشهورة وخفيفة)
         const games = [
-            { id: "2048", name: "2048", icon: "🧩" },
-            { id: "agar-io", name: "Agar.io", icon: "🟢" },
-            { id: "bloxd-io", name: "Bloxd.io", icon: "🧱" },
-            { id: "chrome-dino", name: "Dino Run", icon: "🦖" },
-            { id: "cookie-clicker", name: "Cookie Clicker", icon: "🍪" },
+            { id: "drift-boss", name: "Drift Boss", icon: "🏎️" },
+            { id: "eggy-car", name: "Eggy Car", icon: "🥚" },
+            { id: "moto-x3m", name: "Moto X3M", icon: "🏍️" },
+            { id: "stickman-hook", name: "Stickman Hook", icon: "🪝" },
+            { id: "iron-snout", name: "Iron Snout", icon: "🐷" },
+            { id: "bacon-may-die", name: "Bacon May Die", icon: "🥓" },
+            { id: "tiny-fishing", name: "Tiny Fishing", icon: "🎣" },
+            { id: "soccer-random", name: "Soccer Random", icon: "⚽" },
+            { id: "basket-random", name: "Basket Random", icon: "🏀" },
+            { id: "penalty-kick", name: "Penalty Kick", icon: "🥅" },
+            { id: "bubble-shooter-classic", name: "Bubble Shooter", icon: "🔮" },
+            { id: "snail-bob-8", name: "Snail Bob 8", icon: "🐌" },
+            { id: "fireboy-and-watergirl-in-the-forest-temple", name: "Fire & Water", icon: "🔥" },
+            { id: "slope", name: "Slope", icon: "🎾" },
             { id: "hole-io", name: "Hole.io", icon: "🕳️" },
             { id: "paper-io", name: "Paper.io", icon: "📄" },
-            { id: "slope", name: "Slope", icon: "🏀" }
+            { id: "agar-io", name: "Agar.io", icon: "🟢" },
+            { id: "2048", name: "2048", icon: "🧩" },
+            { id: "chrome-dino", name: "Dino Run", icon: "🦖" },
+            { id: "bloxd-io", name: "Bloxd.io", icon: "🧱" },
+            { id: "cookie-clicker", name: "Cookie Clicker", icon: "🍪" }
         ];
 
         const container = document.getElementById('game-container');
         const loader = document.getElementById('loader');
         
         function init() {
-            // استخدام DocumentFragment لتحسين أداء الـ DOM
             const fragment = document.createDocumentFragment();
 
             games.forEach(game => {
                 const card = document.createElement('a');
                 card.href = `games/${game.id}/index.html`;
                 card.className = 'game-card';
-                
-                // إضافة الأيقونة والاسم
                 card.innerHTML = `
                     <span class="icon">${game.icon}</span>
                     <span>${game.name}</span>
                 `;
-                
                 fragment.appendChild(card);
             });
 
             container.appendChild(fragment);
-            
-            // إخفاء الـ loader وإظهار الألعاب
             loader.classList.add('hidden');
             container.classList.remove('hidden');
         }
 
-        // تشغيل الكود بعد تحميل الصفحة لضمان السرعة
         window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
