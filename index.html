@@ -3,67 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة ألعاب كسرة</title>
+    <title>بوابة ألعاب كسرة | أداء عالي</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f0f; color: #ffffff; text-align: center; padding: 40px 20px; margin: 0; }
-        h1 { color: #ffcc00; font-size: 3em; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
-        .subtitle { color: #888; margin-bottom: 50px; font-size: 1.2em; }
-        .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        .game-card { background: linear-gradient(145deg, #1e1e1e, #121212); padding: 40px 20px; border-radius: 20px; text-decoration: none; color: #fff; font-weight: bold; font-size: 1.3em; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid #2a2a2a; display: flex; align-items: center; justify-content: center; min-height: 100px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
-        .game-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,204,0,0.1), transparent); transition: 0.5s; }
-        .game-card:hover::before { left: 100%; }
-        .game-card:hover { transform: translateY(-10px); border-color: #ffcc00; color: #ffcc00; box-shadow: 0 15px 30px rgba(255, 204, 0, 0.15); }
-        .loading { font-style: italic; color: #555; grid-column: 1/-1; padding: 50px; }
+        :root {
+            --primary: #ffcc00;
+            --bg: #0a0a0a;
+            --card-bg: #161616;
+            --text: #eeeeee;
+        }
+        body { 
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            text-align: center; 
+            padding: 20px; 
+            margin: 0;
+            overflow-x: hidden;
+        }
+        header { padding: 40px 0; }
+        h1 { color: var(--primary); font-size: 2.5em; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
+        .subtitle { color: #888; margin-top: 10px; font-size: 1.1em; }
+        
+        .game-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+            gap: 20px; 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            padding: 20px;
+        }
+        
+        .game-card { 
+            background: var(--card-bg); 
+            padding: 30px 15px; 
+            border-radius: 15px; 
+            text-decoration: none; 
+            color: #fff; 
+            font-weight: 600; 
+            transition: all 0.3s ease; 
+            border: 1px solid #222; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+            min-height: 80px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .game-card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--primary); 
+            background: #1f1f1f;
+            box-shadow: 0 8px 25px rgba(255, 204, 0, 0.1);
+        }
+
+        .game-card .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(255,255,255,0.1);
+            border-left-color: var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 50px auto;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* تحسين الأداء: إخفاء العناصر حتى تصبح جاهزة */
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-    <h1>بوابة ألعاب كسرة</h1>
-    <p class="subtitle">استمتع بأفضل الألعاب المجانية في مكان واحد</p>
+    <header>
+        <h1>بوابة ألعاب كسرة</h1>
+        <p class="subtitle">ألعاب خفيفة وسريعة للكمبيوتر والجوال</p>
+    </header>
     
-    <div class="game-grid" id="game-container">
-        <div class="loading">جاري اكتشاف الألعاب المتاحة...</div>
+    <div id="loader" class="loading-spinner"></div>
+    
+    <div class="game-grid hidden" id="game-container">
+        <!-- سيتم ملء الألعاب هنا برمجياً -->
     </div>
 
     <script>
-        // قائمة الألعاب المتبقية بعد تصفية حقوق الملكية
-        const potentialGames = [
-            "2048",
-            "agar-io",
-            "bloxd-io",
-            "chrome-dino",
-            "cookie-clicker",
-            "hole-io",
-            "paper-io",
-            "slope"
+        // قائمة الألعاب مع أيقونات تعبيرية لتحسين الشكل بدون صور ثقيلة
+        const games = [
+            { id: "2048", name: "2048", icon: "🧩" },
+            { id: "agar-io", name: "Agar.io", icon: "🟢" },
+            { id: "bloxd-io", name: "Bloxd.io", icon: "🧱" },
+            { id: "chrome-dino", name: "Dino Run", icon: "🦖" },
+            { id: "cookie-clicker", name: "Cookie Clicker", icon: "🍪" },
+            { id: "hole-io", name: "Hole.io", icon: "🕳️" },
+            { id: "paper-io", name: "Paper.io", icon: "📄" },
+            { id: "slope", name: "Slope", icon: "🏀" }
         ];
 
         const container = document.getElementById('game-container');
+        const loader = document.getElementById('loader');
         
-        async function init() {
-            container.innerHTML = '';
-            let found = 0;
+        function init() {
+            // استخدام DocumentFragment لتحسين أداء الـ DOM
+            const fragment = document.createDocumentFragment();
 
-            for (const game of potentialGames) {
-                try {
-                    const res = await fetch(`games/${game}/index.html`, { method: 'HEAD' });
-                    if (res.ok) {
-                        const name = game.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-                        const card = document.createElement('a');
-                        card.href = `games/${game}/index.html`;
-                        card.className = 'game-card';
-                        card.textContent = name;
-                        container.appendChild(card);
-                        found++;
-                    }
-                } catch (e) {}
-            }
+            games.forEach(game => {
+                const card = document.createElement('a');
+                card.href = `games/${game.id}/index.html`;
+                card.className = 'game-card';
+                
+                // إضافة الأيقونة والاسم
+                card.innerHTML = `
+                    <span class="icon">${game.icon}</span>
+                    <span>${game.name}</span>
+                `;
+                
+                fragment.appendChild(card);
+            });
 
-            if (found === 0) {
-                container.innerHTML = '<div class="loading">لم يتم العثور على ألعاب مرفوعة. تأكد من رفعها في مجلد games/</div>';
-            }
+            container.appendChild(fragment);
+            
+            // إخفاء الـ loader وإظهار الألعاب
+            loader.classList.add('hidden');
+            container.classList.remove('hidden');
         }
 
-        init();
+        // تشغيل الكود بعد تحميل الصفحة لضمان السرعة
+        window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
