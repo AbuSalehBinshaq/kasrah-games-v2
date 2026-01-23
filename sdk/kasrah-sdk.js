@@ -1,8 +1,8 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v1.5.0
-    // Optimized for Performance, Scalability & Data Integrity
+    // Kasrah Games SDK - Cloud Edition v1.6.0
+    // Optimized for Performance, Scalability & Visual Feedback
     
-    const SDK_VERSION = '1.5.0';
+    const SDK_VERSION = '1.6.0';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
@@ -18,7 +18,7 @@
             this.injectStyles();
             this.createSplashScreen();
             this.checkAuth();
-            this.handleUnload(); // تفعيل الحفظ عند إغلاق الصفحة
+            this.handleUnload();
         },
 
         injectStyles: function() {
@@ -56,14 +56,28 @@
                     box-shadow: 0 8px 25px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 12px;
                     cursor: pointer; transition: all 0.3s; animation: kasrah-slide-up 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                 }
-                .kasrah-guest-alert:hover { transform: translateX(-50%) scale(1.05); background: ${PRIMARY_COLOR}; }
+                .kasrah-save-status {
+                    position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7);
+                    color: white; padding: 6px 15px; border-radius: 20px; font-size: 11px;
+                    z-index: 999997; border: 1px solid #444; backdrop-filter: blur(5px);
+                    display: flex; align-items: center; gap: 8px; opacity: 0; transition: opacity 0.3s;
+                    pointer-events: none; text-transform: uppercase; letter-spacing: 1px;
+                }
+                .kasrah-dot { width: 6px; height: 6px; border-radius: 50%; background: #888; }
+                .kasrah-dot.saving { background: ${PRIMARY_COLOR}; animation: kasrah-pulse 1s infinite; }
+                .kasrah-dot.saved { background: #2ecc71; }
+                @keyframes kasrah-pulse {
+                    0% { transform: scale(1); opacity: 1; }
+                    50% { transform: scale(1.5); opacity: 0.5; }
+                    100% { transform: scale(1); opacity: 1; }
+                }
                 @keyframes kasrah-slide-up {
                     from { bottom: -60px; opacity: 0; }
                     to { bottom: 20px; opacity: 1; }
                 }
                 @media (max-width: 600px) {
                     .kasrah-logo { font-size: 32px; }
-                    .kasrah-guest-alert { width: 90%; font-size: 12px; justify-content: center; padding: 10px; }
+                    .kasrah-save-status { bottom: 10px; right: 10px; font-size: 10px; }
                 }
             `;
             const styleSheet = document.createElement("style");
@@ -142,10 +156,34 @@
             }, 12000);
         },
 
+        updateSaveStatus: function(status) {
+            let statusEl = document.getElementById('kasrah-save-status');
+            if (!statusEl) {
+                statusEl = document.createElement('div');
+                statusEl.id = 'kasrah-save-status';
+                statusEl.className = 'kasrah-save-status';
+                document.body.appendChild(statusEl);
+            }
+
+            if (status === 'saving') {
+                statusEl.innerHTML = `<div class="kasrah-dot saving"></div> Saving...`;
+                statusEl.style.opacity = '1';
+            } else if (status === 'saved') {
+                statusEl.innerHTML = `<div class="kasrah-dot saved"></div> Saved`;
+                statusEl.style.opacity = '1';
+                setTimeout(() => {
+                    if (statusEl.innerHTML.includes('Saved')) statusEl.style.opacity = '0';
+                }, 2000);
+            }
+        },
+
         saveData: function(key, value) {
             localStorage.setItem('kasrah_' + key, JSON.stringify(value));
             if (!this.user) return;
+            
             this.saveQueue[key] = value;
+            this.updateSaveStatus('saving'); // إظهار "جاري الحفظ"
+
             if (this.saveTimeout) clearTimeout(this.saveTimeout);
             this.saveTimeout = setTimeout(() => this.syncWithCloud(), 3000);
         },
@@ -155,7 +193,7 @@
             const dataToSync = { ...this.saveQueue };
             this.saveQueue = {};
             try {
-                await fetch(`${MAIN_SITE_URL}/api/games/save-data`, {
+                const response = await fetch(`${MAIN_SITE_URL}/api/games/save-data`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
@@ -164,10 +202,14 @@
                         data: dataToSync
                     })
                 });
-            } catch (e) {}
+                if (response.ok) {
+                    this.updateSaveStatus('saved'); // إظهار "تم الحفظ"
+                }
+            } catch (e) {
+                console.error("☁️ Kasrah Cloud: Sync failed.");
+            }
         },
 
-        // ميزة الحفظ عند إغلاق الصفحة باستخدام Beacon API لضمان وصول البيانات
         handleUnload: function() {
             window.addEventListener('beforeunload', () => {
                 if (this.user && Object.keys(this.saveQueue).length > 0) {
@@ -175,7 +217,6 @@
                         gameId: this.gameId,
                         data: this.saveQueue
                     });
-                    // استخدام sendBeacon لضمان إرسال البيانات حتى بعد إغلاق المتصفح
                     navigator.sendBeacon(`${MAIN_SITE_URL}/api/games/save-data`, payload);
                 }
             });
