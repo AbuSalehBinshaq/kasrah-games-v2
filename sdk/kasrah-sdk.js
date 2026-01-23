@@ -1,8 +1,8 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v1.4.0
-    // Optimized for Performance & Scalability
+    // Kasrah Games SDK - Cloud Edition v1.5.0
+    // Optimized for Performance, Scalability & Data Integrity
     
-    const SDK_VERSION = '1.4.0';
+    const SDK_VERSION = '1.5.0';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
@@ -18,6 +18,7 @@
             this.injectStyles();
             this.createSplashScreen();
             this.checkAuth();
+            this.handleUnload(); // تفعيل الحفظ عند إغلاق الصفحة
         },
 
         injectStyles: function() {
@@ -82,7 +83,7 @@
 
             let progress = 0;
             const interval = setInterval(() => {
-                progress += Math.random() * 30;
+                progress += Math.random() * 35;
                 if (progress > 100) progress = 100;
                 const pBar = document.getElementById('kasrah-p-bar');
                 if (pBar) pBar.style.width = progress + '%';
@@ -94,7 +95,7 @@
                         setTimeout(() => splash.remove(), 800);
                     }, 400);
                 }
-            }, 120);
+            }, 100);
         },
 
         checkAuth: async function() {
@@ -141,27 +142,18 @@
             }, 12000);
         },
 
-        // نظام الحفظ الذكي (Debouncing) لتجنب الضغط على السيرفر
         saveData: function(key, value) {
-            // حفظ محلي فوري
             localStorage.setItem('kasrah_' + key, JSON.stringify(value));
-            
             if (!this.user) return;
-
-            // إضافة البيانات لزمام الانتظار
             this.saveQueue[key] = value;
-
-            // إعادة ضبط المؤقت (سيتم الإرسال فقط بعد توقف التغييرات بـ 3 ثوانٍ)
             if (this.saveTimeout) clearTimeout(this.saveTimeout);
             this.saveTimeout = setTimeout(() => this.syncWithCloud(), 3000);
         },
 
         syncWithCloud: async function() {
             if (!this.user || Object.keys(this.saveQueue).length === 0) return;
-
             const dataToSync = { ...this.saveQueue };
-            this.saveQueue = {}; // تفريغ الزمام
-
+            this.saveQueue = {};
             try {
                 await fetch(`${MAIN_SITE_URL}/api/games/save-data`, {
                     method: 'POST',
@@ -172,10 +164,21 @@
                         data: dataToSync
                     })
                 });
-                console.log("☁️ Kasrah Cloud: Progress synced successfully.");
-            } catch (e) {
-                console.error("☁️ Kasrah Cloud: Sync failed.");
-            }
+            } catch (e) {}
+        },
+
+        // ميزة الحفظ عند إغلاق الصفحة باستخدام Beacon API لضمان وصول البيانات
+        handleUnload: function() {
+            window.addEventListener('beforeunload', () => {
+                if (this.user && Object.keys(this.saveQueue).length > 0) {
+                    const payload = JSON.stringify({
+                        gameId: this.gameId,
+                        data: this.saveQueue
+                    });
+                    // استخدام sendBeacon لضمان إرسال البيانات حتى بعد إغلاق المتصفح
+                    navigator.sendBeacon(`${MAIN_SITE_URL}/api/games/save-data`, payload);
+                }
+            });
         },
 
         loadData: function(key) {
@@ -183,7 +186,6 @@
         }
     };
 
-    // التشغيل التلقائي
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
         KasrahSDK.init();
     } else {
