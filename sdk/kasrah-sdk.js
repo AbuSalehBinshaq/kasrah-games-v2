@@ -1,8 +1,8 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v1.6.0
-    // Optimized for Performance, Scalability & Visual Feedback
+    // Kasrah Games SDK - Cloud Edition v1.7.0
+    // Fixed: Login Link, Auth Logic, and Integrated UI Feedback
     
-    const SDK_VERSION = '1.6.0';
+    const SDK_VERSION = '1.7.0';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
@@ -12,6 +12,7 @@
         gameId: window.location.pathname.split('/').filter(Boolean).pop() || 'unknown',
         saveQueue: {},
         saveTimeout: null,
+        isAuthChecked: false,
 
         init: function() {
             console.log(`%c 🎮 ${PLATFORM_NAME} SDK v${SDK_VERSION} Active `, `background: ${PRIMARY_COLOR}; color: white; font-weight: bold; padding: 4px; border-radius: 4px;`);
@@ -42,6 +43,10 @@
                     box-shadow: 0 0 10px ${PRIMARY_COLOR};
                     transition: width 0.3s ease;
                 }
+                .kasrah-splash-alert {
+                    margin-top: 20px; color: #ff4757; font-size: 14px; font-weight: 500;
+                    opacity: 0; transition: opacity 0.5s;
+                }
                 .kasrah-user-badge {
                     position: fixed; top: 10px; right: 10px; background: rgba(0,0,0,0.6);
                     color: white; padding: 5px 12px; border-radius: 15px; font-size: 12px;
@@ -56,6 +61,7 @@
                     box-shadow: 0 8px 25px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 12px;
                     cursor: pointer; transition: all 0.3s; animation: kasrah-slide-up 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                 }
+                .kasrah-guest-alert:hover { transform: translateX(-50%) scale(1.05); background: ${PRIMARY_COLOR}; }
                 .kasrah-save-status {
                     position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7);
                     color: white; padding: 6px 15px; border-radius: 20px; font-size: 11px;
@@ -77,7 +83,7 @@
                 }
                 @media (max-width: 600px) {
                     .kasrah-logo { font-size: 32px; }
-                    .kasrah-save-status { bottom: 10px; right: 10px; font-size: 10px; }
+                    .kasrah-guest-alert { width: 90%; font-size: 12px; justify-content: center; padding: 10px; }
                 }
             `;
             const styleSheet = document.createElement("style");
@@ -91,13 +97,14 @@
             splash.innerHTML = `
                 <div class="kasrah-logo">KASRAH</div>
                 <div class="kasrah-loader"><div class="kasrah-progress" id="kasrah-p-bar"></div></div>
+                <div id="kasrah-splash-alert" class="kasrah-splash-alert">⚠️ Login to save your progress!</div>
                 <div style="color: #888; margin-top: 15px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Cloud Sync Active</div>
             `;
             document.body.appendChild(splash);
 
             let progress = 0;
             const interval = setInterval(() => {
-                progress += Math.random() * 35;
+                progress += Math.random() * 25;
                 if (progress > 100) progress = 100;
                 const pBar = document.getElementById('kasrah-p-bar');
                 if (pBar) pBar.style.width = progress + '%';
@@ -107,19 +114,27 @@
                     setTimeout(() => {
                         splash.style.opacity = '0';
                         setTimeout(() => splash.remove(), 800);
-                    }, 400);
+                    }, 1000); // زيادة الوقت قليلاً ليرى المستخدم التنبيه
                 }
-            }, 100);
+            }, 150);
         },
 
         checkAuth: async function() {
             try {
                 const response = await fetch(`${MAIN_SITE_URL}/api/auth/profile`, { credentials: 'include' });
+                this.isAuthChecked = true;
                 if (response.ok) {
                     this.user = await response.json();
                     this.showUserBadge();
+                    // إخفاء تنبيه شاشة التحميل إذا كان مسجلاً
+                    const splashAlert = document.getElementById('kasrah-splash-alert');
+                    if (splashAlert) splashAlert.style.display = 'none';
                 } else {
-                    setTimeout(() => this.showGuestAlert(), 3000);
+                    // إظهار التنبيه في شاشة التحميل
+                    const splashAlert = document.getElementById('kasrah-splash-alert');
+                    if (splashAlert) splashAlert.style.opacity = '1';
+                    // إظهار التنبيه العائم لاحقاً
+                    setTimeout(() => this.showGuestAlert(), 4000);
                 }
             } catch (e) {
                 console.warn("Kasrah SDK: Connection to main platform failed.");
@@ -139,7 +154,9 @@
         },
 
         showGuestAlert: function() {
-            if (this.user) return;
+            // التأكد من عدم وجود مستخدم وعدم وجود تنبيه سابق
+            if (this.user || document.querySelector('.kasrah-guest-alert')) return;
+            
             const alert = document.createElement('div');
             alert.className = 'kasrah-guest-alert';
             alert.innerHTML = `
@@ -147,13 +164,14 @@
                 <span>Login to save your progress in the cloud!</span>
                 <span style="text-decoration: underline; font-weight: bold; margin-left: 5px;">Login Now</span>
             `;
-            alert.onclick = () => window.open(`${MAIN_SITE_URL}/login`, '_blank');
+            // إصلاح الرابط: التوجه لصفحة تسجيل الدخول الصحيحة
+            alert.onclick = () => window.open(`${MAIN_SITE_URL}/auth/login`, '_blank');
             document.body.appendChild(alert);
             
             setTimeout(() => {
                 alert.style.opacity = '0';
                 setTimeout(() => alert.remove(), 600);
-            }, 12000);
+            }, 10000);
         },
 
         updateSaveStatus: function(status) {
@@ -182,7 +200,7 @@
             if (!this.user) return;
             
             this.saveQueue[key] = value;
-            this.updateSaveStatus('saving'); // إظهار "جاري الحفظ"
+            this.updateSaveStatus('saving');
 
             if (this.saveTimeout) clearTimeout(this.saveTimeout);
             this.saveTimeout = setTimeout(() => this.syncWithCloud(), 3000);
@@ -203,11 +221,9 @@
                     })
                 });
                 if (response.ok) {
-                    this.updateSaveStatus('saved'); // إظهار "تم الحفظ"
+                    this.updateSaveStatus('saved');
                 }
-            } catch (e) {
-                console.error("☁️ Kasrah Cloud: Sync failed.");
-            }
+            } catch (e) {}
         },
 
         handleUnload: function() {
