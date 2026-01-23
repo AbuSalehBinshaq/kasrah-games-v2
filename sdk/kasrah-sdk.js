@@ -1,8 +1,8 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v1.7.0
-    // Fixed: Login Link, Auth Logic, and Integrated UI Feedback
+    // Kasrah Games SDK - Cloud Edition v1.8.0
+    // Fixed: Auth Logic for Admins/Users & Smart Redirect after Login
     
-    const SDK_VERSION = '1.7.0';
+    const SDK_VERSION = '1.8.0';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
@@ -114,7 +114,7 @@
                     setTimeout(() => {
                         splash.style.opacity = '0';
                         setTimeout(() => splash.remove(), 800);
-                    }, 1000); // زيادة الوقت قليلاً ليرى المستخدم التنبيه
+                    }, 1000);
                 }
             }, 150);
         },
@@ -124,18 +124,22 @@
                 const response = await fetch(`${MAIN_SITE_URL}/api/auth/profile`, { credentials: 'include' });
                 this.isAuthChecked = true;
                 if (response.ok) {
-                    this.user = await response.json();
-                    this.showUserBadge();
-                    // إخفاء تنبيه شاشة التحميل إذا كان مسجلاً
-                    const splashAlert = document.getElementById('kasrah-splash-alert');
-                    if (splashAlert) splashAlert.style.display = 'none';
-                } else {
-                    // إظهار التنبيه في شاشة التحميل
-                    const splashAlert = document.getElementById('kasrah-splash-alert');
-                    if (splashAlert) splashAlert.style.opacity = '1';
-                    // إظهار التنبيه العائم لاحقاً
-                    setTimeout(() => this.showGuestAlert(), 4000);
+                    const data = await response.json();
+                    // التحقق من وجود بيانات المستخدم سواء كان أدمن أو مستخدم عادي
+                    if (data && (data.username || data.email)) {
+                        this.user = data;
+                        this.showUserBadge();
+                        const splashAlert = document.getElementById('kasrah-splash-alert');
+                        if (splashAlert) splashAlert.style.display = 'none';
+                        return;
+                    }
                 }
+                
+                // إذا لم يكن مسجلاً
+                const splashAlert = document.getElementById('kasrah-splash-alert');
+                if (splashAlert) splashAlert.style.opacity = '1';
+                setTimeout(() => this.showGuestAlert(), 4000);
+                
             } catch (e) {
                 console.warn("Kasrah SDK: Connection to main platform failed.");
             }
@@ -145,16 +149,16 @@
             if (!this.user) return;
             const badge = document.createElement('div');
             badge.className = 'kasrah-user-badge';
+            const displayName = this.user.username || this.user.email.split('@')[0];
             badge.innerHTML = `
                 <span style="color: ${PRIMARY_COLOR}">●</span>
-                <span>${this.user.username}</span>
+                <span>${displayName}</span>
             `;
             document.body.appendChild(badge);
             setTimeout(() => badge.style.opacity = '0.4', 5000);
         },
 
         showGuestAlert: function() {
-            // التأكد من عدم وجود مستخدم وعدم وجود تنبيه سابق
             if (this.user || document.querySelector('.kasrah-guest-alert')) return;
             
             const alert = document.createElement('div');
@@ -164,8 +168,11 @@
                 <span>Login to save your progress in the cloud!</span>
                 <span style="text-decoration: underline; font-weight: bold; margin-left: 5px;">Login Now</span>
             `;
-            // إصلاح الرابط: التوجه لصفحة تسجيل الدخول الصحيحة
-            alert.onclick = () => window.open(`${MAIN_SITE_URL}/auth/login`, '_blank');
+            
+            // ميزة العودة التلقائية: إرسال رابط اللعبة الحالي كـ callbackUrl
+            const currentGameUrl = window.location.href;
+            alert.onclick = () => window.open(`${MAIN_SITE_URL}/auth/login?callbackUrl=${encodeURIComponent(currentGameUrl)}`, '_self');
+            
             document.body.appendChild(alert);
             
             setTimeout(() => {
