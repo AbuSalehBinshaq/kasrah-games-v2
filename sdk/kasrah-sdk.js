@@ -1,17 +1,21 @@
 (function() {
-    // Kasrah Games SDK - Core Edition (Optimized)
-    // Focused on Branding and Future Scalability
+    // Kasrah Games SDK - Cloud Edition v1.2.0
+    // Integrated with Kasrah Main Platform Authentication
     
-    const SDK_VERSION = '1.1.0';
+    const SDK_VERSION = '1.2.0';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
+    const MAIN_SITE_URL = 'https://kasrah-games.onrender.com'; // رابط الموقع الأساسي
     
     const KasrahSDK = {
+        user: null,
+        gameId: window.location.pathname.split('/').filter(Boolean).pop(), // استخراج اسم اللعبة من الرابط
+
         init: function() {
             console.log(`%c 🎮 ${PLATFORM_NAME} SDK v${SDK_VERSION} Active `, `background: ${PRIMARY_COLOR}; color: white; font-weight: bold; padding: 4px; border-radius: 4px;`);
             this.injectStyles();
             this.createSplashScreen();
-            // Toolbar removed as per user request (handled by main site)
+            this.checkAuth(); // التحقق من تسجيل الدخول عند التشغيل
         },
 
         injectStyles: function() {
@@ -34,8 +38,11 @@
                     box-shadow: 0 0 10px ${PRIMARY_COLOR};
                     transition: width 0.3s ease;
                 }
-                @media (max-width: 600px) {
-                    .kasrah-logo { font-size: 32px; }
+                .kasrah-user-badge {
+                    position: fixed; top: 10px; right: 10px; background: rgba(0,0,0,0.6);
+                    color: white; padding: 5px 12px; border-radius: 15px; font-size: 12px;
+                    display: flex; align-items: center; gap: 8px; z-index: 999998;
+                    border: 1px solid ${PRIMARY_COLOR}; backdrop-filter: blur(5px);
                 }
             `;
             const styleSheet = document.createElement("style");
@@ -49,13 +56,13 @@
             splash.innerHTML = `
                 <div class="kasrah-logo">KASRAH</div>
                 <div class="kasrah-loader"><div class="kasrah-progress" id="kasrah-p-bar"></div></div>
-                <div style="color: #888; margin-top: 15px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Powered by Kasrah Platform</div>
+                <div style="color: #888; margin-top: 15px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Cloud Sync Active</div>
             `;
             document.body.appendChild(splash);
 
             let progress = 0;
             const interval = setInterval(() => {
-                progress += Math.random() * 20;
+                progress += Math.random() * 25;
                 if (progress > 100) progress = 100;
                 const pBar = document.getElementById('kasrah-p-bar');
                 if (pBar) pBar.style.width = progress + '%';
@@ -67,24 +74,60 @@
                         setTimeout(() => splash.remove(), 800);
                     }, 400);
                 }
-            }, 150);
+            }, 100);
         },
 
-        /* --- FUTURE FEATURES (Ready to be activated) --- */
-        
-        // Call this to show an ad: KasrahSDK.showAd()
-        showAd: function(callback) {
-            console.log("Ads System: Ready for integration. Contact Ad provider.");
-            if (callback) callback();
+        // التحقق من حالة المستخدم من الموقع الأساسي
+        checkAuth: async function() {
+            try {
+                // محاولة جلب الملف الشخصي من الموقع الأساسي (يعتمد على الكوكيز)
+                const response = await fetch(`${MAIN_SITE_URL}/api/auth/profile`, { credentials: 'include' });
+                if (response.ok) {
+                    this.user = await response.json();
+                    this.showUserBadge();
+                    console.log("☁️ Cloud Save Enabled for: " + this.user.username);
+                }
+            } catch (e) {
+                console.log("Offline mode: Cloud save disabled.");
+            }
         },
 
-        // Call this to save data: KasrahSDK.saveData('score', 100)
-        saveData: function(key, value) {
+        showUserBadge: function() {
+            if (!this.user) return;
+            const badge = document.createElement('div');
+            badge.className = 'kasrah-user-badge';
+            badge.innerHTML = `
+                <span style="color: ${PRIMARY_COLOR}">●</span>
+                <span>${this.user.username}</span>
+            `;
+            document.body.appendChild(badge);
+            setTimeout(() => badge.style.opacity = '0.5', 3000);
+        },
+
+        // ميزة الحفظ السحابي
+        saveData: async function(key, value) {
+            // حفظ محلي دائماً
             localStorage.setItem('kasrah_' + key, JSON.stringify(value));
-            console.log("Cloud Save: Data saved locally. Ready for Server sync.");
+            
+            // إذا كان المستخدم مسجلاً، نحفظ في السحاب
+            if (this.user) {
+                try {
+                    await fetch(`${MAIN_SITE_URL}/api/games/save-data`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            gameId: this.gameId,
+                            data: { [key]: value }
+                        })
+                    });
+                    console.log("☁️ Data synced to cloud.");
+                } catch (e) {
+                    console.error("Cloud sync failed.");
+                }
+            }
         },
 
-        // Call this to load data: KasrahSDK.loadData('score')
         loadData: function(key) {
             return JSON.parse(localStorage.getItem('kasrah_' + key));
         }
