@@ -1,0 +1,132 @@
+{
+    "hierarchy": {
+        "name": "center_bathroom",
+        "children": [
+            {
+                "name": "base_bathroom"
+            },
+            {
+                "name": "base2_bathroom"
+            },
+            {
+                "name": "water2"
+            },
+            {
+                "name": "edge"
+            },
+            {
+                "name": "water3"
+            },
+            {
+                "name": "water4"
+            },
+            {
+                "name": "bubble"
+            },
+            {
+                "name": "duck"
+            },
+            {
+                "name": "water1"
+            },
+            {
+                "name": "stuffs"
+            }
+        ],
+        "animations": [
+            "bathroom_stand"
+        ]
+    },
+    "properties": {
+        "base_bathroom": {
+            "file": "center_bathroom.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.2,
+                "y": 0.3
+            },
+            "type": "sprite"
+        },
+        "base2_bathroom": {
+            "file": "tina.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -1.1,
+                "y": -2.1
+            },
+            "type": "sprite"
+        },
+        "water2": {
+            "file": "water14.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 1,
+                "y": -21.6
+            },
+            "type": "sprite"
+        },
+        "edge": {
+            "file": "shawer.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -3.8,
+                "y": -56.7
+            },
+            "type": "sprite"
+        },
+        "water3": {
+            "file": "water1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -3.9,
+                "y": -71.5
+            },
+            "type": "sprite"
+        },
+        "water4": {
+            "file": "water21.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -2.7,
+                "y": -72.7
+            },
+            "type": "sprite"
+        },
+        "bubble": {
+            "file": "bubbles.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -3.9,
+                "y": -44.2
+            },
+            "type": "sprite"
+        },
+        "duck": {
+            "file": "duck.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -4.3,
+                "y": -28
+            },
+            "type": "sprite"
+        },
+        "water1": {
+            "file": "water2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.9,
+                "y": -6.6
+            },
+            "type": "sprite"
+        },
+        "stuffs": {
+            "file": "stuff.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -8.4,
+                "y": 41.4
+            },
+            "type": "sprite"
+        }
+    }
+}

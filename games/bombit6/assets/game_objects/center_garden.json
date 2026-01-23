@@ -1,0 +1,510 @@
+{
+    "hierarchy": {
+        "name": "center_garden",
+        "children": [
+            {
+                "name": "base_garden"
+            },
+            {
+                "name": "rose"
+            },
+            {
+                "name": "container_faery1",
+                "children": [
+                    {
+                        "name": "wing_r"
+                    },
+                    {
+                        "name": "wing_l"
+                    },
+                    {
+                        "name": "fx_wing"
+                    },
+                    {
+                        "name": "leg1_l",
+                        "children": [
+                            {
+                                "name": "leg2_l"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "leg1_r",
+                        "children": [
+                            {
+                                "name": "leg2_r"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "body",
+                        "children": [
+                            {
+                                "name": "arm_l",
+                                "children": [
+                                    {
+                                        "name": "star",
+                                        "children": [
+                                            {
+                                                "name": "fx_star"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "arm_r"
+                            },
+                            {
+                                "name": "head"
+                            }
+                        ]
+                    }
+                ],
+                "animations": [
+                    "faery_stand",
+                    "faery_open"
+                ]
+            },
+            {
+                "name": "container_faery2",
+                "children": [
+                    {
+                        "name": "wing_r"
+                    },
+                    {
+                        "name": "wing_l"
+                    },
+                    {
+                        "name": "fx_wing"
+                    },
+                    {
+                        "name": "leg1_l",
+                        "children": [
+                            {
+                                "name": "leg2_l"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "leg1_r",
+                        "children": [
+                            {
+                                "name": "leg2_r"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "body",
+                        "children": [
+                            {
+                                "name": "arm_l",
+                                "children": [
+                                    {
+                                        "name": "star",
+                                        "children": [
+                                            {
+                                                "name": "fx_star"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "arm_r"
+                            },
+                            {
+                                "name": "head"
+                            }
+                        ]
+                    }
+                ],
+                "animations": [
+                    "faery_stand",
+                    "faery_open"
+                ]
+            },
+            {
+                "name": "rose_fx"
+            }
+        ],
+        "animations": [
+            "garden_stand",
+            "garden_open"
+        ]
+    },
+    "properties": {
+        "base_garden": {
+            "file": "center_bg.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.6,
+                "y": 0.6
+            },
+            "type": "sprite"
+        },
+        "rose": {
+            "file": "rose1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -8.3,
+                "y": 9.1
+            },
+            "scale": {
+                "x": 1.2,
+                "y": 1.2
+            },
+            "anchor": {
+                "x": 0.4,
+                "y": 0.9
+            },
+            "type": "sprite"
+        },
+        "container_faery1": {
+            "position": {
+                "x": 93.4,
+                "y": -41.5
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5
+            },
+            "type": "container"
+        },
+        "container_faery1/wing_r": {
+            "file": "wing_l.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 7.2,
+                "y": -7.8
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.8
+            },
+            "type": "sprite"
+        },
+        "container_faery1/wing_l": {
+            "file": "wing_r.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -5.2,
+                "y": -11.3
+            },
+            "anchor": {
+                "x": 0.9,
+                "y": 0.8
+            },
+            "type": "sprite"
+        },
+        "container_faery1/fx_wing": {
+            "file": "wing1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": -1.6
+            },
+            "type": "sprite"
+        },
+        "container_faery1/leg1_l": {
+            "file": "leg1_2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.7,
+                "y": 10.2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.09999999999999998
+            },
+            "type": "sprite"
+        },
+        "container_faery1/leg1_l/leg2_l": {
+            "file": "leg2_2.png.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -14,
+                "y": 22.2
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.30000000000000004
+            },
+            "type": "sprite"
+        },
+        "container_faery1/leg1_r": {
+            "file": "leg1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 10.8,
+                "y": 6.6
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_faery1/leg1_r/leg2_r": {
+            "file": "leg2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.5,
+                "y": 32.8
+            },
+            "anchor": {
+                "x": 0.1,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_faery1/body": {
+            "file": "body.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 4.4,
+                "y": -3.6
+            },
+            "type": "sprite"
+        },
+        "container_faery1/body/arm_l": {
+            "file": "arm2_2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -22.6,
+                "y": 2.7
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0.9
+            },
+            "type": "sprite"
+        },
+        "container_faery1/body/arm_l/star": {
+            "file": "star.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -29,
+                "y": -4.4
+            },
+            "anchor": {
+                "x": 1,
+                "y": 1
+            },
+            "type": "sprite"
+        },
+        "container_faery1/body/arm_l/star/fx_star": {
+            "file": "star_anim1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -16.9,
+                "y": -14.2
+            },
+            "type": "sprite"
+        },
+        "container_faery1/body/arm_r": {
+            "file": "arm2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 22,
+                "y": -3.7
+            },
+            "anchor": {
+                "x": 0,
+                "y": 1
+            },
+            "type": "sprite"
+        },
+        "container_faery1/body/head": {
+            "file": "head1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -4.9,
+                "y": -18.2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 1
+            },
+            "type": "sprite"
+        },
+        "container_faery2": {
+            "position": {
+                "x": -69.1,
+                "y": -3.9
+            },
+            "scale": {
+                "x": -0.5,
+                "y": 0.5
+            },
+            "type": "container"
+        },
+        "container_faery2/wing_r": {
+            "file": "wing_l.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 7.2,
+                "y": -7.8
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.8
+            },
+            "type": "sprite"
+        },
+        "container_faery2/wing_l": {
+            "file": "wing_r.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -5.2,
+                "y": -11.3
+            },
+            "anchor": {
+                "x": 0.9,
+                "y": 0.8
+            },
+            "type": "sprite"
+        },
+        "container_faery2/fx_wing": {
+            "file": "wing1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.8,
+                "y": -1.6
+            },
+            "type": "sprite"
+        },
+        "container_faery2/leg1_l": {
+            "file": "leg1_2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 3.2,
+                "y": 7.9
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.09999999999999998
+            },
+            "type": "sprite"
+        },
+        "container_faery2/leg1_l/leg2_l": {
+            "file": "leg2_2.png.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -14,
+                "y": 22.2
+            },
+            "angle": 77,
+            "anchor": {
+                "x": 0,
+                "y": 0.30000000000000004
+            },
+            "type": "sprite"
+        },
+        "container_faery2/leg1_r": {
+            "file": "leg1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 10,
+                "y": 5.3
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_faery2/leg1_r/leg2_r": {
+            "file": "leg2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.5,
+                "y": 32.8
+            },
+            "anchor": {
+                "x": 0.1,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container_faery2/body": {
+            "file": "body.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 4.4,
+                "y": -3.6
+            },
+            "type": "sprite"
+        },
+        "container_faery2/body/arm_l": {
+            "file": "arm2_2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -22.6,
+                "y": 2.7
+            },
+            "anchor": {
+                "x": 1,
+                "y": 0.9
+            },
+            "type": "sprite"
+        },
+        "container_faery2/body/arm_l/star": {
+            "file": "star.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -29,
+                "y": -4.4
+            },
+            "anchor": {
+                "x": 1,
+                "y": 1
+            },
+            "type": "sprite"
+        },
+        "container_faery2/body/arm_l/star/fx_star": {
+            "file": "star_anim1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -16.9,
+                "y": -14.2
+            },
+            "type": "sprite"
+        },
+        "container_faery2/body/arm_r": {
+            "file": "arm2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 22,
+                "y": -3.7
+            },
+            "anchor": {
+                "x": 0,
+                "y": 1
+            },
+            "type": "sprite"
+        },
+        "container_faery2/body/head": {
+            "file": "head1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -4.9,
+                "y": -18.2
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 1
+            },
+            "type": "sprite"
+        },
+        "rose_fx": {
+            "file": "stars11.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 17,
+                "y": -52.5
+            },
+            "type": "sprite"
+        }
+    }
+}

@@ -1,0 +1,108 @@
+{"frames": [
+
+{
+	"filename": "ballons_left.png",
+	"frame": {"x":1607,"y":2,"w":208,"h":239},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":208,"h":239},
+	"sourceSize": {"w":208,"h":239}
+},
+{
+	"filename": "ballons_right.png",
+	"frame": {"x":1607,"y":243,"w":183,"h":243},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":183,"h":243},
+	"sourceSize": {"w":183,"h":243}
+},
+{
+	"filename": "button.png",
+	"frame": {"x":1661,"y":557,"w":65,"h":46},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":65,"h":46},
+	"sourceSize": {"w":65,"h":48}
+},
+{
+	"filename": "button_press.png",
+	"frame": {"x":1684,"y":488,"w":65,"h":46},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":65,"h":46},
+	"sourceSize": {"w":65,"h":48}
+},
+{
+	"filename": "gc_container.png",
+	"frame": {"x":2,"y":2,"w":838,"h":580},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":838,"h":580},
+	"sourceSize": {"w":838,"h":580}
+},
+{
+	"filename": "go_bar.png",
+	"frame": {"x":842,"y":581,"w":535,"h":43},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":535,"h":43},
+	"sourceSize": {"w":535,"h":43}
+},
+{
+	"filename": "go_container.png",
+	"frame": {"x":842,"y":2,"w":763,"h":577},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":763,"h":577},
+	"sourceSize": {"w":763,"h":577}
+},
+{
+	"filename": "go_star_button.png",
+	"frame": {"x":1607,"y":557,"w":52,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":52,"h":57},
+	"sourceSize": {"w":52,"h":57}
+},
+{
+	"filename": "lvlc_p2.png",
+	"frame": {"x":64,"y":584,"w":50,"h":29},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":29},
+	"sourceSize": {"w":50,"h":29}
+},
+{
+	"filename": "p1_1.png",
+	"frame": {"x":2,"y":584,"w":60,"h":38},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":38},
+	"sourceSize": {"w":60,"h":38}
+},
+{
+	"filename": "p1_2.png",
+	"frame": {"x":116,"y":584,"w":41,"h":26},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":41,"h":26},
+	"sourceSize": {"w":41,"h":26}
+},
+{
+	"filename": "stars.png",
+	"frame": {"x":1607,"y":488,"w":75,"h":67},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":67},
+	"sourceSize": {"w":75,"h":67}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "atlas_ui_game_completed.png",
+	"format": "RGBA8888",
+	"size": {"w":1817,"h":626},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e4bc07032d2e9a56122b76d7f909f733:4efcb41fa9c1811942967444aa0bb795:55b079d2ecac5eb6aa6f503a16323e11$"
+}
+}

@@ -1,0 +1,272 @@
+
+dress_hero6.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+eye_dizzy
+  rotate: false
+  xy: 890, 151
+  size: 40, 38
+  orig: 40, 38
+  offset: 0, 0
+  index: -1
+frente/eye_3
+  rotate: true
+  xy: 866, 94
+  size: 23, 21
+  orig: 23, 21
+  offset: 0, 0
+  index: -1
+frente/eyes_1
+  rotate: false
+  xy: 1287, 640
+  size: 57, 21
+  orig: 57, 21
+  offset: 0, 0
+  index: -1
+frente/eyes_2
+  rotate: false
+  xy: 1352, 778
+  size: 57, 21
+  orig: 57, 21
+  offset: 0, 0
+  index: -1
+frente/eyes_4
+  rotate: false
+  xy: 1025, 268
+  size: 22, 21
+  orig: 22, 21
+  offset: 0, 0
+  index: -1
+frente/robot_arm_front1
+  rotate: false
+  xy: 1446, 829
+  size: 34, 42
+  orig: 34, 42
+  offset: 0, 0
+  index: -1
+frente/robot_arm_front2
+  rotate: false
+  xy: 1487, 891
+  size: 34, 42
+  orig: 34, 42
+  offset: 0, 0
+  index: -1
+frente/robot_body_front1
+  rotate: false
+  xy: 796, 47
+  size: 68, 70
+  orig: 68, 70
+  offset: 0, 0
+  index: -1
+frente/robot_body_front2
+  rotate: false
+  xy: 955, 219
+  size: 68, 70
+  orig: 68, 70
+  offset: 0, 0
+  index: -1
+frente/robot_body_front3
+  rotate: false
+  xy: 1049, 291
+  size: 68, 70
+  orig: 68, 70
+  offset: 0, 0
+  index: -1
+frente/robot_body_front4
+  rotate: false
+  xy: 1193, 519
+  size: 68, 70
+  orig: 68, 70
+  offset: 0, 0
+  index: -1
+frente/robot_decor_front1
+  rotate: false
+  xy: 1193, 835
+  size: 157, 170
+  orig: 157, 170
+  offset: 0, 0
+  index: -1
+frente/robot_decor_front2
+  rotate: false
+  xy: 796, 191
+  size: 157, 170
+  orig: 157, 170
+  offset: 0, 0
+  index: -1
+frente/robot_decor_front3
+  rotate: false
+  xy: 1193, 663
+  size: 157, 170
+  orig: 157, 170
+  offset: 0, 0
+  index: -1
+frente/robot_face_front1
+  rotate: false
+  xy: 796, 119
+  size: 92, 70
+  orig: 92, 70
+  offset: 0, 0
+  index: -1
+frente/robot_face_front2
+  rotate: false
+  xy: 955, 291
+  size: 92, 70
+  orig: 92, 70
+  offset: 0, 0
+  index: -1
+frente/robot_face_front3
+  rotate: false
+  xy: 1193, 591
+  size: 92, 70
+  orig: 92, 70
+  offset: 0, 0
+  index: -1
+frente/robot_face_front4
+  rotate: false
+  xy: 1352, 801
+  size: 92, 70
+  orig: 92, 70
+  offset: 0, 0
+  index: -1
+frente/robot_face_front5
+  rotate: false
+  xy: 1487, 935
+  size: 92, 70
+  orig: 92, 70
+  offset: 0, 0
+  index: -1
+frente/robot_head_front1
+  rotate: false
+  xy: 1352, 873
+  size: 133, 132
+  orig: 133, 132
+  offset: 0, 0
+  index: -1
+frente/robot_leg_front1
+  rotate: false
+  xy: 1581, 967
+  size: 25, 38
+  orig: 25, 38
+  offset: 0, 0
+  index: -1
+frente/robot_leg_front2
+  rotate: true
+  xy: 955, 192
+  size: 25, 38
+  orig: 25, 38
+  offset: 0, 0
+  index: -1
+fx_black0001
+  rotate: false
+  xy: 2, 685
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0002
+  rotate: false
+  xy: 2, 685
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0003
+  rotate: false
+  xy: 2, 363
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0004
+  rotate: false
+  xy: 2, 363
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0005
+  rotate: false
+  xy: 399, 685
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0006
+  rotate: false
+  xy: 399, 685
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0007
+  rotate: false
+  xy: 2, 41
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0008
+  rotate: false
+  xy: 2, 41
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0009
+  rotate: false
+  xy: 399, 363
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0010
+  rotate: false
+  xy: 399, 363
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0011
+  rotate: false
+  xy: 796, 685
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0012
+  rotate: false
+  xy: 796, 685
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0013
+  rotate: false
+  xy: 399, 41
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0014
+  rotate: false
+  xy: 399, 41
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+fx_black0015
+  rotate: false
+  xy: 796, 363
+  size: 395, 320
+  orig: 395, 320
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 2, 2
+  size: 83, 37
+  orig: 83, 37
+  offset: 0, 0
+  index: -1

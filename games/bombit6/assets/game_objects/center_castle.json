@@ -1,0 +1,48 @@
+{
+    "hierarchy": {
+        "name": "center_castle",
+        "children": [
+            {
+                "name": "base_castle"
+            },
+            {
+                "name": "castle_ballon_shadow"
+            },
+            {
+                "name": "castle_ballon"
+            }
+        ],
+        "animations": [
+            "castle_stand"
+        ]
+    },
+    "properties": {
+        "base_castle": {
+            "file": "center_castle.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -38.8
+            },
+            "type": "sprite"
+        },
+        "castle_ballon_shadow": {
+            "file": "ballon_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -24.8,
+                "y": -35.9
+            },
+            "type": "sprite"
+        },
+        "castle_ballon": {
+            "file": "ballons.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -32.1,
+                "y": -72.2
+            },
+            "type": "sprite"
+        }
+    }
+}

@@ -1,0 +1,115 @@
+{
+    "name": "tile_spring_anim",
+    "speed": 1,
+    "mode": "loop",
+    "data": {
+        "tile_spring_base": {
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "tile_spring1.png"
+                },
+                {
+                    "frame": 33,
+                    "value": "tile_spring2.png"
+                },
+                {
+                    "frame": 67,
+                    "value": "tile_spring3.png"
+                },
+                {
+                    "frame": 100,
+                    "value": "tile_spring4.png"
+                },
+                {
+                    "frame": 133,
+                    "value": "tile_spring5.png"
+                },
+                {
+                    "frame": 167,
+                    "value": "tile_spring6.png"
+                },
+                {
+                    "frame": 200,
+                    "value": "tile_spring7.png"
+                },
+                {
+                    "frame": 233,
+                    "value": "tile_spring8.png"
+                },
+                {
+                    "frame": 267,
+                    "value": "tile_spring9.png"
+                },
+                {
+                    "frame": 300,
+                    "value": "tile_spring10.png"
+                },
+                {
+                    "frame": 333,
+                    "value": "tile_spring11.png"
+                },
+                {
+                    "frame": 367,
+                    "value": "tile_spring12.png"
+                },
+                {
+                    "frame": 400,
+                    "value": "tile_spring13.png"
+                },
+                {
+                    "frame": 433,
+                    "value": "tile_spring14.png"
+                },
+                {
+                    "frame": 467,
+                    "value": "tile_spring15.png"
+                },
+                {
+                    "frame": 500,
+                    "value": "tile_spring16.png"
+                },
+                {
+                    "frame": 533,
+                    "value": "tile_spring17.png"
+                },
+                {
+                    "frame": 567,
+                    "value": "tile_spring18.png"
+                },
+                {
+                    "frame": 600,
+                    "value": "tile_spring19.png"
+                },
+                {
+                    "frame": 633,
+                    "value": "tile_spring20.png"
+                },
+                {
+                    "frame": 667,
+                    "value": "tile_spring21.png"
+                },
+                {
+                    "frame": 700,
+                    "value": "tile_spring22.png"
+                },
+                {
+                    "frame": 733,
+                    "value": "tile_spring23.png"
+                },
+                {
+                    "frame": 767,
+                    "value": "tile_spring24.png"
+                },
+                {
+                    "frame": 800,
+                    "value": "tile_spring25.png"
+                },
+                {
+                    "frame": 833,
+                    "value": "tile_spring26.png"
+                }
+            ]
+        }
+    }
+}

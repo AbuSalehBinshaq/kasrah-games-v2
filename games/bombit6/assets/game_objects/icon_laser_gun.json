@@ -1,0 +1,40 @@
+{
+    "hierarchy": {
+        "name": "icon_laser_gun",
+        "children": [
+            {
+                "name": "icon_shadow"
+            },
+            {
+                "name": "icon_base"
+            }
+        ],
+        "animations": [
+            "icon_anim"
+        ]
+    },
+    "properties": {
+        "icon_shadow": {
+            "file": "bomb_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "icon_base": {
+            "file": "icon_machine_gun.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -41.8
+            },
+            "scale": {
+                "x": 0.8,
+                "y": 0.8
+            },
+            "type": "sprite"
+        }
+    }
+}

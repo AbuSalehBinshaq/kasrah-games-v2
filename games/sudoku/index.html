@@ -1,0 +1,66 @@
+<!DOCTYPE html><html class="sudokuPage"><head><title>Free online Sudoku Unblocked - CrazyGames</title><script>window.addEventListener("load", function(){
+  var updateConsent = function() {
+    var consent = this.hasConsented();
+    window.adsbygoogle.requestNonPersonalizedAds = consent ? 0 : 1;
+  };
+  var autoConsent = function() {
+    window.store.set("cookie-consent", "allow");
+    window.adsbygoogle.requestNonPersonalizedAds = 0;
+    window.adsbygoogle.pauseAdRequests = 0;
+  };
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#252e39"
+      },
+      "button": {
+        "background": "#b5f9cf"
+      }
+    },
+    "theme": "classic",
+    "position": "bottom", // refers to unused revoke float
+    "static": true,
+    "type": "opt-in",
+    "content": {
+      "href": "/legal"
+    },
+    "reallyNotRevokable": true,
+    "location": {
+      "services": ["geoipdb"]
+    },
+    "onStatusChange": updateConsent,
+    "onRevokeChoice": updateConsent,
+    "onNoCookieLaw": autoConsent
+  }, function complete(popup) {
+    document.getElementById("revoke-cookie-consent").addEventListener("click", function() {
+      popup.revokeChoice();
+    });
+    window.adsbygoogle.pauseAdRequests = 0;
+  }, function error(err, popup) {
+    document.getElementById("revoke-cookie-consent").addEventListener("click", function() {
+      popup.revokeChoice();
+    });
+    window.adsbygoogle.requestNonPersonalizedAds = 0;
+    window.adsbygoogle.pauseAdRequests = 0;
+  })
+});</script><script async src="patch/js/null.js?www.googletagmanager.com/gtag/js?id=UA-26841383-2"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-26841383-2', {
+  "custom_map": { "dimension2": "settings" }
+});
+
+function updateGASettings(settings) {
+  setTimeout(function(){
+    gtag("event", "update_settings", {"settings": JSON.stringify(settings), non_interaction: true});
+  }, 0);
+}
+
+setTimeout((function(){gtag('event','nobounce',{event_category:'aux'})}),60000);
+setInterval((function(){gtag('event','beacon',{event_category:'aux'})}),1500000);</script><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" media="screen" href="./assets/sudoku-c830a0434b9768a3dc368c9babd14559.css"><script>window.difficulty = "easy";</script><script>(window.Promise && window.Symbol && Object.entries) || document.write('\x3Cscript src="./assets/shim.min-da6a3b9b50b0fb3804a86c0c2cd5d123.js">\x3C/script>')</script><script src="./assets/sudoku-29ef8dfba70542979045a48a89dfc0a2.js"></script></head><body><div class="solitr-header"><div class="solitr-tab-bar"><div class="solitr-brand">sudoku.game</div><a class="solitr-tab solitaire-tab protect-game-in-progress" href="//solitr.com/"><span class="solitaire-icon">♠</span><span class="solitr-tab-bar-text">&nbsp;Solitaire</span></a><a class="solitr-tab spider-tab protect-game-in-progress" href="//solitr.com/spider-solitaire-two-suits"><span class="solitaire-icon">♠</span><span class="solitr-tab-bar-text">&nbsp;Spider</span></a><a class="solitr-tab mahjong-tab protect-game-in-progress" href="//mahjon.gg"><span class="mahjong-icon">中</span><span class="solitr-tab-bar-text">&nbsp;Mahjong</span></a><span class="active solitr-tab sudoku-tab protect-game-in-progress"><span class="sudoku-icon">▦</span><span class="solitr-tab-bar-text">&nbsp;Sudoku</span></span><div class="solitr-small-links-container"><a class="solitr-small-link" id="revoke-cookie-consent">Cookies</a>&nbsp;-&nbsp;<a class="solitr-small-link" data-toggle="modal" href="#about-modal">About</a></div></div><div class="solitr-menu-bar sudoku-menu-bar"><div class="sudoku-menu-bar-contents"><a class="solitr-menu-item solitr-new-game" tabindex="0" onclick="window.sudoku.dispatch({type:'NEW_GAME',level:window.difficulty})">New Game</a><div class="solitr-dropdown-menu-wrapper"><a class="solitr-menu-item dropdown-toggle" data-toggle="dropdown" tabindex="0">Difficulty <span class="caret"></span></a><ul class="dropdown-menu sudoku-difficulty-dropdown-menu" role="menu"><li class="solitr-dropdown-button-item" role="presentation"><div class="btn-group" role="group"><span class="active btn btn-default protect-game-in-progress">Easy</span><a class="btn btn-default protect-game-in-progress" href="//sudoku.game/medium">Medium</a><a class="btn btn-default protect-game-in-progress" href="//sudoku.game/hard">Hard</a><a class="btn btn-default protect-game-in-progress" href="//sudoku.game/very-hard">Very hard</a></div></li></ul></div><a class="solitr-menu-item" data-toggle="modal" href="#instructions">Help</a></div></div></div><div id="sudoku"><div class="sudokuContainer"><div class="sudokuAd sudokuAdLeft"><div class="sudokuAdSpacer"></div><div class="adsenseContainer"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5247847789508527" data-ad-slot="3639964010" data-ad-format="auto"></ins></div></div><div class="sudokuGame"><div class="sudokuBoardContainer"><canvas id="sudokuBoard"></canvas></div><div class="sudokuInputBar"><div class="button sudokuCell cell1"><div class="buttonState unselectedButtonState"></div><div class="buttonState selectedButtonState"></div><div class="buttonState disabledButtonState"></div></div><div class="button sudokuCell cell2"><div class="buttonState unselectedButtonState"></div><div class="buttonState selectedButtonState"></div><div class="buttonState disabledButtonState"></div></div><div class="button sudokuCell cell3"><div class="buttonState unselectedButtonState"></div><div class="buttonState selectedButtonState"></div><div class="buttonState disabledButtonState"></div></div><div class="button sudokuCell cell4"><div class="buttonState unselectedButtonState"></div><div class="buttonState selectedButtonState"></div><div class="buttonState disabledButtonState"></div></div><div class="button sudokuCell cell5"><div class="buttonState unselectedButtonState"></div><div class="buttonState selectedButtonState"></div><div class="buttonState disabledButtonState"></div></div><div class="button sudokuCell cell6"><div class="buttonState unselectedButtonState"></div><div class="buttonState selectedButtonState"></div><div class="buttonState disabledButtonState"></div></div><div class="button sudokuCell cell7"><div class="buttonState unselectedButtonState"></div><div class="buttonState selectedButtonState"></div><div class="buttonState disabledButtonState"></div></div><div class="button sudokuCell cell8"><div class="buttonState unselectedButtonState"></div><div class="buttonState selectedButtonState"></div><div class="buttonState disabledButtonState"></div></div><div class="button sudokuCell cell9"><div class="buttonState unselectedButtonState"></div><div class="buttonState selectedButtonState"></div><div class="buttonState disabledButtonState"></div></div><div class="button notes" title="Note-taking mode (N)"><div class="buttonState unselectedButtonState"></div><div class="buttonState selectedButtonState"></div></div></div></div><div class="sudokuAd sudokuAdRight"><div class="sudokuAdSpacer"></div><div class="adsenseContainer"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5247847789508527" data-ad-slot="8599990112" data-ad-format="auto"></ins></div></div></div></div></body><script async src="patch/js/null.js?pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><div class="modal fade" id="about-modal"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">About Solitr</h4></div><div class="modal-body"><p>Hi there, I'm Jo! I originally created this game in November 2011. Please let me know if something doesn't work. I also love hearing suggestions! Email me at <a href="mailto:joliss42@gmail.com?subject=Solitr">joliss42@gmail.com</a>.</p><p>P.S. Check out my new <a href="https://www.calcu.net/">calculator</a> web app!</p><h4>Legal</h4><p>This site is now owned and operated by my company:</p><p>Sinopia Olive Limited<br>
+11 Raven Wharf<br>
+Lafone Street<br>
+London<br>
+SE1 2LR<br>
+United Kingdom</p><p>Company number: 10151298</p><p>Website: <a href="https://sinopiaolive.com/">sinopiaolive.com</a></p><p>By using this site you agree to the <a href="/legal">Privacy and Cookie Policy</a>.</p><h4>Credits</h4><p>I would like to thank Richard Hoelscher, who created an excellent vector version of Grimaud's 19th-century "Paris pattern" card deck (see the <a href="https://web.archive.org/web/20110910064024/http://rahga.com/svg/">archived page</a> or download <a href="/images/original/paris-b09de7c04863f4866fbff2043ac09c50.svg">paris.svg</a>).</p></div><div class="modal-footer"><a class="btn btn-primary" data-dismiss="modal" href="#">Close</a></div></div></div></div><div class="win-modal modal fade" id="win-modal"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">You Win</h4></div><div class="modal-body"><p>✨✨✨ You have won the game! ✨✨✨</p><div class="score"></div></div><div class="modal-footer"><a class="btn btn-success new-game-button" data-dismiss="modal">New Game</a></div></div></div></div><div class="modal fade" id="instructions"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title">How To Play Sudoku</h4></div><div class="modal-body"><h4>Goal</h4><p>The goal is to fill in all the empty cells on the board with the correct numbers.</p><h4>Rules</h4><p>Cells each take a number between 1 and 9. A number may only appear once in a single row, column or three-by-three box.</p><div class="no-touch-only"><h4>How to Play</h4><p>Click a cell to select it. Then click a number in the button bar to set or clear the number for the selected cell.</p><p>To take notes, click the small numbers inside a cell when it is selected. Alternatively, click the notes button in the lower right corner, and then click the numbers in the button bar.</p><h4>Keyboard Shortcuts</h4><p>Press the arrow keys to move the cursor around. Press a number key from 1 through 9 to set a number. Press backspace to clear a number. Press N to switch to note-taking mode, or press Shift-1 through Shift-9 to set notes without switching modes.</p></div><div class="touch-only"><h4>How to Play</h4><p>Tap a cell to select it. Then tap a number in the button bar to set or clear the number for the selected cell.</p><p>To take notes, tap the notes button in the lower right corner, and then tap the numbers in the button bar.</p></div></div><div class="modal-footer"><a class="btn btn-primary" data-dismiss="modal" href="#">Close</a></div></div></div></div></html>

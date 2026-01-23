@@ -1,0 +1,255 @@
+{
+    "hierarchy": {
+        "name": "Canvas",
+        "children": [
+            {
+                "name": "container",
+                "children": [
+                    {
+                        "name": "title"
+                    },
+                    {
+                        "name": "mode_image"
+                    },
+                    {
+                        "name": "back_button",
+                        "children": [
+                            {
+                                "name": "back_text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "next_button",
+                        "children": [
+                            {
+                                "name": "next_text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "black_container"
+                    },
+                    {
+                        "name": "description"
+                    }
+                ]
+            }
+        ]
+    },
+    "properties": {
+        "Canvas": {
+            "design": {
+                "width": 1280,
+                "height": 720
+            },
+            "type": "canvas"
+        },
+        "container": {
+            "file": "big_container4.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER"
+            }
+        },
+        "container/title": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 36
+            },
+            "text": "SELECT MODE:",
+            "align": "center",
+            "stroke": "#660000",
+            "strokeThickness": 4.6,
+            "position": {
+                "x": 0,
+                "y": -236.1
+            },
+            "color": "#ffe000",
+            "type": "text",
+            "orientation": {
+                "landscape": {
+                    "properties": {
+                        "position": {
+                            "x": 0,
+                            "y": -239
+                        }
+                    }
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 0,
+                            "y": -341.2
+                        }
+                    }
+                }
+            }
+        },
+        "container/mode_image": {
+            "file": "sm_image_1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -18.9
+            },
+            "type": "sprite",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "scale": {
+                            "x": 0.87,
+                            "y": 0.87
+                        }
+                    }
+                }
+            }
+        },
+        "container/back_button": {
+            "file": "button.png",
+            "image": "SLICED",
+            "slice": {
+                "top": 5,
+                "bottom": 9,
+                "left": 25,
+                "right": 24
+            },
+            "size": {
+                "width": 199,
+                "height": 48
+            },
+            "position": {
+                "x": -163.5,
+                "y": 251.8
+            },
+            "type": "button",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -163,
+                            "y": 354
+                        }
+                    }
+                }
+            }
+        },
+        "container/back_button/back_text": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 24
+            },
+            "text": "BACK",
+            "align": "center",
+            "stroke": "#b65001",
+            "strokeThickness": 3.2,
+            "position": {
+                "x": 0,
+                "y": 0.7
+            },
+            "type": "text"
+        },
+        "container/next_button": {
+            "file": "button.png",
+            "image": "SLICED",
+            "slice": {
+                "top": 5,
+                "bottom": 9,
+                "left": 25,
+                "right": 24
+            },
+            "size": {
+                "width": 199,
+                "height": 48
+            },
+            "position": {
+                "x": 164.5,
+                "y": 251.5
+            },
+            "type": "button",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 165,
+                            "y": 354
+                        }
+                    }
+                }
+            }
+        },
+        "container/next_button/next_text": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 24
+            },
+            "text": "NEXT",
+            "align": "center",
+            "stroke": "#b65001",
+            "strokeThickness": 3.2,
+            "position": {
+                "x": 0,
+                "y": 0.7
+            },
+            "type": "text"
+        },
+        "container/black_container": {
+            "file": "sm_bar.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -0.9,
+                "y": 144.5
+            },
+            "type": "sprite",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -1,
+                            "y": 225
+                        }
+                    }
+                }
+            }
+        },
+        "container/description": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 26
+            },
+            "text": "ARCADE        KILL ALL ENEMIES",
+            "align": "center",
+            "position": {
+                "x": -0.9,
+                "y": 144.5
+            },
+            "type": "text",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -1,
+                            "y": 225
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

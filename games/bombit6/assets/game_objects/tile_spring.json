@@ -1,0 +1,32 @@
+{
+    "hierarchy": {
+        "name": "tile_spring",
+        "children": [
+            {
+                "name": "tile_spring_base"
+            }
+        ],
+        "animations": [
+            "tile_spring_anim"
+        ]
+    },
+    "properties": {
+        "tile_spring_base": {
+            "file": "tile_spring1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -40
+            },
+            "scale": {
+                "x": 1.2,
+                "y": 1.2
+            },
+            "anchor": {
+                "x": 0.4,
+                "y": 0.5
+            },
+            "type": "sprite"
+        }
+    }
+}

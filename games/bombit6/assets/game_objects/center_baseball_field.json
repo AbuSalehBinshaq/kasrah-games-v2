@@ -1,0 +1,84 @@
+{
+    "hierarchy": {
+        "name": "center_baseball_field",
+        "children": [
+            {
+                "name": "base_baseball"
+            },
+            {
+                "name": "light_l"
+            },
+            {
+                "name": "light_bottom"
+            },
+            {
+                "name": "light_r"
+            },
+            {
+                "name": "trophy"
+            }
+        ],
+        "animations": [
+            "baseball_field_stand"
+        ]
+    },
+    "properties": {
+        "base_baseball": {
+            "file": "center_baseball.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -0.8,
+                "y": -8
+            },
+            "type": "sprite"
+        },
+        "light_l": {
+            "file": "light1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -70.7,
+                "y": 61
+            },
+            "anchor": {
+                "x": 0,
+                "y": 1
+            },
+            "type": "sprite"
+        },
+        "light_bottom": {
+            "file": "light3.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -3.9,
+                "y": -11.8
+            },
+            "type": "sprite"
+        },
+        "light_r": {
+            "file": "light1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 68.7,
+                "y": 60
+            },
+            "scale": {
+                "x": -1,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0,
+                "y": 1
+            },
+            "type": "sprite"
+        },
+        "trophy": {
+            "file": "trophy.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 1.7,
+                "y": -6.2
+            },
+            "type": "sprite"
+        }
+    }
+}

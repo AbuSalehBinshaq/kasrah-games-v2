@@ -1,0 +1,90 @@
+{
+    "name": "castle_stand",
+    "speed": 1,
+    "mode": "loop",
+    "data": {
+        "castle_ballon_shadow": {
+            "scaleY": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 1233,
+                    "value": 0.7
+                },
+                {
+                    "frame": 2783,
+                    "value": 1
+                }
+            ],
+            "scaleX": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 1233,
+                    "value": 0.7
+                },
+                {
+                    "frame": 2783,
+                    "value": 1
+                }
+            ]
+        },
+        "castle_ballon": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        -32.1,
+                        -72.2
+                    ]
+                },
+                {
+                    "frame": 1233,
+                    "value": [
+                        -32.1,
+                        -88.7
+                    ]
+                },
+                {
+                    "frame": 2783,
+                    "value": [
+                        -32.1,
+                        -72.2
+                    ]
+                }
+            ],
+            "scaleX": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 1233,
+                    "value": 1.2
+                },
+                {
+                    "frame": 2783,
+                    "value": 1
+                }
+            ],
+            "scaleY": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 1233,
+                    "value": 1.2
+                },
+                {
+                    "frame": 2783,
+                    "value": 1
+                }
+            ]
+        }
+    }
+}

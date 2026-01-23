@@ -1,0 +1,142 @@
+{
+  "hierarchy": {
+    "name": "Canvas",
+    "children": [
+      {
+        "name": "container_flag",
+        "children": [
+          {
+            "name": "flag1"
+          },
+          {
+            "name": "flag2"
+          },
+          {
+            "name": "flag3"
+          }
+        ]
+      },
+      {
+        "name": "container_select",
+        "children": [
+          {
+            "name": "flag_select"
+          }
+        ]
+      }
+    ]
+  },
+  "properties": {
+    "Canvas": {
+      "design": {
+        "width": 1280,
+        "height": 720
+      },
+      "type": "canvas"
+    },
+    "container_flag": {
+      "file": "menu.png",
+      "image": "SIMPLE",
+      "type": "sprite",
+      "alignment": {
+        "type": "BOTTOM_CENTER",
+        "offset": {
+          "x": -380,
+          "y": -55
+        }
+      },
+      "orientation": {
+        "landscape": {
+          "properties": {},
+          "alignment": {
+            "type": "BOTTOM_CENTER",
+            "offset": {
+              "x": -380,
+              "y": -55
+            }
+          }
+        },
+        "portrait": {
+          "properties": {},
+          "alignment": {
+            "type": "BOTTOM_CENTER",
+            "offset": {
+              "x": -270,
+              "y": -146
+            }
+          }
+        }
+      }
+    },
+    "container_flag/flag1": {
+      "file": "es.png",
+      "image": "SIMPLE",
+      "position": {
+        "x": 0,
+        "y": 60
+      },
+      "type": "sprite"
+    },
+    "container_flag/flag2": {
+      "file": "hol.png",
+      "image": "SIMPLE",
+      "position": {
+        "x": 0,
+        "y": -20
+      },
+      "type": "sprite"
+    },
+    "container_flag/flag3": {
+      "file": "ru.png",
+      "image": "SIMPLE",
+      "position": {
+        "x": 0,
+        "y": -105
+      },
+      "type": "sprite"
+    },
+    "container_select": {
+      "file": "select.png",
+      "image": "SIMPLE",
+      "type": "sprite",
+      "alignment": {
+        "type": "BOTTOM_CENTER",
+        "offset": {
+          "x": -380,
+          "y": -8.5
+        }
+      },
+      "orientation": {
+        "landscape": {
+          "properties": {},
+          "alignment": {
+            "type": "BOTTOM_CENTER",
+            "offset": {
+              "x": -380,
+              "y": -8.5
+            }
+          }
+        },
+        "portrait": {
+          "properties": {},
+          "alignment": {
+            "type": "BOTTOM_CENTER",
+            "offset": {
+              "x": -270,
+              "y": -97.5
+            }
+          }
+        }
+      }
+    },
+    "container_select/flag_select": {
+      "file": "eng.png",
+      "image": "SIMPLE",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "type": "sprite"
+    }
+  }
+}

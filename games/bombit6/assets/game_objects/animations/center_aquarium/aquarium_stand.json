@@ -1,0 +1,402 @@
+{
+    "name": "aquarium_stand",
+    "speed": 1,
+    "mode": "loop",
+    "data": {
+        "fish1": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        -28.7,
+                        -29.8
+                    ]
+                },
+                {
+                    "frame": 1000,
+                    "value": [
+                        -20.1,
+                        -27.2
+                    ]
+                },
+                {
+                    "frame": 2000,
+                    "value": [
+                        -30.9,
+                        -27.2
+                    ]
+                },
+                {
+                    "frame": 3000,
+                    "value": [
+                        -27.7,
+                        -43.2
+                    ]
+                },
+                {
+                    "frame": 4000,
+                    "value": [
+                        -28.7,
+                        -29.8
+                    ]
+                }
+            ],
+            "angle": [
+                {
+                    "frame": 0,
+                    "value": 3
+                },
+                {
+                    "frame": 1000,
+                    "value": 12
+                },
+                {
+                    "frame": 2000,
+                    "value": -2
+                },
+                {
+                    "frame": 3000,
+                    "value": 32
+                },
+                {
+                    "frame": 4000,
+                    "value": 3
+                }
+            ]
+        },
+        "fish3": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        31.4,
+                        -79.5
+                    ]
+                },
+                {
+                    "frame": 1000,
+                    "value": [
+                        24.2,
+                        -76.7
+                    ]
+                },
+                {
+                    "frame": 2000,
+                    "value": [
+                        21.5,
+                        -58
+                    ]
+                },
+                {
+                    "frame": 3000,
+                    "value": [
+                        23.2,
+                        -48.1
+                    ]
+                },
+                {
+                    "frame": 4017,
+                    "value": [
+                        31.4,
+                        -79.5
+                    ]
+                }
+            ],
+            "angle": [
+                {
+                    "frame": 0,
+                    "value": 0
+                },
+                {
+                    "frame": 1000,
+                    "value": 34
+                },
+                {
+                    "frame": 2000,
+                    "value": 6
+                },
+                {
+                    "frame": 3000,
+                    "value": -14
+                },
+                {
+                    "frame": 4017,
+                    "value": 0
+                }
+            ]
+        },
+        "fish2": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        -35.9,
+                        -75.9
+                    ]
+                },
+                {
+                    "frame": 1000,
+                    "value": [
+                        -37.6,
+                        -63.4
+                    ]
+                },
+                {
+                    "frame": 2000,
+                    "value": [
+                        -24.7,
+                        -63
+                    ]
+                },
+                {
+                    "frame": 3000,
+                    "value": [
+                        -35,
+                        -79.2
+                    ]
+                },
+                {
+                    "frame": 4000,
+                    "value": [
+                        -35.9,
+                        -75.9
+                    ]
+                }
+            ],
+            "angle": [
+                {
+                    "frame": 0,
+                    "value": 12
+                },
+                {
+                    "frame": 1000,
+                    "value": 11
+                },
+                {
+                    "frame": 2000,
+                    "value": 49
+                },
+                {
+                    "frame": 3000,
+                    "value": 67
+                },
+                {
+                    "frame": 4000,
+                    "value": 12
+                }
+            ]
+        },
+        "water": {
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "water_frame1.png"
+                },
+                {
+                    "frame": 83,
+                    "value": "water_frame2.png"
+                },
+                {
+                    "frame": 183,
+                    "value": "water_frame3.png"
+                },
+                {
+                    "frame": 283,
+                    "value": "water_frame4.png"
+                },
+                {
+                    "frame": 400,
+                    "value": "water_frame5.png"
+                },
+                {
+                    "frame": 517,
+                    "value": "water_frame6.png"
+                },
+                {
+                    "frame": 617,
+                    "value": "water_frame7.png"
+                },
+                {
+                    "frame": 717,
+                    "value": "water_frame8.png"
+                },
+                {
+                    "frame": 817,
+                    "value": "water_frame9.png"
+                },
+                {
+                    "frame": 933,
+                    "value": "water_frame10.png"
+                },
+                {
+                    "frame": 1050,
+                    "value": "water_frame11.png"
+                },
+                {
+                    "frame": 1167,
+                    "value": "water_frame14.png"
+                },
+                {
+                    "frame": 1283,
+                    "value": "water_frame15.png"
+                },
+                {
+                    "frame": 1367,
+                    "value": "water_frame1.png"
+                },
+                {
+                    "frame": 1450,
+                    "value": "water_frame2.png"
+                },
+                {
+                    "frame": 1550,
+                    "value": "water_frame3.png"
+                },
+                {
+                    "frame": 1650,
+                    "value": "water_frame4.png"
+                },
+                {
+                    "frame": 1750,
+                    "value": "water_frame5.png"
+                },
+                {
+                    "frame": 1850,
+                    "value": "water_frame6.png"
+                },
+                {
+                    "frame": 1950,
+                    "value": "water_frame7.png"
+                },
+                {
+                    "frame": 2050,
+                    "value": "water_frame8.png"
+                },
+                {
+                    "frame": 2150,
+                    "value": "water_frame9.png"
+                },
+                {
+                    "frame": 2250,
+                    "value": "water_frame10.png"
+                },
+                {
+                    "frame": 2383,
+                    "value": "water_frame11.png"
+                },
+                {
+                    "frame": 2500,
+                    "value": "water_frame14.png"
+                },
+                {
+                    "frame": 2600,
+                    "value": "water_frame15.png"
+                },
+                {
+                    "frame": 2683,
+                    "value": "water_frame1.png"
+                },
+                {
+                    "frame": 2783,
+                    "value": "water_frame2.png"
+                },
+                {
+                    "frame": 2867,
+                    "value": "water_frame3.png"
+                },
+                {
+                    "frame": 2933,
+                    "value": "water_frame4.png"
+                },
+                {
+                    "frame": 3017,
+                    "value": "water_frame5.png"
+                },
+                {
+                    "frame": 3133,
+                    "value": "water_frame6.png"
+                },
+                {
+                    "frame": 3250,
+                    "value": "water_frame7.png"
+                },
+                {
+                    "frame": 3333,
+                    "value": "water_frame8.png"
+                },
+                {
+                    "frame": 3450,
+                    "value": "water_frame9.png"
+                },
+                {
+                    "frame": 3583,
+                    "value": "water_frame10.png"
+                },
+                {
+                    "frame": 3717,
+                    "value": "water_frame11.png"
+                },
+                {
+                    "frame": 3850,
+                    "value": "water_frame14.png"
+                },
+                {
+                    "frame": 4000,
+                    "value": "water_frame15.png"
+                }
+            ]
+        },
+        "shine": {
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "aquarium_shine1.png"
+                },
+                {
+                    "frame": 317,
+                    "value": "aquarium_shine2.png"
+                },
+                {
+                    "frame": 650,
+                    "value": "aquarium_shine3.png"
+                },
+                {
+                    "frame": 983,
+                    "value": "aquarium_shine4.png"
+                },
+                {
+                    "frame": 1433,
+                    "value": "aquarium_shine5.png"
+                },
+                {
+                    "frame": 1750,
+                    "value": "aquarium_.png"
+                },
+                {
+                    "frame": 2150,
+                    "value": "aquarium_shine1.png"
+                },
+                {
+                    "frame": 2583,
+                    "value": "aquarium_shine2.png"
+                },
+                {
+                    "frame": 2983,
+                    "value": "aquarium_shine3.png"
+                },
+                {
+                    "frame": 3367,
+                    "value": "aquarium_shine4.png"
+                },
+                {
+                    "frame": 3683,
+                    "value": "aquarium_shine5.png"
+                },
+                {
+                    "frame": 3983,
+                    "value": "aquarium_.png"
+                }
+            ]
+        }
+    }
+}

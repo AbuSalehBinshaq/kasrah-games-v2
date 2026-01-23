@@ -1,0 +1,156 @@
+{
+    "hierarchy": {
+        "name": "train",
+        "children": [
+            {
+                "name": "shadow"
+            },
+            {
+                "name": "wheel5"
+            },
+            {
+                "name": "wheel7"
+            },
+            {
+                "name": "wheel4"
+            },
+            {
+                "name": "wheel6"
+            },
+            {
+                "name": "body",
+                "children": [
+                    {
+                        "name": "wheel1"
+                    },
+                    {
+                        "name": "wheel2"
+                    },
+                    {
+                        "name": "wheel3"
+                    }
+                ]
+            },
+            {
+                "name": "smoke"
+            }
+        ],
+        "animations": [
+            "train_side",
+            "train_down",
+            "train_up"
+        ]
+    },
+    "properties": {
+        "shadow": {
+            "file": "shadow_side.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 1
+            },
+            "type": "sprite"
+        },
+        "wheel5": {
+            "file": "wheel_front11.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -17,
+                "y": -34.7
+            },
+            "type": "sprite"
+        },
+        "wheel7": {
+            "file": "wheel_front11.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 17,
+                "y": -34.7
+            },
+            "scale": {
+                "x": -1,
+                "y": 1
+            },
+            "type": "sprite"
+        },
+        "wheel4": {
+            "file": "wheel_front11.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -19.8,
+                "y": -17.2
+            },
+            "type": "sprite"
+        },
+        "wheel6": {
+            "file": "wheel_front11.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 19.8,
+                "y": -17.2
+            },
+            "scale": {
+                "x": -1,
+                "y": 1
+            },
+            "type": "sprite"
+        },
+        "body": {
+            "file": "train_side.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 1
+            },
+            "type": "sprite"
+        },
+        "body/wheel1": {
+            "file": "train_wheel_side.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 23.6,
+                "y": -13.1
+            },
+            "type": "sprite"
+        },
+        "body/wheel2": {
+            "file": "train_wheel_side.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -3,
+                "y": -12.6
+            },
+            "type": "sprite"
+        },
+        "body/wheel3": {
+            "file": "train_wheel_side.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -30.7,
+                "y": -14.7
+            },
+            "scale": {
+                "x": 0.8,
+                "y": 0.8
+            },
+            "type": "sprite"
+        },
+        "smoke": {
+            "file": "smoke14.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 18,
+                "y": -116
+            },
+            "type": "sprite"
+        }
+    }
+}

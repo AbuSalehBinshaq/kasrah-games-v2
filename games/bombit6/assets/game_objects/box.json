@@ -1,0 +1,53 @@
+{
+    "hierarchy": {
+        "name": "box",
+        "children": [
+            {
+                "name": "box_base"
+            },
+            {
+                "name": "box_fx_star"
+            },
+            {
+                "name": "box_fx_star2"
+            }
+        ],
+        "animations": [
+            "box_in",
+            "box_stand"
+        ]
+    },
+    "properties": {
+        "box_base": {
+            "file": "box_anim.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -31.2
+            },
+            "type": "sprite"
+        },
+        "box_fx_star": {
+            "file": "box_star_fx41.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -0.8,
+                "y": -44.5
+            },
+            "type": "sprite"
+        },
+        "box_fx_star2": {
+            "file": "flag_star_anim1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -1,
+                "y": -63
+            },
+            "scale": {
+                "x": 0.8,
+                "y": 0.8
+            },
+            "type": "sprite"
+        }
+    }
+}

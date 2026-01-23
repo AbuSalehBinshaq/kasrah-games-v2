@@ -1,0 +1,166 @@
+{
+    "hierarchy": {
+        "name": "Canvas",
+        "children": [
+            {
+                "name": "sound_container",
+                "children": [
+                    {
+                        "name": "audio_button"
+                    },
+                    {
+                        "name": "music_button"
+                    }
+                ]
+            },
+            {
+                "name": "main_menu_button",
+                "children": [
+                    {
+                        "name": "text"
+                    }
+                ]
+            },
+            {
+                "name": "pause_button",
+                "children": [
+                    {
+                        "name": "text"
+                    }
+                ]
+            },
+            {
+                "name": "character"
+            }
+        ]
+    },
+    "properties": {
+        "Canvas": {
+            "design": {
+                "width": 1280,
+                "height": 720
+            },
+            "type": "canvas"
+        },
+        "sound_container": {
+            "type": "container",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": 328,
+                    "y": -179
+                }
+            }
+        },
+        "sound_container/audio_button": {
+            "file": "mm_audio.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "mm_audio.png",
+                "pressed": "mm_audio_off.png",
+                "hover": "mm_audio.png"
+            },
+            "position": {
+                "x": -0.2,
+                "y": 30.7
+            },
+            "type": "button"
+        },
+        "sound_container/music_button": {
+            "file": "mm_music.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "mm_music.png",
+                "pressed": "mm_music_off.png",
+                "hover": "mm_music.png"
+            },
+            "position": {
+                "x": -0.21,
+                "y": -31.1
+            },
+            "type": "button"
+        },
+        "main_menu_button": {
+            "file": "button.png",
+            "image": "SLICED",
+            "slice": {
+                "top": 5,
+                "bottom": 9,
+                "left": 25,
+                "right": 24
+            },
+            "size": {
+                "width": 199,
+                "height": 48
+            },
+            "type": "button",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": -228,
+                    "y": 254
+                }
+            }
+        },
+        "main_menu_button/text": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 21
+            },
+            "text": "MAIN MENU",
+            "align": "center",
+            "stroke": "#c55d18",
+            "strokeThickness": 3,
+            "position": {
+                "x": 0,
+                "y": 0.7
+            },
+            "type": "text"
+        },
+        "pause_button": {
+            "file": "button.png",
+            "image": "SLICED",
+            "slice": {
+                "top": 5,
+                "bottom": 9,
+                "left": 25,
+                "right": 24
+            },
+            "size": {
+                "width": 199,
+                "height": 48
+            },
+            "type": "button",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": 228,
+                    "y": 254
+                }
+            }
+        },
+        "pause_button/text": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 21
+            },
+            "text": "RESUME",
+            "align": "center",
+            "stroke": "#c55d18",
+            "strokeThickness": 3,
+            "position": {
+                "x": 0,
+                "y": 0.7
+            },
+            "type": "text"
+        },
+        "character": {
+            "type": "container",
+            "alignment": {
+                "type": "CENTER"
+            }
+        }
+    }
+}

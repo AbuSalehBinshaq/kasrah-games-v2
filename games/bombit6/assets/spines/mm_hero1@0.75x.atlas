@@ -1,0 +1,153 @@
+
+mm_hero1.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+frente/eyes_0
+  rotate: false
+  xy: 327, 95
+  size: 77, 26
+  orig: 77, 26
+  offset: 0, 0
+  index: -1
+frente/eyes_1
+  rotate: false
+  xy: 784, 228
+  size: 77, 26
+  orig: 77, 26
+  offset: 0, 0
+  index: -1
+frente/eyes_2
+  rotate: false
+  xy: 581, 140
+  size: 77, 26
+  orig: 77, 26
+  offset: 0, 0
+  index: -1
+frente/eyes_fx1
+  rotate: false
+  xy: 141, 2
+  size: 79, 31
+  orig: 79, 31
+  offset: 0, 0
+  index: -1
+frente/eyes_fx2
+  rotate: false
+  xy: 222, 2
+  size: 79, 31
+  orig: 79, 31
+  offset: 0, 0
+  index: -1
+frente/robot1_arm
+  rotate: false
+  xy: 361, 59
+  size: 30, 34
+  orig: 30, 34
+  offset: 0, 0
+  index: -1
+frente/robot1_arm2
+  rotate: false
+  xy: 406, 97
+  size: 40, 24
+  orig: 40, 24
+  offset: 0, 0
+  index: -1
+frente/robot1_arm3
+  rotate: false
+  xy: 863, 233
+  size: 37, 21
+  orig: 37, 21
+  offset: 0, 0
+  index: -1
+frente/robot1_arm4
+  rotate: true
+  xy: 503, 127
+  size: 39, 76
+  orig: 39, 76
+  offset: 0, 0
+  index: -1
+frente/robot1_face_mm
+  rotate: false
+  xy: 689, 180
+  size: 93, 74
+  orig: 93, 74
+  offset: 0, 0
+  index: -1
+frente/robot1_head_mm
+  rotate: false
+  xy: 2, 8
+  size: 137, 113
+  orig: 137, 113
+  offset: 0, 0
+  index: -1
+frente/robot_body_front1_1
+  rotate: false
+  xy: 503, 168
+  size: 91, 86
+  orig: 91, 86
+  offset: 0, 0
+  index: -1
+frente/robot_body_front1_2
+  rotate: false
+  xy: 141, 35
+  size: 91, 86
+  orig: 91, 86
+  offset: 0, 0
+  index: -1
+frente/robot_body_front1_3
+  rotate: false
+  xy: 596, 168
+  size: 91, 86
+  orig: 91, 86
+  offset: 0, 0
+  index: -1
+frente/robot_body_front1_4
+  rotate: false
+  xy: 234, 35
+  size: 91, 86
+  orig: 91, 86
+  offset: 0, 0
+  index: -1
+frente/robot_decor_front2
+  rotate: false
+  xy: 2, 123
+  size: 165, 131
+  orig: 165, 131
+  offset: 0, 0
+  index: -1
+frente/robot_decor_front3
+  rotate: false
+  xy: 169, 123
+  size: 165, 131
+  orig: 165, 131
+  offset: 0, 0
+  index: -1
+frente/robot_decor_front4
+  rotate: false
+  xy: 336, 123
+  size: 165, 131
+  orig: 165, 131
+  offset: 0, 0
+  index: -1
+frente/robot_leg_front1
+  rotate: false
+  xy: 327, 48
+  size: 32, 45
+  orig: 32, 45
+  offset: 0, 0
+  index: -1
+frente/robot_leg_front2
+  rotate: false
+  xy: 327, 48
+  size: 32, 45
+  orig: 32, 45
+  offset: 0, 0
+  index: -1
+frente/white_flag
+  rotate: false
+  xy: 784, 192
+  size: 40, 34
+  orig: 40, 34
+  offset: 0, 0
+  index: -1

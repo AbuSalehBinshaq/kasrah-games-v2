@@ -1,0 +1,149 @@
+{
+    "name": "bubble_out",
+    "speed": 1,
+    "mode": "normal",
+    "data": {
+        "bubble_shadow": {
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 250,
+                    "value": 0
+                }
+            ],
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "shadow_penguin.png"
+                }
+            ]
+        },
+        "bubble_base": {
+            "scaleX": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 83,
+                    "value": 1
+                }
+            ],
+            "scaleY": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 83,
+                    "value": 1
+                }
+            ],
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        3.7,
+                        -60.4
+                    ]
+                },
+                {
+                    "frame": 83,
+                    "value": [
+                        3.3,
+                        -63.5
+                    ]
+                }
+            ],
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "bubble_out1.png"
+                },
+                {
+                    "frame": 133,
+                    "value": "bubble_out2.png"
+                },
+                {
+                    "frame": 183,
+                    "value": "bubble_out3.png"
+                },
+                {
+                    "frame": 233,
+                    "value": "bubble_out4.png"
+                },
+                {
+                    "frame": 283,
+                    "value": "bubble_out5.png"
+                },
+                {
+                    "frame": 333,
+                    "value": "bubble_out6.png"
+                },
+                {
+                    "frame": 383,
+                    "value": "bubble_out7.png"
+                },
+                {
+                    "frame": 433,
+                    "value": "bubble_out8.png"
+                },
+                {
+                    "frame": 483,
+                    "value": "bubble_out9.png"
+                },
+                {
+                    "frame": 533,
+                    "value": "bubble_out10.png"
+                },
+                {
+                    "frame": 583,
+                    "value": "bubble_out11.png"
+                },
+                {
+                    "frame": 633,
+                    "value": "bubble_out12.png"
+                },
+                {
+                    "frame": 683,
+                    "value": "bubble_out13.png"
+                },
+                {
+                    "frame": 733,
+                    "value": "bubble_out14.png"
+                },
+                {
+                    "frame": 783,
+                    "value": "bubble_out15.png"
+                },
+                {
+                    "frame": 833,
+                    "value": "bubble_out16.png"
+                },
+                {
+                    "frame": 883,
+                    "value": "bubble_out17.png"
+                },
+                {
+                    "frame": 933,
+                    "value": "bubble_out18.png"
+                },
+                {
+                    "frame": 983,
+                    "value": "bubble_out19.png"
+                },
+                {
+                    "frame": 1033,
+                    "value": "bubble_out20.png"
+                },
+                {
+                    "frame": 1083,
+                    "value": "bubble_out21.png"
+                }
+            ]
+        }
+    }
+}

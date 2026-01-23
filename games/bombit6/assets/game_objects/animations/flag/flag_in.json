@@ -1,0 +1,195 @@
+{
+    "name": "flag_in",
+    "speed": 1,
+    "mode": "normal",
+    "data": {
+        "flag_stars": {
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "flag_star_anim1.png"
+                },
+                {
+                    "frame": 50,
+                    "value": "flag_star_anim2.png"
+                },
+                {
+                    "frame": 100,
+                    "value": "flag_star_anim3.png"
+                },
+                {
+                    "frame": 150,
+                    "value": "flag_star_anim4.png"
+                },
+                {
+                    "frame": 200,
+                    "value": "flag_star_anim5.png"
+                },
+                {
+                    "frame": 250,
+                    "value": "flag_star_anim6.png"
+                },
+                {
+                    "frame": 300,
+                    "value": "flag_star_anim7.png"
+                },
+                {
+                    "frame": 350,
+                    "value": "flag_star_anim8.png"
+                },
+                {
+                    "frame": 400,
+                    "value": "flag_star_anim9.png"
+                },
+                {
+                    "frame": 450,
+                    "value": "flag_star_anim10.png"
+                },
+                {
+                    "frame": 500,
+                    "value": "flag_star_anim11.png"
+                },
+                {
+                    "frame": 550,
+                    "value": "flag_star_anim12.png"
+                },
+                {
+                    "frame": 600,
+                    "value": "flag_star_anim13.png"
+                },
+                {
+                    "frame": 650,
+                    "value": "flag_star_anim14.png"
+                },
+                {
+                    "frame": 700,
+                    "value": "flag_star_anim15.png"
+                },
+                {
+                    "frame": 750,
+                    "value": "flag_star_anim16.png"
+                },
+                {
+                    "frame": 800,
+                    "value": "flag_star_anim17.png"
+                },
+                {
+                    "frame": 850,
+                    "value": "flag_star_anim18.png"
+                },
+                {
+                    "frame": 900,
+                    "value": "flag_star_anim19.png"
+                },
+                {
+                    "frame": 950,
+                    "value": "flag_star_anim20.png"
+                },
+                {
+                    "frame": 1000,
+                    "value": "flag_star_anim21.png"
+                },
+                {
+                    "frame": 1050,
+                    "value": "flag_star_anim22.png"
+                },
+                {
+                    "frame": 1100,
+                    "value": "flag_star_anim23.png"
+                },
+                {
+                    "frame": 1150,
+                    "value": "flag_star_anim24.png"
+                },
+                {
+                    "frame": 1200,
+                    "value": "flag_star_anim25.png"
+                },
+                {
+                    "frame": 1250,
+                    "value": "flag_star_anim26.png"
+                },
+                {
+                    "frame": 1300,
+                    "value": "flag_star_anim27.png"
+                },
+                {
+                    "frame": 1333,
+                    "value": "flag_star_anim83.png"
+                }
+            ]
+        },
+        "flag_base": {
+            "alpha": [
+                {
+                    "frame": 250,
+                    "value": 0
+                },
+                {
+                    "frame": 583,
+                    "value": 1
+                }
+            ]
+        },
+        "flag_bg": {
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 0
+                },
+                {
+                    "frame": 250,
+                    "value": 1
+                }
+            ]
+        },
+        "flag_shine": {
+            "scaleX": [
+                {
+                    "frame": 0,
+                    "value": 0
+                },
+                {
+                    "frame": 417,
+                    "value": 1.3
+                },
+                {
+                    "frame": 817,
+                    "value": 3
+                }
+            ],
+            "scaleY": [
+                {
+                    "frame": 0,
+                    "value": 0
+                },
+                {
+                    "frame": 417,
+                    "value": 1.3
+                },
+                {
+                    "frame": 817,
+                    "value": 3
+                }
+            ],
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 0
+                },
+                {
+                    "frame": 133,
+                    "value": 1
+                },
+                {
+                    "frame": 667,
+                    "value": 1
+                },
+                {
+                    "frame": 817,
+                    "value": 0
+                }
+            ]
+        }
+    }
+}

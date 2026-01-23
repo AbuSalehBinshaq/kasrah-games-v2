@@ -1,0 +1,45 @@
+{
+  "preparing" :{
+      "eg" : "preparing"
+  },
+
+  "tap to continue" : {
+      "eg" : "tap to continue"
+  },
+  
+  "SCORE" : {
+      "eg" : "SCORE"
+  },
+  
+  "TARGET" : {
+      "eg" : "TARGET"
+  },
+
+  "BEST"   : {
+      "eg" : "BEST"
+  },
+
+  "Level"  : {
+	  "eg" : "Level"
+  },
+
+  "HighScore"  : {
+      "eg" : "Hi-Score"
+  },
+
+  "PROGRAM" : {
+      "eg" : "PROGRAM"
+  },
+
+  "GRAPHIC" : {
+      "eg"  : "GRAPHIC"
+  },
+
+  "MUSIC"   : {
+      "eg"  : "MUSIC"
+  },
+
+  "TUTORIAL"   : {
+      "eg"  : "TUTORIAL"
+  }
+}

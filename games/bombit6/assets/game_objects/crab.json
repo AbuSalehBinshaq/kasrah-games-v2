@@ -1,0 +1,354 @@
+{
+    "hierarchy": {
+        "name": "crab",
+        "children": [
+            {
+                "name": "body"
+            },
+            {
+                "name": "finger_l",
+                "children": [
+                    {
+                        "name": "hand_l"
+                    }
+                ]
+            },
+            {
+                "name": "finger_r",
+                "children": [
+                    {
+                        "name": "hand_r"
+                    }
+                ]
+            },
+            {
+                "name": "eye_l"
+            },
+            {
+                "name": "shadow"
+            },
+            {
+                "name": "eye_r"
+            },
+            {
+                "name": "leg1_1_r",
+                "children": [
+                    {
+                        "name": "leg1_2_r"
+                    }
+                ]
+            },
+            {
+                "name": "leg2_1_r",
+                "children": [
+                    {
+                        "name": "leg2_2_r"
+                    }
+                ]
+            },
+            {
+                "name": "leg3_1_r",
+                "children": [
+                    {
+                        "name": "leg2_3_r"
+                    }
+                ]
+            },
+            {
+                "name": "leg1_1_l",
+                "children": [
+                    {
+                        "name": "leg1_2_l"
+                    }
+                ]
+            },
+            {
+                "name": "leg2_1_l",
+                "children": [
+                    {
+                        "name": "leg2_2_l"
+                    }
+                ]
+            },
+            {
+                "name": "leg3_1_l",
+                "children": [
+                    {
+                        "name": "leg3_2_l"
+                    }
+                ]
+            }
+        ],
+        "animations": [
+            "crab_walk"
+        ]
+    },
+    "properties": {
+        "body": {
+            "file": "crab_lips.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 2.1,
+                "y": -24.1
+            },
+            "type": "sprite"
+        },
+        "finger_l": {
+            "file": "crab_finger.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -29.1,
+                "y": -39.1
+            },
+            "angle": -10,
+            "anchor": {
+                "x": 0.1,
+                "y": 0.9
+            },
+            "type": "sprite"
+        },
+        "finger_l/hand_l": {
+            "file": "crab_hand.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 2.2,
+                "y": 5.3
+            },
+            "anchor": {
+                "x": 0.9,
+                "y": 0.8
+            },
+            "type": "sprite"
+        },
+        "finger_r": {
+            "file": "crab_finger.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 31.7,
+                "y": -44.6
+            },
+            "angle": -10,
+            "scale": {
+                "x": -1,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0.1,
+                "y": 0.9
+            },
+            "type": "sprite"
+        },
+        "finger_r/hand_r": {
+            "file": "crab_hand.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 2.2,
+                "y": 5.3
+            },
+            "anchor": {
+                "x": 0.9,
+                "y": 0.8
+            },
+            "type": "sprite"
+        },
+        "eye_l": {
+            "file": "crab_eye0001.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -14.4,
+                "y": -40.3
+            },
+            "type": "sprite"
+        },
+        "shadow": {
+            "file": "crab_shadow.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0.7,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "eye_r": {
+            "file": "crab_eye0001.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 14.3,
+                "y": -43.8
+            },
+            "type": "sprite"
+        },
+        "leg1_1_r": {
+            "file": "crab_arm.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 14,
+                "y": -11.5
+            },
+            "angle": 27,
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "leg1_1_r/leg1_2_r": {
+            "file": "crab_arm2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 9.3,
+                "y": 0.2
+            },
+            "anchor": {
+                "x": 0.1,
+                "y": 0.30000000000000004
+            },
+            "type": "sprite"
+        },
+        "leg2_1_r": {
+            "file": "crab_arm.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 17.4,
+                "y": -16
+            },
+            "angle": 16,
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "leg2_1_r/leg2_2_r": {
+            "file": "crab_arm2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 9.3,
+                "y": 0.2
+            },
+            "anchor": {
+                "x": 0.1,
+                "y": 0.30000000000000004
+            },
+            "type": "sprite"
+        },
+        "leg3_1_r": {
+            "file": "crab_arm.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 21.3,
+                "y": -21.7
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "leg3_1_r/leg2_3_r": {
+            "file": "crab_arm2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 9.2,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.1,
+                "y": 0.30000000000000004
+            },
+            "type": "sprite"
+        },
+        "leg1_1_l": {
+            "file": "crab_arm.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -14.2,
+                "y": -10.5
+            },
+            "angle": -18,
+            "scale": {
+                "x": -1,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "leg1_1_l/leg1_2_l": {
+            "file": "crab_arm2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 9.2,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.1,
+                "y": 0.30000000000000004
+            },
+            "type": "sprite"
+        },
+        "leg2_1_l": {
+            "file": "crab_arm.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -17.4,
+                "y": -15.7
+            },
+            "angle": -11,
+            "scale": {
+                "x": -1,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "leg2_1_l/leg2_2_l": {
+            "file": "crab_arm2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 9.2,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.1,
+                "y": 0.30000000000000004
+            },
+            "type": "sprite"
+        },
+        "leg3_1_l": {
+            "file": "crab_arm.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -20.1,
+                "y": -21.2
+            },
+            "scale": {
+                "x": -1,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "leg3_1_l/leg3_2_l": {
+            "file": "crab_arm2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 9.2,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.1,
+                "y": 0.30000000000000004
+            },
+            "type": "sprite"
+        }
+    }
+}

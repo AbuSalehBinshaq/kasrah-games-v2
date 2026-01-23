@@ -1,0 +1,304 @@
+{
+    "hierarchy": {
+        "name": "Canvas",
+        "children": [
+            {
+                "name": "container",
+                "children": [
+                    {
+                        "name": "title"
+                    },
+                    {
+                        "name": "container_items",
+                        "children": [
+                            {
+                                "name": "item1"
+                            },
+                            {
+                                "name": "item2"
+                            },
+                            {
+                                "name": "item3"
+                            },
+                            {
+                                "name": "item4"
+                            },
+                            {
+                                "name": "item5"
+                            },
+                            {
+                                "name": "item6"
+                            },
+                            {
+                                "name": "item7"
+                            },
+                            {
+                                "name": "item8"
+                            },
+                            {
+                                "name": "item9"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "decor_bg"
+                    },
+                    {
+                        "name": "p1_image"
+                    },
+                    {
+                        "name": "character"
+                    },
+                    {
+                        "name": "total_score_text"
+                    },
+                    {
+                        "name": "total_score"
+                    },
+                    {
+                        "name": "star"
+                    },
+                    {
+                        "name": "all_time_total_score"
+                    },
+                    {
+                        "name": "back_button",
+                        "children": [
+                            {
+                                "name": "back_text"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "properties": {
+        "Canvas": {
+            "design": {
+                "width": 1280,
+                "height": 720
+            },
+            "type": "canvas"
+        },
+        "container": {
+            "file": "big_container3.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER",
+                "offset": {
+                    "x": -2,
+                    "y": -7
+                }
+            }
+        },
+        "container/title": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 42
+            },
+            "text": "DRESS UP",
+            "align": "center",
+            "stroke": "#660000",
+            "strokeThickness": 4.6,
+            "position": {
+                "x": -1,
+                "y": -244
+            },
+            "color": "#ffe000",
+            "type": "text"
+        },
+        "container/container_items": {
+            "file": "dress_up_go_container1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 109,
+                "y": -25
+            },
+            "type": "sprite"
+        },
+        "container/container_items/item1": {
+            "position": {
+                "x": -89,
+                "y": -98.3
+            },
+            "type": "container"
+        },
+        "container/container_items/item2": {
+            "position": {
+                "x": 0.5,
+                "y": -98.3
+            },
+            "type": "container"
+        },
+        "container/container_items/item3": {
+            "position": {
+                "x": 90.5,
+                "y": -98.3
+            },
+            "type": "container"
+        },
+        "container/container_items/item4": {
+            "position": {
+                "x": -89,
+                "y": 0.9
+            },
+            "type": "container"
+        },
+        "container/container_items/item5": {
+            "position": {
+                "x": 0.5,
+                "y": 0.9
+            },
+            "type": "container"
+        },
+        "container/container_items/item6": {
+            "position": {
+                "x": 90.5,
+                "y": 0.9
+            },
+            "type": "container"
+        },
+        "container/container_items/item7": {
+            "position": {
+                "x": -89,
+                "y": 100.9
+            },
+            "type": "container"
+        },
+        "container/container_items/item8": {
+            "position": {
+                "x": 0.5,
+                "y": 100.9
+            },
+            "type": "container"
+        },
+        "container/container_items/item9": {
+            "position": {
+                "x": 90.5,
+                "y": 100.9
+            },
+            "type": "container"
+        },
+        "container/decor_bg": {
+            "file": "dress_up_go_container2.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 170
+            },
+            "type": "sprite"
+        },
+        "container/p1_image": {
+            "file": "p1_1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -212,
+                "y": -146.4
+            },
+            "type": "sprite"
+        },
+        "container/character": {
+            "file": "dress_up_character.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -159.3,
+                "y": 92.6
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.9
+            },
+            "type": "sprite"
+        },
+        "container/total_score_text": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 23
+            },
+            "text": "TOTAL SCORE",
+            "align": "center",
+            "position": {
+                "x": -138.9,
+                "y": 169.9
+            },
+            "color": "#125b7c",
+            "type": "text"
+        },
+        "container/total_score": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 21
+            },
+            "text": "14350",
+            "align": "center",
+            "stroke": "#660000",
+            "strokeThickness": 3.8,
+            "position": {
+                "x": -4.7,
+                "y": 172.2
+            },
+            "color": "#ffdf1f",
+            "type": "text"
+        },
+        "container/star": {
+            "file": "dress_up_star.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 77.3,
+                "y": 168.4
+            },
+            "type": "sprite"
+        },
+        "container/all_time_total_score": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 21
+            },
+            "text": "1970",
+            "align": "center",
+            "stroke": "#0e64a0",
+            "strokeThickness": 3.8,
+            "position": {
+                "x": 179.3,
+                "y": 170.2
+            },
+            "type": "text"
+        },
+        "container/back_button": {
+            "file": "button.png",
+            "image": "SLICED",
+            "slice": {
+                "top": 5,
+                "bottom": 9,
+                "left": 25,
+                "right": 24
+            },
+            "size": {
+                "width": 199,
+                "height": 48
+            },
+            "position": {
+                "x": 0,
+                "y": 254.4
+            },
+            "type": "button"
+        },
+        "container/back_button/back_text": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 21
+            },
+            "text": "BACK",
+            "align": "center",
+            "stroke": "#c55d18",
+            "strokeThickness": 3.6,
+            "position": {
+                "x": 0,
+                "y": 0.7
+            },
+            "type": "text"
+        }
+    }
+}

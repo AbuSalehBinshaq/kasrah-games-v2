@@ -1,0 +1,253 @@
+{
+    "name": "bathroom_stand",
+    "speed": 1,
+    "mode": "loop",
+    "data": {
+        "water2": {
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "water14.png"
+                },
+                {
+                    "frame": 217,
+                    "value": "water15.png"
+                },
+                {
+                    "frame": 383,
+                    "value": "water16.png"
+                },
+                {
+                    "frame": 617,
+                    "value": "water17.png"
+                },
+                {
+                    "frame": 800,
+                    "value": "water18.png"
+                },
+                {
+                    "frame": 967,
+                    "value": "water19.png"
+                },
+                {
+                    "frame": 1183,
+                    "value": "water20.png"
+                },
+                {
+                    "frame": 1417,
+                    "value": "water14.png"
+                }
+            ]
+        },
+        "water1": {
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "water2.png"
+                },
+                {
+                    "frame": 83,
+                    "value": "water3.png"
+                },
+                {
+                    "frame": 200,
+                    "value": "water4.png"
+                },
+                {
+                    "frame": 317,
+                    "value": "water5.png"
+                },
+                {
+                    "frame": 417,
+                    "value": "water6.png"
+                },
+                {
+                    "frame": 533,
+                    "value": "water7.png"
+                },
+                {
+                    "frame": 650,
+                    "value": "water8.png"
+                },
+                {
+                    "frame": 750,
+                    "value": "water9.png"
+                },
+                {
+                    "frame": 883,
+                    "value": "water10.png"
+                },
+                {
+                    "frame": 1017,
+                    "value": "water11.png"
+                },
+                {
+                    "frame": 1133,
+                    "value": "water12.png"
+                },
+                {
+                    "frame": 1267,
+                    "value": "water13.png"
+                },
+                {
+                    "frame": 1417,
+                    "value": "water135.png"
+                }
+            ]
+        },
+        "duck": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        -4.3,
+                        -28
+                    ]
+                },
+                {
+                    "frame": 233,
+                    "value": [
+                        1.2,
+                        -24
+                    ]
+                },
+                {
+                    "frame": 550,
+                    "value": [
+                        1.3,
+                        -35.8
+                    ]
+                },
+                {
+                    "frame": 900,
+                    "value": [
+                        -0.7,
+                        -25.7
+                    ]
+                },
+                {
+                    "frame": 1417,
+                    "value": [
+                        -4.3,
+                        -28
+                    ]
+                }
+            ],
+            "angle": [
+                {
+                    "frame": 0,
+                    "value": 0
+                },
+                {
+                    "frame": 233,
+                    "value": 4
+                },
+                {
+                    "frame": 550,
+                    "value": -13
+                },
+                {
+                    "frame": 900,
+                    "value": 19
+                },
+                {
+                    "frame": 1417,
+                    "value": 0
+                }
+            ]
+        },
+        "bubble": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        -3.9,
+                        -44.2
+                    ]
+                },
+                {
+                    "frame": 417,
+                    "value": [
+                        -3.9,
+                        -43.6
+                    ]
+                },
+                {
+                    "frame": 750,
+                    "value": [
+                        -3.9,
+                        -47.5
+                    ]
+                },
+                {
+                    "frame": 1067,
+                    "value": [
+                        -3.9,
+                        -42.9
+                    ]
+                },
+                {
+                    "frame": 1417,
+                    "value": [
+                        -3.9,
+                        -44.2
+                    ]
+                }
+            ],
+            "alpha": [
+                {
+                    "frame": 0,
+                    "value": 1
+                },
+                {
+                    "frame": 400,
+                    "value": 0.59
+                },
+                {
+                    "frame": 733,
+                    "value": 1
+                },
+                {
+                    "frame": 1050,
+                    "value": 0.59
+                },
+                {
+                    "frame": 1417,
+                    "value": 1
+                }
+            ]
+        },
+        "water4": {
+            "frameName": [
+                {
+                    "frame": 0,
+                    "value": "water21.png"
+                },
+                {
+                    "frame": 250,
+                    "value": "water22.png"
+                },
+                {
+                    "frame": 467,
+                    "value": "water23.png"
+                },
+                {
+                    "frame": 700,
+                    "value": "water21.png"
+                },
+                {
+                    "frame": 933,
+                    "value": "water22.png"
+                },
+                {
+                    "frame": 1150,
+                    "value": "water23.png"
+                },
+                {
+                    "frame": 1417,
+                    "value": "water21.png"
+                }
+            ]
+        }
+    }
+}

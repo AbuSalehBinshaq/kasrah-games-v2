@@ -1,0 +1,480 @@
+{
+    "hierarchy": {
+        "name": "Canvas",
+        "children": [
+            {
+                "name": "bar1",
+                "children": [
+                    {
+                        "name": "base",
+                        "children": [
+                            {
+                                "name": "bar"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "stars"
+                    }
+                ]
+            },
+            {
+                "name": "bar2",
+                "children": [
+                    {
+                        "name": "base",
+                        "children": [
+                            {
+                                "name": "bar"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "stars"
+                    }
+                ]
+            },
+            {
+                "name": "bar3",
+                "children": [
+                    {
+                        "name": "base",
+                        "children": [
+                            {
+                                "name": "bar"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "stars"
+                    }
+                ]
+            },
+            {
+                "name": "bar4",
+                "children": [
+                    {
+                        "name": "base",
+                        "children": [
+                            {
+                                "name": "bar"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "stars"
+                    }
+                ]
+            },
+            {
+                "name": "bar5",
+                "children": [
+                    {
+                        "name": "base",
+                        "children": [
+                            {
+                                "name": "bar"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "stars"
+                    }
+                ]
+            },
+            {
+                "name": "bar6",
+                "children": [
+                    {
+                        "name": "base",
+                        "children": [
+                            {
+                                "name": "bar"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "stars"
+                    }
+                ]
+            },
+            {
+                "name": "bar7",
+                "children": [
+                    {
+                        "name": "base",
+                        "children": [
+                            {
+                                "name": "bar"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "stars"
+                    }
+                ]
+            },
+            {
+                "name": "bar8",
+                "children": [
+                    {
+                        "name": "base",
+                        "children": [
+                            {
+                                "name": "bar"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "stars"
+                    }
+                ]
+            }
+        ]
+    },
+    "properties": {
+        "Canvas": {
+            "design": {
+                "width": 960,
+                "height": 640
+            },
+            "type": "canvas"
+        },
+        "bar1": {
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "container"
+        },
+        "bar1/base": {
+            "file": "flag_bg_bar.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -66.4
+            },
+            "type": "sprite"
+        },
+        "bar1/base/bar": {
+            "file": "flag_bar1.png",
+            "image": "TILED",
+            "size": {
+                "width": 70,
+                "height": 13
+            },
+            "position": {
+                "x": -50,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "bar1/stars": {
+            "file": "flag_bar_star.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -56,
+                "y": -67.5
+            },
+            "type": "sprite"
+        },
+        "bar2": {
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "container"
+        },
+        "bar2/base": {
+            "file": "flag_bg_bar.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -66.4
+            },
+            "type": "sprite"
+        },
+        "bar2/base/bar": {
+            "file": "flag_bar2.png",
+            "image": "TILED",
+            "size": {
+                "width": 70,
+                "height": 13
+            },
+            "position": {
+                "x": -50,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "bar2/stars": {
+            "file": "flag_bar_star.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -56,
+                "y": -67.5
+            },
+            "type": "sprite"
+        },
+        "bar3": {
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "container"
+        },
+        "bar3/base": {
+            "file": "flag_bg_bar.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -66.4
+            },
+            "type": "sprite"
+        },
+        "bar3/base/bar": {
+            "file": "flag_bar3.png",
+            "image": "TILED",
+            "size": {
+                "width": 70,
+                "height": 13
+            },
+            "position": {
+                "x": -50,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "bar3/stars": {
+            "file": "flag_bar_star.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -56,
+                "y": -67.5
+            },
+            "type": "sprite"
+        },
+        "bar4": {
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "container"
+        },
+        "bar4/base": {
+            "file": "flag_bg_bar.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -66.4
+            },
+            "type": "sprite"
+        },
+        "bar4/base/bar": {
+            "file": "flag_bar4.png",
+            "image": "TILED",
+            "size": {
+                "width": 70,
+                "height": 13
+            },
+            "position": {
+                "x": -50,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "bar4/stars": {
+            "file": "flag_bar_star.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -56,
+                "y": -67.5
+            },
+            "type": "sprite"
+        },
+        "bar5": {
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "container"
+        },
+        "bar5/base": {
+            "file": "flag_bg_bar.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -66.4
+            },
+            "type": "sprite"
+        },
+        "bar5/base/bar": {
+            "file": "flag_bar5.png",
+            "image": "TILED",
+            "size": {
+                "width": 70,
+                "height": 13
+            },
+            "position": {
+                "x": -50,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "bar5/stars": {
+            "file": "flag_bar_star.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -56,
+                "y": -67.5
+            },
+            "type": "sprite"
+        },
+        "bar6": {
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "container"
+        },
+        "bar6/base": {
+            "file": "flag_bg_bar.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -66.4
+            },
+            "type": "sprite"
+        },
+        "bar6/base/bar": {
+            "file": "flag_bar6.png",
+            "image": "TILED",
+            "size": {
+                "width": 70,
+                "height": 13
+            },
+            "position": {
+                "x": -50,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "bar6/stars": {
+            "file": "flag_bar_star.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -56,
+                "y": -67.5
+            },
+            "type": "sprite"
+        },
+        "bar7": {
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "container"
+        },
+        "bar7/base": {
+            "file": "flag_bg_bar.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -66.4
+            },
+            "type": "sprite"
+        },
+        "bar7/base/bar": {
+            "file": "flag_bar7.png",
+            "image": "TILED",
+            "size": {
+                "width": 70,
+                "height": 13
+            },
+            "position": {
+                "x": -50,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "bar7/stars": {
+            "file": "flag_bar_star.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -56,
+                "y": -67.5
+            },
+            "type": "sprite"
+        },
+        "bar8": {
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "type": "container"
+        },
+        "bar8/base": {
+            "file": "flag_bg_bar.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": -66.4
+            },
+            "type": "sprite"
+        },
+        "bar8/base/bar": {
+            "file": "flag_bar8.png",
+            "image": "TILED",
+            "size": {
+                "width": 70,
+                "height": 13
+            },
+            "position": {
+                "x": -50,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "bar8/stars": {
+            "file": "flag_bar_star.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -56,
+                "y": -67.5
+            },
+            "type": "sprite"
+        }
+    }
+}

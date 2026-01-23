@@ -1,0 +1,132 @@
+
+walrus.png
+size: 512,64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1x1
+  rotate: false
+  xy: 105, 2
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+atras/body1
+  rotate: false
+  xy: 216, 27
+  size: 37, 35
+  orig: 37, 35
+  offset: 0, 0
+  index: -1
+atras/body2
+  rotate: false
+  xy: 334, 36
+  size: 27, 26
+  orig: 27, 26
+  offset: 0, 0
+  index: -1
+atras/body3
+  rotate: true
+  xy: 82, 2
+  size: 18, 21
+  orig: 18, 21
+  offset: 0, 0
+  index: -1
+atras/fin_left
+  rotate: false
+  xy: 391, 50
+  size: 28, 12
+  orig: 28, 12
+  offset: 0, 0
+  index: -1
+atras/head
+  rotate: false
+  xy: 174, 25
+  size: 40, 37
+  orig: 40, 37
+  offset: 0, 0
+  index: -1
+atras/tail1
+  rotate: false
+  xy: 255, 49
+  size: 46, 13
+  orig: 46, 13
+  offset: 0, 0
+  index: -1
+frente/body
+  rotate: true
+  xy: 128, 26
+  size: 36, 44
+  orig: 36, 44
+  offset: 0, 0
+  index: -1
+frente/fin_left
+  rotate: false
+  xy: 363, 46
+  size: 26, 16
+  orig: 26, 16
+  offset: 0, 0
+  index: -1
+frente/head
+  rotate: false
+  xy: 2, 11
+  size: 39, 51
+  orig: 39, 51
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 255, 34
+  size: 45, 13
+  orig: 45, 13
+  offset: 0, 0
+  index: -1
+walrus_arm
+  rotate: false
+  xy: 471, 48
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+walrus_arm2
+  rotate: false
+  xy: 105, 5
+  size: 20, 15
+  orig: 20, 15
+  offset: 0, 0
+  index: -1
+walrus_body
+  rotate: false
+  xy: 82, 22
+  size: 44, 40
+  orig: 44, 40
+  offset: 0, 0
+  index: -1
+walrus_body2
+  rotate: false
+  xy: 303, 36
+  size: 29, 26
+  orig: 29, 26
+  offset: 0, 0
+  index: -1
+walrus_body3
+  rotate: false
+  xy: 449, 42
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+walrus_head
+  rotate: false
+  xy: 43, 12
+  size: 37, 50
+  orig: 37, 50
+  offset: 0, 0
+  index: -1
+walrus_tail
+  rotate: false
+  xy: 421, 49
+  size: 26, 13
+  orig: 26, 13
+  offset: 0, 0
+  index: -1

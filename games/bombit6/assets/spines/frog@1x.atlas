@@ -1,0 +1,237 @@
+
+frog.png
+size: 512,64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+atras/1x1
+  rotate: false
+  xy: 93, 13
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+atras/body
+  rotate: false
+  xy: 2, 12
+  size: 45, 50
+  orig: 45, 50
+  offset: 0, 0
+  index: -1
+atras/body2
+  rotate: true
+  xy: 96, 21
+  size: 41, 49
+  orig: 41, 49
+  offset: 0, 0
+  index: -1
+atras/body3
+  rotate: false
+  xy: 331, 23
+  size: 39, 39
+  orig: 39, 39
+  offset: 0, 0
+  index: -1
+atras/body4
+  rotate: false
+  xy: 147, 20
+  size: 45, 42
+  orig: 45, 42
+  offset: 0, 0
+  index: -1
+atras/foot
+  rotate: false
+  xy: 96, 2
+  size: 15, 17
+  orig: 15, 17
+  offset: 0, 0
+  index: -1
+atras/leg1
+  rotate: false
+  xy: 194, 2
+  size: 20, 23
+  orig: 20, 23
+  offset: 0, 0
+  index: -1
+atras/leg1_2
+  rotate: false
+  xy: 231, 3
+  size: 18, 22
+  orig: 18, 22
+  offset: 0, 0
+  index: -1
+atras/leg2
+  rotate: false
+  xy: 154, 2
+  size: 14, 16
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+frente/arm1_l
+  rotate: false
+  xy: 126, 2
+  size: 9, 17
+  orig: 9, 17
+  offset: 0, 0
+  index: -1
+frente/arm1_r
+  rotate: true
+  xy: 268, 2
+  size: 9, 17
+  orig: 9, 17
+  offset: 0, 0
+  index: -1
+frente/arm2_l
+  rotate: false
+  xy: 500, 35
+  size: 9, 14
+  orig: 9, 14
+  offset: 0, 0
+  index: -1
+frente/arm2_r
+  rotate: false
+  xy: 183, 3
+  size: 9, 15
+  orig: 9, 15
+  offset: 0, 0
+  index: -1
+frente/body
+  rotate: false
+  xy: 372, 35
+  size: 36, 27
+  orig: 36, 27
+  offset: 0, 0
+  index: -1
+frente/foot
+  rotate: false
+  xy: 251, 12
+  size: 15, 13
+  orig: 15, 13
+  offset: 0, 0
+  index: -1
+frente/hand2_l
+  rotate: false
+  xy: 268, 13
+  size: 15, 12
+  orig: 15, 12
+  offset: 0, 0
+  index: -1
+frente/hand2_r
+  rotate: false
+  xy: 372, 22
+  size: 15, 11
+  orig: 15, 11
+  offset: 0, 0
+  index: -1
+frente/hand_l
+  rotate: false
+  xy: 418, 26
+  size: 11, 9
+  orig: 11, 9
+  offset: 0, 0
+  index: -1
+frente/hand_r
+  rotate: true
+  xy: 500, 51
+  size: 11, 10
+  orig: 11, 10
+  offset: 0, 0
+  index: -1
+frente/head
+  rotate: false
+  xy: 242, 27
+  size: 44, 35
+  orig: 44, 35
+  offset: 0, 0
+  index: -1
+frente/leg1
+  rotate: false
+  xy: 410, 37
+  size: 30, 25
+  orig: 30, 25
+  offset: 0, 0
+  index: -1
+frente/leg2
+  rotate: true
+  xy: 113, 2
+  size: 17, 11
+  orig: 17, 11
+  offset: 0, 0
+  index: -1
+perfil/body
+  rotate: false
+  xy: 194, 27
+  size: 46, 35
+  orig: 46, 35
+  offset: 0, 0
+  index: -1
+perfil/body2
+  rotate: false
+  xy: 49, 16
+  size: 45, 46
+  orig: 45, 46
+  offset: 0, 0
+  index: -1
+perfil/foot
+  rotate: false
+  xy: 137, 2
+  size: 15, 16
+  orig: 15, 16
+  offset: 0, 0
+  index: -1
+perfil/foot_back
+  rotate: true
+  xy: 405, 20
+  size: 13, 11
+  orig: 13, 11
+  offset: 0, 0
+  index: -1
+perfil/head
+  rotate: false
+  xy: 288, 23
+  size: 41, 39
+  orig: 41, 39
+  offset: 0, 0
+  index: -1
+perfil/leg1
+  rotate: false
+  xy: 442, 38
+  size: 27, 24
+  orig: 27, 24
+  offset: 0, 0
+  index: -1
+perfil/leg1_2
+  rotate: false
+  xy: 471, 41
+  size: 27, 21
+  orig: 27, 21
+  offset: 0, 0
+  index: -1
+perfil/leg2
+  rotate: true
+  xy: 170, 2
+  size: 16, 11
+  orig: 16, 11
+  offset: 0, 0
+  index: -1
+perfil/leg_back1
+  rotate: true
+  xy: 216, 2
+  size: 23, 13
+  orig: 23, 13
+  offset: 0, 0
+  index: -1
+perfil/leg_back2
+  rotate: true
+  xy: 389, 21
+  size: 12, 14
+  orig: 12, 14
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 49, 2
+  size: 42, 12
+  orig: 42, 12
+  offset: 0, 0
+  index: -1

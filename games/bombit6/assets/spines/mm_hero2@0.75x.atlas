@@ -1,0 +1,139 @@
+
+mm_hero2.png
+size: 2048,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+frente/eyes_0
+  rotate: false
+  xy: 1202, 112
+  size: 114, 44
+  orig: 114, 44
+  offset: 0, 0
+  index: -1
+frente/eyes_1
+  rotate: false
+  xy: 1497, 207
+  size: 114, 44
+  orig: 114, 44
+  offset: 0, 0
+  index: -1
+frente/eyes_2
+  rotate: false
+  xy: 1613, 207
+  size: 114, 44
+  orig: 114, 44
+  offset: 0, 0
+  index: -1
+frente/robot_body_front1
+  rotate: false
+  xy: 1002, 9
+  size: 80, 79
+  orig: 80, 79
+  offset: 0, 0
+  index: -1
+frente/robot_body_front2
+  rotate: false
+  xy: 1333, 172
+  size: 80, 79
+  orig: 80, 79
+  offset: 0, 0
+  index: -1
+frente/robot_body_front3
+  rotate: false
+  xy: 1084, 9
+  size: 80, 79
+  orig: 80, 79
+  offset: 0, 0
+  index: -1
+frente/robot_body_front4
+  rotate: false
+  xy: 1415, 172
+  size: 80, 79
+  orig: 80, 79
+  offset: 0, 0
+  index: -1
+frente/robot_face_front1
+  rotate: false
+  xy: 1202, 158
+  size: 129, 93
+  orig: 129, 93
+  offset: 0, 0
+  index: -1
+frente/robot_head_front1
+  rotate: false
+  xy: 2, 2
+  size: 248, 249
+  orig: 248, 249
+  offset: 0, 0
+  index: -1
+frente/robot_head_front2
+  rotate: false
+  xy: 252, 2
+  size: 248, 249
+  orig: 248, 249
+  offset: 0, 0
+  index: -1
+frente/robot_head_front3
+  rotate: false
+  xy: 502, 2
+  size: 248, 249
+  orig: 248, 249
+  offset: 0, 0
+  index: -1
+frente/robot_head_front4
+  rotate: false
+  xy: 752, 2
+  size: 248, 249
+  orig: 248, 249
+  offset: 0, 0
+  index: -1
+frente/robot_leg_front1
+  rotate: false
+  xy: 1807, 191
+  size: 38, 60
+  orig: 38, 60
+  offset: 0, 0
+  index: -1
+frente/robot_leg_front2
+  rotate: false
+  xy: 1847, 191
+  size: 38, 60
+  orig: 38, 60
+  offset: 0, 0
+  index: -1
+robot2_arm
+  rotate: false
+  xy: 1202, 93
+  size: 34, 17
+  orig: 34, 17
+  offset: 0, 0
+  index: -1
+robot2_arm2
+  rotate: true
+  xy: 1166, 50
+  size: 38, 32
+  orig: 38, 32
+  offset: 0, 0
+  index: -1
+robot2_weapon1
+  rotate: false
+  xy: 1002, 90
+  size: 98, 161
+  orig: 98, 161
+  offset: 0, 0
+  index: -1
+robot2_weapon2
+  rotate: false
+  xy: 1102, 90
+  size: 98, 161
+  orig: 98, 161
+  offset: 0, 0
+  index: -1
+shield
+  rotate: true
+  xy: 1729, 178
+  size: 73, 76
+  orig: 73, 76
+  offset: 0, 0
+  index: -1

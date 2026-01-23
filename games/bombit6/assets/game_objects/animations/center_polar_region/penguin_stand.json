@@ -1,0 +1,295 @@
+{
+    "name": "penguin_stand",
+    "speed": 1,
+    "mode": "loop",
+    "data": {
+        "penguin1_body": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        1.5,
+                        -6.7
+                    ]
+                },
+                {
+                    "frame": 250,
+                    "value": [
+                        2.5,
+                        -6.1
+                    ]
+                },
+                {
+                    "frame": 417,
+                    "value": [
+                        1.5,
+                        -9.4
+                    ]
+                },
+                {
+                    "frame": 683,
+                    "value": [
+                        6,
+                        -8.2
+                    ]
+                },
+                {
+                    "frame": 917,
+                    "value": [
+                        1.5,
+                        -6.7
+                    ]
+                }
+            ],
+            "angle": [
+                {
+                    "frame": 0,
+                    "value": 0
+                },
+                {
+                    "frame": 250,
+                    "value": -8
+                },
+                {
+                    "frame": 417,
+                    "value": 0
+                },
+                {
+                    "frame": 683,
+                    "value": 14
+                },
+                {
+                    "frame": 917,
+                    "value": 0
+                }
+            ]
+        },
+        "penguin1_leg_r": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        7.3,
+                        14.4
+                    ]
+                },
+                {
+                    "frame": 250,
+                    "value": [
+                        16.2,
+                        13.7
+                    ]
+                },
+                {
+                    "frame": 417,
+                    "value": [
+                        7.3,
+                        14.4
+                    ]
+                },
+                {
+                    "frame": 917,
+                    "value": [
+                        7.3,
+                        14.4
+                    ]
+                }
+            ]
+        },
+        "penguin1_leg_l": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        -1.1,
+                        14.1
+                    ]
+                },
+                {
+                    "frame": 250,
+                    "value": [
+                        0.4,
+                        13.8
+                    ]
+                },
+                {
+                    "frame": 417,
+                    "value": [
+                        -1.1,
+                        14.1
+                    ]
+                },
+                {
+                    "frame": 683,
+                    "value": [
+                        -14.7,
+                        9.5
+                    ]
+                },
+                {
+                    "frame": 917,
+                    "value": [
+                        -1.1,
+                        14.1
+                    ]
+                }
+            ]
+        },
+        "penguin1_shadow": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        1.8,
+                        24.6
+                    ]
+                },
+                {
+                    "frame": 250,
+                    "value": [
+                        11.1,
+                        24.6
+                    ]
+                },
+                {
+                    "frame": 417,
+                    "value": [
+                        1.8,
+                        24.6
+                    ]
+                },
+                {
+                    "frame": 683,
+                    "value": [
+                        -6.4,
+                        24.6
+                    ]
+                },
+                {
+                    "frame": 917,
+                    "value": [
+                        1.8,
+                        24.6
+                    ]
+                }
+            ]
+        },
+        "penguin1_body/penguin1_face": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        0.4,
+                        -6.1
+                    ]
+                },
+                {
+                    "frame": 250,
+                    "value": [
+                        0.4,
+                        -6.1
+                    ]
+                },
+                {
+                    "frame": 417,
+                    "value": [
+                        0.4,
+                        -4.3
+                    ]
+                },
+                {
+                    "frame": 683,
+                    "value": [
+                        1.1,
+                        -9.7
+                    ]
+                },
+                {
+                    "frame": 917,
+                    "value": [
+                        0.4,
+                        -6.1
+                    ]
+                }
+            ]
+        },
+        "penguin1_body/penguin1_eye_r": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        10.1,
+                        -13.5
+                    ]
+                },
+                {
+                    "frame": 250,
+                    "value": [
+                        10.1,
+                        -13.5
+                    ]
+                },
+                {
+                    "frame": 417,
+                    "value": [
+                        10.1,
+                        -11.2
+                    ]
+                },
+                {
+                    "frame": 683,
+                    "value": [
+                        10.6,
+                        -16.5
+                    ]
+                },
+                {
+                    "frame": 917,
+                    "value": [
+                        10.1,
+                        -13.5
+                    ]
+                }
+            ]
+        },
+        "penguin1_body/penguin1_eye_l": {
+            "position": [
+                {
+                    "frame": 0,
+                    "value": [
+                        -10.4,
+                        -13.1
+                    ]
+                },
+                {
+                    "frame": 250,
+                    "value": [
+                        -10.4,
+                        -13.1
+                    ]
+                },
+                {
+                    "frame": 417,
+                    "value": [
+                        -9.9,
+                        -10.8
+                    ]
+                },
+                {
+                    "frame": 683,
+                    "value": [
+                        -8.8,
+                        -16.9
+                    ]
+                },
+                {
+                    "frame": 917,
+                    "value": [
+                        -10.4,
+                        -13.1
+                    ]
+                }
+            ]
+        }
+    }
+}

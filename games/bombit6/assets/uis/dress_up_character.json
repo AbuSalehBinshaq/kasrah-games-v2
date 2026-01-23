@@ -1,0 +1,947 @@
+{
+    "hierarchy": {
+        "name": "Canvas",
+        "children": [
+            {
+                "name": "container",
+                "children": [
+                    {
+                        "name": "title"
+                    },
+                    {
+                        "name": "character1_button"
+                    },
+                    {
+                        "name": "character1",
+                        "children": [
+                            {
+                                "name": "player"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "character2_button"
+                    },
+                    {
+                        "name": "character2",
+                        "children": [
+                            {
+                                "name": "player"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "character3_button"
+                    },
+                    {
+                        "name": "character3",
+                        "children": [
+                            {
+                                "name": "player"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "character4_button"
+                    },
+                    {
+                        "name": "character4",
+                        "children": [
+                            {
+                                "name": "player"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "character5_button"
+                    },
+                    {
+                        "name": "character5",
+                        "children": [
+                            {
+                                "name": "player"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "character6_button"
+                    },
+                    {
+                        "name": "character6",
+                        "children": [
+                            {
+                                "name": "player"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "character7_button"
+                    },
+                    {
+                        "name": "character7",
+                        "children": [
+                            {
+                                "name": "player"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "character8_button"
+                    },
+                    {
+                        "name": "character8",
+                        "children": [
+                            {
+                                "name": "player"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "character_container",
+                        "children": [
+                            {
+                                "name": "p1_image"
+                            },
+                            {
+                                "name": "character"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "itmes_container",
+                        "children": [
+                            {
+                                "name": "item1"
+                            },
+                            {
+                                "name": "item2"
+                            },
+                            {
+                                "name": "item3"
+                            },
+                            {
+                                "name": "item4"
+                            },
+                            {
+                                "name": "item5"
+                            },
+                            {
+                                "name": "item6"
+                            },
+                            {
+                                "name": "item7"
+                            },
+                            {
+                                "name": "item8"
+                            },
+                            {
+                                "name": "item9"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "score_container",
+                        "children": [
+                            {
+                                "name": "total_score"
+                            },
+                            {
+                                "name": "star"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "start_button",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "back_button",
+                        "children": [
+                            {
+                                "name": "text"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "properties": {
+        "Canvas": {
+            "design": {
+                "width": 1280,
+                "height": 720
+            },
+            "type": "canvas"
+        },
+        "container": {
+            "file": "big_container1.png",
+            "image": "SIMPLE",
+            "type": "sprite",
+            "alignment": {
+                "type": "CENTER"
+            }
+        },
+        "container/title": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 28
+            },
+            "lineSpacing": -5,
+            "text": "DRESS UP YOUR CHARACTERS",
+            "align": "center",
+            "stroke": "#660000",
+            "strokeThickness": 4.6,
+            "position": {
+                "x": -0.2,
+                "y": -245.1
+            },
+            "color": "#ffe000",
+            "type": "text",
+            "orientation": {
+                "landscape": {
+                    "properties": {
+                        "position": {
+                            "x": -0.2,
+                            "y": -247.9
+                        }
+                    }
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -0.2,
+                            "y": -344.5
+                        }
+                    }
+                }
+            }
+        },
+        "container/character1_button": {
+            "file": "face_normal.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "face_normal.png",
+                "pressed": "face_hover.png",
+                "hover": "face_hover.png"
+            },
+            "position": {
+                "x": -301.9,
+                "y": -155
+            },
+            "type": "button",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -150,
+                            "y": -253.4
+                        }
+                    }
+                }
+            }
+        },
+        "container/character1": {
+            "position": {
+                "x": -300,
+                "y": -155
+            },
+            "type": "container",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -146.9,
+                            "y": -253.4
+                        }
+                    }
+                }
+            }
+        },
+        "container/character1/player": {
+            "file": "face_p1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -1.9,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container/character2_button": {
+            "file": "face_normal.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "face_normal.png",
+                "pressed": "face_hover.png",
+                "hover": "face_hover.png"
+            },
+            "position": {
+                "x": -216.8,
+                "y": -155
+            },
+            "type": "button",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -51.7,
+                            "y": -253.4
+                        }
+                    }
+                }
+            }
+        },
+        "container/character2": {
+            "position": {
+                "x": -214,
+                "y": -155
+            },
+            "type": "container",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -48,
+                            "y": -253.4
+                        }
+                    }
+                }
+            }
+        },
+        "container/character2/player": {
+            "file": "face_p1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -2.8,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container/character3_button": {
+            "file": "face_normal.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "face_normal.png",
+                "pressed": "face_hover.png",
+                "hover": "face_hover.png"
+            },
+            "position": {
+                "x": -131,
+                "y": -155
+            },
+            "type": "button",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 45.3,
+                            "y": -253.4
+                        }
+                    }
+                }
+            }
+        },
+        "container/character3": {
+            "position": {
+                "x": -129,
+                "y": -155
+            },
+            "type": "container",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 48,
+                            "y": -253.4
+                        }
+                    }
+                }
+            }
+        },
+        "container/character3/player": {
+            "file": "face_p1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -2,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container/character4_button": {
+            "file": "face_normal.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "face_normal.png",
+                "pressed": "face_hover.png",
+                "hover": "face_hover.png"
+            },
+            "position": {
+                "x": -45.4,
+                "y": -155
+            },
+            "type": "button",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 146.6,
+                            "y": -253.4
+                        }
+                    }
+                }
+            }
+        },
+        "container/character4": {
+            "position": {
+                "x": -43,
+                "y": -155
+            },
+            "type": "container",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 150,
+                            "y": -253.4
+                        }
+                    }
+                }
+            }
+        },
+        "container/character4/player": {
+            "file": "face_p1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -2.4,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container/character5_button": {
+            "file": "face_normal.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "face_normal.png",
+                "pressed": "face_hover.png",
+                "hover": "face_hover.png"
+            },
+            "position": {
+                "x": 40,
+                "y": -155
+            },
+            "type": "button",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -150,
+                            "y": -153.7
+                        }
+                    }
+                }
+            }
+        },
+        "container/character5": {
+            "position": {
+                "x": 43,
+                "y": -155
+            },
+            "type": "container",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -150,
+                            "y": -158.4
+                        }
+                    }
+                }
+            }
+        },
+        "container/character5/player": {
+            "file": "face_p1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -3,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container/character6_button": {
+            "file": "face_normal.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "face_normal.png",
+                "pressed": "face_hover.png",
+                "hover": "face_hover.png"
+            },
+            "position": {
+                "x": 126,
+                "y": -155
+            },
+            "type": "button",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -51.7,
+                            "y": -153.7
+                        }
+                    }
+                }
+            }
+        },
+        "container/character6": {
+            "position": {
+                "x": 129,
+                "y": -155
+            },
+            "type": "container",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -48,
+                            "y": -158.4
+                        }
+                    }
+                }
+            }
+        },
+        "container/character6/player": {
+            "file": "face_p1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -3,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container/character7_button": {
+            "file": "face_normal.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "face_normal.png",
+                "pressed": "face_hover.png",
+                "hover": "face_hover.png"
+            },
+            "position": {
+                "x": 211.3,
+                "y": -155
+            },
+            "type": "button",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 45.3,
+                            "y": -153.7
+                        }
+                    }
+                }
+            }
+        },
+        "container/character7": {
+            "position": {
+                "x": 214,
+                "y": -155
+            },
+            "type": "container",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 48,
+                            "y": -158.4
+                        }
+                    }
+                }
+            }
+        },
+        "container/character7/player": {
+            "file": "face_p1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -2.7,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container/character8_button": {
+            "file": "face_normal.png",
+            "image": "SIMPLE",
+            "transitionMode": "image",
+            "transition": {
+                "normal": "face_normal.png",
+                "pressed": "face_hover.png",
+                "hover": "face_hover.png"
+            },
+            "position": {
+                "x": 297.6,
+                "y": -155
+            },
+            "type": "button",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 146.6,
+                            "y": -153.7
+                        }
+                    }
+                }
+            }
+        },
+        "container/character8": {
+            "position": {
+                "x": 300,
+                "y": -155
+            },
+            "type": "container",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 150,
+                            "y": -158.4
+                        }
+                    }
+                }
+            }
+        },
+        "container/character8/player": {
+            "file": "face_p1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -2.4,
+                "y": 0
+            },
+            "type": "sprite"
+        },
+        "container/character_container": {
+            "position": {
+                "x": -228,
+                "y": 62
+            },
+            "type": "container",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -5,
+                            "y": -6
+                        }
+                    }
+                }
+            }
+        },
+        "container/character_container/p1_image": {
+            "file": "p1_1.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -60.7,
+                "y": -147
+            },
+            "type": "sprite"
+        },
+        "container/character_container/character": {
+            "position": {
+                "x": -6.7,
+                "y": 61.8
+            },
+            "type": "container"
+        },
+        "container/itmes_container": {
+            "position": {
+                "x": 87.8,
+                "y": 33.7
+            },
+            "type": "container",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 0,
+                            "y": 176.3
+                        }
+                    }
+                }
+            }
+        },
+        "container/itmes_container/item1": {
+            "position": {
+                "x": -182.2,
+                "y": -51.8
+            },
+            "type": "container"
+        },
+        "container/itmes_container/item2": {
+            "position": {
+                "x": -91.7,
+                "y": -51.8
+            },
+            "type": "container"
+        },
+        "container/itmes_container/item3": {
+            "position": {
+                "x": 0,
+                "y": -51.8
+            },
+            "type": "container"
+        },
+        "container/itmes_container/item4": {
+            "position": {
+                "x": 92.4,
+                "y": -51.8
+            },
+            "type": "container"
+        },
+        "container/itmes_container/item5": {
+            "position": {
+                "x": 184.4,
+                "y": -51.8
+            },
+            "type": "container"
+        },
+        "container/itmes_container/item6": {
+            "position": {
+                "x": -143.1,
+                "y": 58.2
+            },
+            "type": "container"
+        },
+        "container/itmes_container/item7": {
+            "position": {
+                "x": -50.7,
+                "y": 58.2
+            },
+            "type": "container"
+        },
+        "container/itmes_container/item8": {
+            "position": {
+                "x": 42.4,
+                "y": 58.2
+            },
+            "type": "container"
+        },
+        "container/itmes_container/item9": {
+            "position": {
+                "x": 135.7,
+                "y": 58.2
+            },
+            "type": "container"
+        },
+        "container/score_container": {
+            "position": {
+                "x": -280.3,
+                "y": 163.1
+            },
+            "type": "container",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 114.4,
+                            "y": 49.3
+                        }
+                    }
+                }
+            }
+        },
+        "container/score_container/total_score": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 25.2
+            },
+            "text": "0",
+            "align": "center",
+            "stroke": "#660000",
+            "strokeThickness": 5.6,
+            "position": {
+                "x": 49.3,
+                "y": 0.8
+            },
+            "color": "#ffdf1f",
+            "type": "text"
+        },
+        "container/score_container/star": {
+            "file": "dress_up_star.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": -31.7,
+                "y": -7.1
+            },
+            "type": "sprite"
+        },
+        "container/start_button": {
+            "file": "button.png",
+            "image": "SLICED",
+            "slice": {
+                "top": 5,
+                "bottom": 9,
+                "left": 25,
+                "right": 24
+            },
+            "size": {
+                "width": 199,
+                "height": 48
+            },
+            "position": {
+                "x": 243,
+                "y": 254.8
+            },
+            "type": "button",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": 231.5,
+                            "y": 350.3
+                        },
+                        "scale": {
+                            "x": 0.88,
+                            "y": 1
+                        }
+                    }
+                }
+            }
+        },
+        "container/start_button/text": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 21
+            },
+            "text": "START GAME",
+            "align": "center",
+            "stroke": "#c55d18",
+            "strokeThickness": 3.6,
+            "position": {
+                "x": 0,
+                "y": 0.7
+            },
+            "type": "text"
+        },
+        "container/back_button": {
+            "file": "button.png",
+            "image": "SLICED",
+            "slice": {
+                "top": 5,
+                "bottom": 9,
+                "left": 25,
+                "right": 24
+            },
+            "size": {
+                "width": 199,
+                "height": 48
+            },
+            "position": {
+                "x": -243.4,
+                "y": 254.8
+            },
+            "type": "button",
+            "orientation": {
+                "landscape": {
+                    "properties": {}
+                },
+                "portrait": {
+                    "properties": {
+                        "position": {
+                            "x": -233.5,
+                            "y": 350.3
+                        },
+                        "scale": {
+                            "x": 0.88,
+                            "y": 1
+                        }
+                    }
+                }
+            }
+        },
+        "container/back_button/text": {
+            "font": {
+                "name": "roboto_condensedbold",
+                "fontSize": 21
+            },
+            "text": "BACK",
+            "align": "center",
+            "stroke": "#c55d18",
+            "strokeThickness": 3.6,
+            "position": {
+                "x": 0,
+                "y": 0.7
+            },
+            "type": "text"
+        }
+    }
+}

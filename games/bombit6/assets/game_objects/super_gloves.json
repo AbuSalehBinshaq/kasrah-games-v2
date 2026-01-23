@@ -1,0 +1,77 @@
+{
+    "hierarchy": {
+        "name": "super_gloves",
+        "children": [
+            {
+                "name": "base",
+                "children": [
+                    {
+                        "name": "chain"
+                    },
+                    {
+                        "name": "hand"
+                    }
+                ]
+            }
+        ],
+        "animations": [
+            "super_gloves_side1",
+            "super_gloves_side2",
+            "super_gloves_side3",
+            "super_gloves_up1",
+            "super_gloves_up2",
+            "super_gloves_up3",
+            "super_gloves_down1",
+            "super_gloves_down2",
+            "super_gloves_down3"
+        ]
+    },
+    "properties": {
+        "base": {
+            "position": {
+                "x": -12.5,
+                "y": -25.5
+            },
+            "scale": {
+                "x": 0.8,
+                "y": 0.8
+            },
+            "type": "container"
+        },
+        "base/chain": {
+            "file": "chain.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 0
+            },
+            "angle": 90,
+            "scale": {
+                "x": 0.1,
+                "y": 1
+            },
+            "anchor": {
+                "x": 0,
+                "y": 0.5
+            },
+            "type": "sprite"
+        },
+        "base/hand": {
+            "file": "hand_front.png",
+            "image": "SIMPLE",
+            "position": {
+                "x": 0,
+                "y": 12.4
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.9
+            },
+            "type": "sprite"
+        }
+    }
+}
