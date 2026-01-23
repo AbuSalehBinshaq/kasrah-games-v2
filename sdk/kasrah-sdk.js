@@ -1,15 +1,17 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v1.3.0
-    // Integrated with Kasrah Main Platform Authentication & Guest Alerts
+    // Kasrah Games SDK - Cloud Edition v1.4.0
+    // Optimized for Performance & Scalability
     
-    const SDK_VERSION = '1.3.0';
+    const SDK_VERSION = '1.4.0';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
     
     const KasrahSDK = {
         user: null,
-        gameId: window.location.pathname.split('/').filter(Boolean).pop(),
+        gameId: window.location.pathname.split('/').filter(Boolean).pop() || 'unknown',
+        saveQueue: {},
+        saveTimeout: null,
 
         init: function() {
             console.log(`%c 🎮 ${PLATFORM_NAME} SDK v${SDK_VERSION} Active `, `background: ${PRIMARY_COLOR}; color: white; font-weight: bold; padding: 4px; border-radius: 4px;`);
@@ -25,6 +27,7 @@
                     background: #0f0f0f; display: flex; flex-direction: column;
                     justify-content: center; align-items: center; z-index: 999999;
                     transition: opacity 0.8s ease-out; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    pointer-events: none;
                 }
                 .kasrah-logo {
                     font-size: 48px; font-weight: bold; color: white; margin-bottom: 20px;
@@ -43,23 +46,23 @@
                     color: white; padding: 5px 12px; border-radius: 15px; font-size: 12px;
                     display: flex; align-items: center; gap: 8px; z-index: 999998;
                     border: 1px solid ${PRIMARY_COLOR}; backdrop-filter: blur(5px);
-                    transition: opacity 0.5s;
+                    transition: opacity 0.5s; pointer-events: none;
                 }
                 .kasrah-guest-alert {
                     position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-                    background: rgba(255, 71, 87, 0.9); color: white; padding: 10px 20px;
+                    background: rgba(255, 71, 87, 0.95); color: white; padding: 12px 25px;
                     border-radius: 30px; font-size: 14px; font-weight: 500; z-index: 999998;
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 10px;
-                    cursor: pointer; transition: all 0.3s; animation: kasrah-slide-up 0.5s ease-out;
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 12px;
+                    cursor: pointer; transition: all 0.3s; animation: kasrah-slide-up 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                 }
                 .kasrah-guest-alert:hover { transform: translateX(-50%) scale(1.05); background: ${PRIMARY_COLOR}; }
                 @keyframes kasrah-slide-up {
-                    from { bottom: -50px; opacity: 0; }
+                    from { bottom: -60px; opacity: 0; }
                     to { bottom: 20px; opacity: 1; }
                 }
                 @media (max-width: 600px) {
                     .kasrah-logo { font-size: 32px; }
-                    .kasrah-guest-alert { width: 90%; font-size: 12px; justify-content: center; }
+                    .kasrah-guest-alert { width: 90%; font-size: 12px; justify-content: center; padding: 10px; }
                 }
             `;
             const styleSheet = document.createElement("style");
@@ -79,7 +82,7 @@
 
             let progress = 0;
             const interval = setInterval(() => {
-                progress += Math.random() * 25;
+                progress += Math.random() * 30;
                 if (progress > 100) progress = 100;
                 const pBar = document.getElementById('kasrah-p-bar');
                 if (pBar) pBar.style.width = progress + '%';
@@ -91,7 +94,7 @@
                         setTimeout(() => splash.remove(), 800);
                     }, 400);
                 }
-            }, 100);
+            }, 120);
         },
 
         checkAuth: async function() {
@@ -100,13 +103,11 @@
                 if (response.ok) {
                     this.user = await response.json();
                     this.showUserBadge();
-                    console.log("☁️ Cloud Save Enabled for: " + this.user.username);
                 } else {
-                    // إذا لم يكن مسجلاً، نظهر التنبيه بعد انتهاء شاشة التحميل
-                    setTimeout(() => this.showGuestAlert(), 2000);
+                    setTimeout(() => this.showGuestAlert(), 3000);
                 }
             } catch (e) {
-                console.log("Offline mode: Cloud save disabled.");
+                console.warn("Kasrah SDK: Connection to main platform failed.");
             }
         },
 
@@ -119,41 +120,61 @@
                 <span>${this.user.username}</span>
             `;
             document.body.appendChild(badge);
-            setTimeout(() => badge.style.opacity = '0.5', 5000);
+            setTimeout(() => badge.style.opacity = '0.4', 5000);
         },
 
         showGuestAlert: function() {
+            if (this.user) return;
             const alert = document.createElement('div');
             alert.className = 'kasrah-guest-alert';
             alert.innerHTML = `
                 <span>⚠️</span>
                 <span>Login to save your progress in the cloud!</span>
-                <span style="text-decoration: underline; font-weight: bold;">Login Now</span>
+                <span style="text-decoration: underline; font-weight: bold; margin-left: 5px;">Login Now</span>
             `;
             alert.onclick = () => window.open(`${MAIN_SITE_URL}/login`, '_blank');
             document.body.appendChild(alert);
             
-            // إخفاء التنبيه تلقائياً بعد 10 ثوانٍ لعدم إزعاج اللاعب
             setTimeout(() => {
                 alert.style.opacity = '0';
-                setTimeout(() => alert.remove(), 500);
-            }, 10000);
+                setTimeout(() => alert.remove(), 600);
+            }, 12000);
         },
 
-        saveData: async function(key, value) {
+        // نظام الحفظ الذكي (Debouncing) لتجنب الضغط على السيرفر
+        saveData: function(key, value) {
+            // حفظ محلي فوري
             localStorage.setItem('kasrah_' + key, JSON.stringify(value));
-            if (this.user) {
-                try {
-                    await fetch(`${MAIN_SITE_URL}/api/games/save-data`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        credentials: 'include',
-                        body: JSON.stringify({
-                            gameId: this.gameId,
-                            data: { [key]: value }
-                        })
-                    });
-                } catch (e) {}
+            
+            if (!this.user) return;
+
+            // إضافة البيانات لزمام الانتظار
+            this.saveQueue[key] = value;
+
+            // إعادة ضبط المؤقت (سيتم الإرسال فقط بعد توقف التغييرات بـ 3 ثوانٍ)
+            if (this.saveTimeout) clearTimeout(this.saveTimeout);
+            this.saveTimeout = setTimeout(() => this.syncWithCloud(), 3000);
+        },
+
+        syncWithCloud: async function() {
+            if (!this.user || Object.keys(this.saveQueue).length === 0) return;
+
+            const dataToSync = { ...this.saveQueue };
+            this.saveQueue = {}; // تفريغ الزمام
+
+            try {
+                await fetch(`${MAIN_SITE_URL}/api/games/save-data`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        gameId: this.gameId,
+                        data: dataToSync
+                    })
+                });
+                console.log("☁️ Kasrah Cloud: Progress synced successfully.");
+            } catch (e) {
+                console.error("☁️ Kasrah Cloud: Sync failed.");
             }
         },
 
@@ -162,6 +183,7 @@
         }
     };
 
+    // التشغيل التلقائي
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
         KasrahSDK.init();
     } else {
