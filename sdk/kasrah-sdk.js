@@ -1,9 +1,10 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v1.9.1 (Ad-Integrated)
+    // Kasrah Games SDK - Cloud Edition v1.9.2 (In-Page Ads Only)
     // Fixed: Auth Logic for Admins/Users & Smart Redirect after Login
-    // Added: Pre-roll Ads in Splash Screen & Interstitial Ad Support
+    // Added: Pre-roll Ads in Splash Screen (Internal Only)
+    // Removed: Smartlinks/Popups to ensure best User Experience
     
-    const SDK_VERSION = '1.9.1';
+    const SDK_VERSION = '1.9.2';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
@@ -117,7 +118,7 @@
             splash.innerHTML = `
                 <div class="kasrah-logo">KASRAH</div>
                 
-                <!-- Ad Container for Pre-roll -->
+                <!-- Ad Container for Pre-roll (Internal Only) -->
                 <div class="kasrah-ad-container" id="kasrah-ad-box">
                     <span class="kasrah-ad-label">Advertisement</span>
                     <div id="kasrah-ad-content"></div>
@@ -128,7 +129,7 @@
                 
                 <button id="kasrah-start-btn" class="kasrah-start-btn">PLAY NOW</button>
                 
-                <div style="color: #444; margin-top: 15px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px;">Cloud Sync & Ad-Network Active</div>
+                <div style="color: #444; margin-top: 15px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px;">Cloud Sync & Internal Ad-Network Active</div>
             `;
             document.body.appendChild(splash);
 
@@ -177,15 +178,8 @@
             container.appendChild(script);
         },
 
-        showInterstitial: function(callback) {
-            console.log("Kasrah SDK: Triggering Interstitial Ad...");
-            // Replace the URL below with your Adsterra Smartlink
-            const smartlink = "YOUR_ADSTERRA_SMARTLINK_HERE";
-            if (smartlink !== "YOUR_ADSTERRA_SMARTLINK_HERE") {
-                window.open(smartlink, '_blank');
-            }
-            if (callback) callback();
-        },
+        // Removed showInterstitial to prevent popups/new windows
+        // You can use this space for other internal ad formats in the future
 
         checkAuth: async function() {
             try {
