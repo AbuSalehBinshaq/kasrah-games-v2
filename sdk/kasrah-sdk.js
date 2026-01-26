@@ -1,13 +1,21 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v1.9.2 (In-Page Ads Only)
-    // Fixed: Auth Logic for Admins/Users & Smart Redirect after Login
-    // Added: Pre-roll Ads in Splash Screen (Internal Only)
-    // Removed: Smartlinks/Popups to ensure best User Experience
+    // Kasrah Games SDK - Cloud Edition v2.0.0 (Centralized Control)
+    // Goal: Easy management of Ads and Features from one place.
     
-    const SDK_VERSION = '1.9.2';
+    const SDK_VERSION = '2.0.0';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
+
+    // --- CENTRAL CONTROL PANEL (CONFIG) ---
+    const SDK_CONFIG = {
+        showAds: true,              // Set to false to hide all ads instantly
+        adKey: '49ac472dc3a5486324fd7f45c712a6ec', // Your Adsterra Banner Key
+        loadSpeed: 10,              // Progress speed (1-100, lower is slower)
+        showStartButton: true,      // Require user to click "Play Now" after loading
+        debugMode: false            // Show console logs for debugging
+    };
+    // --------------------------------------
     
     const KasrahSDK = {
         user: null,
@@ -17,7 +25,7 @@
         isAuthChecked: false,
 
         init: function() {
-            console.log(`%c 🎮 ${PLATFORM_NAME} SDK v${SDK_VERSION} Active `, `background: ${PRIMARY_COLOR}; color: white; font-weight: bold; padding: 4px; border-radius: 4px;`);
+            if (SDK_CONFIG.debugMode) console.log(`%c 🎮 ${PLATFORM_NAME} SDK v${SDK_VERSION} Active `, `background: ${PRIMARY_COLOR}; color: white; font-weight: bold; padding: 4px; border-radius: 4px;`);
             this.injectStyles();
             this.createSplashScreen();
             this.checkAuth();
@@ -115,30 +123,34 @@
         createSplashScreen: function() {
             const splash = document.createElement('div');
             splash.id = 'kasrah-splash';
+            
+            let adHtml = '';
+            if (SDK_CONFIG.showAds) {
+                adHtml = `
+                    <div class="kasrah-ad-container" id="kasrah-ad-box">
+                        <span class="kasrah-ad-label">Advertisement</span>
+                        <div id="kasrah-ad-content"></div>
+                    </div>
+                `;
+            }
+
             splash.innerHTML = `
                 <div class="kasrah-logo">KASRAH</div>
-                
-                <!-- Ad Container for Pre-roll (Internal Only) -->
-                <div class="kasrah-ad-container" id="kasrah-ad-box">
-                    <span class="kasrah-ad-label">Advertisement</span>
-                    <div id="kasrah-ad-content"></div>
-                </div>
-
+                ${adHtml}
                 <div class="kasrah-loader"><div class="kasrah-progress" id="kasrah-p-bar"></div></div>
                 <div id="kasrah-splash-alert" class="kasrah-splash-alert">⚠️ Login to save your progress!</div>
-                
                 <button id="kasrah-start-btn" class="kasrah-start-btn">PLAY NOW</button>
-                
-                <div style="color: #444; margin-top: 15px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px;">Cloud Sync & Internal Ad-Network Active</div>
+                <div style="color: #444; margin-top: 15px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px;">Cloud Sync Active</div>
             `;
             document.body.appendChild(splash);
 
-            // Inject Real Adsterra Banner Code
-            this.injectAdCode('kasrah-ad-content');
+            if (SDK_CONFIG.showAds) {
+                this.injectAdCode('kasrah-ad-content');
+            }
 
             let progress = 0;
             const interval = setInterval(() => {
-                progress += Math.random() * 10; // Slower progress to allow ad visibility
+                progress += Math.random() * SDK_CONFIG.loadSpeed;
                 if (progress > 100) progress = 100;
                 const pBar = document.getElementById('kasrah-p-bar');
                 if (pBar) pBar.style.width = progress + '%';
@@ -146,13 +158,18 @@
                 if (progress === 100) {
                     clearInterval(interval);
                     setTimeout(() => {
-                        const startBtn = document.getElementById('kasrah-start-btn');
-                        if (startBtn) {
-                            startBtn.classList.add('visible');
-                            startBtn.onclick = () => {
-                                splash.style.opacity = '0';
-                                setTimeout(() => splash.remove(), 800);
-                            };
+                        if (SDK_CONFIG.showStartButton) {
+                            const startBtn = document.getElementById('kasrah-start-btn');
+                            if (startBtn) {
+                                startBtn.classList.add('visible');
+                                startBtn.onclick = () => {
+                                    splash.style.opacity = '0';
+                                    setTimeout(() => splash.remove(), 800);
+                                };
+                            }
+                        } else {
+                            splash.style.opacity = '0';
+                            setTimeout(() => splash.remove(), 800);
                         }
                     }, 1000);
                 }
@@ -163,9 +180,8 @@
             const container = document.getElementById(containerId);
             if (!container) return;
 
-            // Real Adsterra Banner Configuration
             window.atOptions = {
-                'key' : '49ac472dc3a5486324fd7f45c712a6ec',
+                'key' : SDK_CONFIG.adKey,
                 'format' : 'iframe',
                 'height' : 250,
                 'width' : 300,
@@ -174,12 +190,9 @@
 
             const script = document.createElement('script');
             script.type = 'text/javascript';
-            script.src = 'https://www.highperformanceformat.com/49ac472dc3a5486324fd7f45c712a6ec/invoke.js';
+            script.src = `https://www.highperformanceformat.com/${SDK_CONFIG.adKey}/invoke.js`;
             container.appendChild(script);
         },
-
-        // Removed showInterstitial to prevent popups/new windows
-        // You can use this space for other internal ad formats in the future
 
         checkAuth: async function() {
             try {
@@ -199,7 +212,7 @@
                 if (splashAlert) splashAlert.style.opacity = '1';
                 setTimeout(() => this.showGuestAlert(), 4000);
             } catch (e) {
-                console.warn("Kasrah SDK: Connection to main platform failed.");
+                if (SDK_CONFIG.debugMode) console.warn("Kasrah SDK: Connection to main platform failed.");
             }
         },
 
