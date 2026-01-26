@@ -1,9 +1,9 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v1.9.0 (Ad-Integrated)
+    // Kasrah Games SDK - Cloud Edition v1.9.1 (Ad-Integrated)
     // Fixed: Auth Logic for Admins/Users & Smart Redirect after Login
     // Added: Pre-roll Ads in Splash Screen & Interstitial Ad Support
     
-    const SDK_VERSION = '1.9.0';
+    const SDK_VERSION = '1.9.1';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
@@ -42,7 +42,7 @@
                 }
                 .kasrah-ad-label {
                     position: absolute; top: 5px; right: 5px; font-size: 10px; color: #555;
-                    text-transform: uppercase; letter-spacing: 1px;
+                    text-transform: uppercase; letter-spacing: 1px; z-index: 10;
                 }
                 .kasrah-loader {
                     width: 200px; height: 4px; background: #333; border-radius: 2px; overflow: hidden;
@@ -102,7 +102,7 @@
                 }
                 @media (max-width: 600px) {
                     .kasrah-logo { font-size: 32px; }
-                    .kasrah-ad-container { width: 250px; height: 200px; }
+                    .kasrah-ad-container { width: 300px; height: 250px; }
                     .kasrah-guest-alert { width: 90%; font-size: 12px; justify-content: center; padding: 10px; }
                 }
             `;
@@ -120,7 +120,7 @@
                 <!-- Ad Container for Pre-roll -->
                 <div class="kasrah-ad-container" id="kasrah-ad-box">
                     <span class="kasrah-ad-label">Advertisement</span>
-                    <div id="kasrah-ad-content" style="color: #444; font-size: 12px;">Loading Ad...</div>
+                    <div id="kasrah-ad-content"></div>
                 </div>
 
                 <div class="kasrah-loader"><div class="kasrah-progress" id="kasrah-p-bar"></div></div>
@@ -132,12 +132,12 @@
             `;
             document.body.appendChild(splash);
 
-            // Inject Adsterra Banner Code (Placeholder - Replace with your actual script)
+            // Inject Real Adsterra Banner Code
             this.injectAdCode('kasrah-ad-content');
 
             let progress = 0;
             const interval = setInterval(() => {
-                progress += Math.random() * 15; // Slower progress to allow ad visibility
+                progress += Math.random() * 10; // Slower progress to allow ad visibility
                 if (progress > 100) progress = 100;
                 const pBar = document.getElementById('kasrah-p-bar');
                 if (pBar) pBar.style.width = progress + '%';
@@ -153,25 +153,28 @@
                                 setTimeout(() => splash.remove(), 800);
                             };
                         }
-                    }, 500);
+                    }, 1000);
                 }
-            }, 250);
+            }, 300);
         },
 
         injectAdCode: function(containerId) {
-            // This function injects the Adsterra Banner
             const container = document.getElementById(containerId);
             if (!container) return;
 
-            // Example Adsterra Banner Script (Replace with your real one)
-            // container.innerHTML = '<script type="text/javascript"> ... </script>';
-            
-            // For now, we'll just put a placeholder. 
-            // You should replace this with your actual Adsterra Banner HTML/Script.
-            container.innerHTML = `<div style="color: #666; text-align: center; padding: 20px;">
-                Your Adsterra Banner Code Goes Here<br>
-                <small>(300x250 Recommended)</small>
-            </div>`;
+            // Real Adsterra Banner Configuration
+            window.atOptions = {
+                'key' : '49ac472dc3a5486324fd7f45c712a6ec',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+            };
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://www.highperformanceformat.com/49ac472dc3a5486324fd7f45c712a6ec/invoke.js';
+            container.appendChild(script);
         },
 
         showInterstitial: function(callback) {
