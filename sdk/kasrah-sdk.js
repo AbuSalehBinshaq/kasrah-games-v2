@@ -1,8 +1,8 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v2.2.0 (Timed Ads & Frequency Control)
-    // Added: showTimedAd() with countdown and frequency control.
+    // Kasrah Games SDK - Cloud Edition v2.3.0 (Pre-Ad Alerts & Auto-Close)
+    // Added: Pre-ad notification system and fully automatic ad closing.
     
-    const SDK_VERSION = '2.2.0';
+    const SDK_VERSION = '2.3.0';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
@@ -13,8 +13,9 @@
         adKey: '49ac472dc3a5486324fd7f45c712a6ec',
         loadSpeed: 10,
         showStartButton: true,
-        adDuration: 5,              // Duration of the timed ad in seconds
-        adFrequency: 3,             // Show ad every X times the function is called (e.g., every 3 deaths)
+        adDuration: 5,              // Duration of the ad in seconds
+        preAdNoticeTime: 10,        // Time to show the "Ad coming soon" notice (seconds)
+        adFrequency: 3,             // Show ad every X times the function is called
         debugMode: false
     };
     
@@ -24,7 +25,7 @@
         saveQueue: {},
         saveTimeout: null,
         isAuthChecked: false,
-        adCallCount: 0,             // Counter for ad frequency
+        adCallCount: 0,
 
         init: function() {
             if (SDK_CONFIG.debugMode) console.log(`%c 🎮 ${PLATFORM_NAME} SDK v${SDK_VERSION} Active `, `background: ${PRIMARY_COLOR}; color: white; font-weight: bold; padding: 4px; border-radius: 4px;`);
@@ -36,11 +37,17 @@
 
         injectStyles: function() {
             const styles = `
-                #kasrah-splash, #kasrah-timed-ad {
+                #kasrah-splash, #kasrah-timed-ad, #kasrah-pre-ad-notice {
                     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
                     background: rgba(15, 15, 15, 0.98); display: flex; flex-direction: column;
                     justify-content: center; align-items: center; z-index: 999999;
                     transition: opacity 0.5s ease-out; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                }
+                #kasrah-pre-ad-notice {
+                    background: rgba(0, 0, 0, 0.7); height: auto; top: 20px; left: 50%;
+                    transform: translateX(-50%); width: auto; padding: 15px 30px;
+                    border-radius: 50px; border: 1px solid ${PRIMARY_COLOR};
+                    backdrop-filter: blur(10px); pointer-events: none;
                 }
                 .kasrah-logo {
                     font-size: 48px; font-weight: bold; color: white; margin-bottom: 20px;
@@ -70,22 +77,14 @@
                     box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
                     transition: all 0.3s;
                 }
-                .kasrah-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5); }
-                .kasrah-btn:disabled { background: #444; cursor: not-allowed; box-shadow: none; }
-                
                 .kasrah-start-btn { opacity: 0; transform: translateY(10px); }
                 .kasrah-start-btn.visible { opacity: 1; transform: translateY(0); }
                 
                 .kasrah-countdown {
                     color: #888; font-size: 14px; margin-top: 10px; font-weight: bold;
                 }
-                
-                .kasrah-user-badge {
-                    position: fixed; top: 10px; right: 10px; background: rgba(0,0,0,0.6);
-                    color: white; padding: 5px 12px; border-radius: 15px; font-size: 12px;
-                    display: flex; align-items: center; gap: 8px; z-index: 999998;
-                    border: 1px solid ${PRIMARY_COLOR}; backdrop-filter: blur(5px);
-                    transition: opacity 0.5s; pointer-events: none;
+                .kasrah-notice-text {
+                    color: white; font-size: 14px; font-weight: bold;
                 }
             `;
             const styleSheet = document.createElement("style");
@@ -96,34 +95,16 @@
         createSplashScreen: function() {
             const splash = document.createElement('div');
             splash.id = 'kasrah-splash';
-            
-            let adHtml = '';
-            if (SDK_CONFIG.showAds) {
-                adHtml = `
-                    <div class="kasrah-ad-container" id="kasrah-ad-box">
-                        <span class="kasrah-ad-label">Advertisement</span>
-                        <div id="kasrah-ad-content"></div>
-                    </div>
-                `;
-            }
-
-            splash.innerHTML = `
-                <div class="kasrah-logo">KASRAH</div>
-                ${adHtml}
-                <div class="kasrah-loader"><div class="kasrah-progress" id="kasrah-p-bar"></div></div>
-                <button id="kasrah-start-btn" class="kasrah-btn kasrah-start-btn">PLAY NOW</button>
-            `;
+            let adHtml = SDK_CONFIG.showAds ? `<div class="kasrah-ad-container" id="kasrah-ad-box"><span class="kasrah-ad-label">Advertisement</span><div id="kasrah-ad-content"></div></div>` : '';
+            splash.innerHTML = `<div class="kasrah-logo">KASRAH</div>${adHtml}<div class="kasrah-loader"><div class="kasrah-progress" id="kasrah-p-bar"></div></div><button id="kasrah-start-btn" class="kasrah-btn kasrah-start-btn">PLAY NOW</button>`;
             document.body.appendChild(splash);
-
             if (SDK_CONFIG.showAds) this.injectAdCode('kasrah-ad-content');
-
             let progress = 0;
             const interval = setInterval(() => {
                 progress += Math.random() * SDK_CONFIG.loadSpeed;
                 if (progress > 100) progress = 100;
                 const pBar = document.getElementById('kasrah-p-bar');
                 if (pBar) pBar.style.width = progress + '%';
-                
                 if (progress === 100) {
                     clearInterval(interval);
                     setTimeout(() => {
@@ -140,17 +121,35 @@
             }, 300);
         },
 
-        // --- NEW: Timed Ad with Countdown and Frequency Control ---
+        // --- UPDATED: Timed Ad with Pre-notice and Auto-close ---
         showTimedAd: function(callback) {
             this.adCallCount++;
-            
-            // Check if we should show the ad based on frequency
             if (!SDK_CONFIG.showAds || (this.adCallCount % SDK_CONFIG.adFrequency !== 0)) {
-                if (SDK_CONFIG.debugMode) console.log("Kasrah SDK: Skipping ad due to frequency or config.");
                 if (callback) callback();
                 return;
             }
 
+            // Step 1: Show Pre-ad Notice
+            const notice = document.createElement('div');
+            notice.id = 'kasrah-pre-ad-notice';
+            notice.innerHTML = `<div class="kasrah-notice-text">📺 Ad starting in <span id="kasrah-notice-timer">${SDK_CONFIG.preAdNoticeTime}</span>s...</div>`;
+            document.body.appendChild(notice);
+
+            let noticeTimeLeft = SDK_CONFIG.preAdNoticeTime;
+            const noticeInterval = setInterval(() => {
+                noticeTimeLeft--;
+                const timerEl = document.getElementById('kasrah-notice-timer');
+                if (timerEl) timerEl.innerText = noticeTimeLeft;
+                
+                if (noticeTimeLeft <= 0) {
+                    clearInterval(noticeInterval);
+                    notice.remove();
+                    this.triggerActualAd(callback);
+                }
+            }, 1000);
+        },
+
+        triggerActualAd: function(callback) {
             const adOverlay = document.createElement('div');
             adOverlay.id = 'kasrah-timed-ad';
             adOverlay.innerHTML = `
@@ -159,54 +158,31 @@
                     <span class="kasrah-ad-label">Advertisement</span>
                 </div>
                 <div class="kasrah-countdown" id="kasrah-ad-timer">Game resumes in ${SDK_CONFIG.adDuration}s...</div>
-                <button id="kasrah-skip-btn" class="kasrah-btn" disabled>PLEASE WAIT</button>
             `;
             document.body.appendChild(adOverlay);
             this.injectAdCode('kasrah-timed-ad-content');
 
             let timeLeft = SDK_CONFIG.adDuration;
-            const timerElement = document.getElementById('kasrah-ad-timer');
-            const skipBtn = document.getElementById('kasrah-skip-btn');
-
             const countdown = setInterval(() => {
                 timeLeft--;
+                const timerElement = document.getElementById('kasrah-ad-timer');
                 if (timerElement) timerElement.innerText = `Game resumes in ${timeLeft}s...`;
                 
                 if (timeLeft <= 0) {
                     clearInterval(countdown);
-                    if (skipBtn) {
-                        skipBtn.innerText = "CONTINUE";
-                        skipBtn.disabled = false;
-                        // Auto-close after 1 more second if user doesn't click
-                        setTimeout(() => {
-                            if (document.getElementById('kasrah-timed-ad')) skipBtn.click();
-                        }, 1500);
-                    }
+                    adOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        adOverlay.remove();
+                        if (callback) callback();
+                    }, 500);
                 }
             }, 1000);
-
-            skipBtn.onclick = () => {
-                clearInterval(countdown);
-                adOverlay.style.opacity = '0';
-                setTimeout(() => {
-                    adOverlay.remove();
-                    if (callback) callback();
-                }, 500);
-            };
         },
 
         injectAdCode: function(containerId) {
             const container = document.getElementById(containerId);
             if (!container) return;
-
-            window.atOptions = {
-                'key' : SDK_CONFIG.adKey,
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
-
+            window.atOptions = { 'key' : SDK_CONFIG.adKey, 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
             const script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = `https://www.highperformanceformat.com/${SDK_CONFIG.adKey}/invoke.js`;
@@ -216,13 +192,11 @@
         checkAuth: async function() {
             try {
                 const response = await fetch(`${MAIN_SITE_URL}/api/auth/profile`, { credentials: 'include' });
-                this.isAuthChecked = true;
                 if (response.ok) {
                     const data = await response.json();
                     if (data && (data.username || data.email)) {
                         this.user = data;
                         this.showUserBadge();
-                        return;
                     }
                 }
             } catch (e) {}
