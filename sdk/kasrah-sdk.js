@@ -1,17 +1,20 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v2.1.0 (Event Triggers)
-    // Added: showGameOverAd() function for in-game ad triggers.
+    // Kasrah Games SDK - Cloud Edition v2.2.0 (Timed Ads & Frequency Control)
+    // Added: showTimedAd() with countdown and frequency control.
     
-    const SDK_VERSION = '2.1.0';
+    const SDK_VERSION = '2.2.0';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
 
+    // --- CENTRAL CONTROL PANEL (CONFIG) ---
     const SDK_CONFIG = {
         showAds: true,
         adKey: '49ac472dc3a5486324fd7f45c712a6ec',
         loadSpeed: 10,
         showStartButton: true,
+        adDuration: 5,              // Duration of the timed ad in seconds
+        adFrequency: 3,             // Show ad every X times the function is called (e.g., every 3 deaths)
         debugMode: false
     };
     
@@ -21,6 +24,7 @@
         saveQueue: {},
         saveTimeout: null,
         isAuthChecked: false,
+        adCallCount: 0,             // Counter for ad frequency
 
         init: function() {
             if (SDK_CONFIG.debugMode) console.log(`%c 🎮 ${PLATFORM_NAME} SDK v${SDK_VERSION} Active `, `background: ${PRIMARY_COLOR}; color: white; font-weight: bold; padding: 4px; border-radius: 4px;`);
@@ -32,9 +36,9 @@
 
         injectStyles: function() {
             const styles = `
-                #kasrah-splash, #kasrah-gameover-ad {
+                #kasrah-splash, #kasrah-timed-ad {
                     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                    background: rgba(15, 15, 15, 0.95); display: flex; flex-direction: column;
+                    background: rgba(15, 15, 15, 0.98); display: flex; flex-direction: column;
                     justify-content: center; align-items: center; z-index: 999999;
                     transition: opacity 0.5s ease-out; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 }
@@ -67,9 +71,14 @@
                     transition: all 0.3s;
                 }
                 .kasrah-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5); }
+                .kasrah-btn:disabled { background: #444; cursor: not-allowed; box-shadow: none; }
                 
                 .kasrah-start-btn { opacity: 0; transform: translateY(10px); }
                 .kasrah-start-btn.visible { opacity: 1; transform: translateY(0); }
+                
+                .kasrah-countdown {
+                    color: #888; font-size: 14px; margin-top: 10px; font-weight: bold;
+                }
                 
                 .kasrah-user-badge {
                     position: fixed; top: 10px; right: 10px; background: rgba(0,0,0,0.6);
@@ -77,14 +86,6 @@
                     display: flex; align-items: center; gap: 8px; z-index: 999998;
                     border: 1px solid ${PRIMARY_COLOR}; backdrop-filter: blur(5px);
                     transition: opacity 0.5s; pointer-events: none;
-                }
-                .kasrah-dot { width: 6px; height: 6px; border-radius: 50%; background: #888; }
-                .kasrah-dot.saving { background: ${PRIMARY_COLOR}; animation: kasrah-pulse 1s infinite; }
-                .kasrah-dot.saved { background: #2ecc71; }
-                @keyframes kasrah-pulse {
-                    0% { transform: scale(1); opacity: 1; }
-                    50% { transform: scale(1.5); opacity: 0.5; }
-                    100% { transform: scale(1); opacity: 1; }
                 }
             `;
             const styleSheet = document.createElement("style");
@@ -139,27 +140,53 @@
             }, 300);
         },
 
-        // --- NEW: Function to show ad when player loses ---
-        showGameOverAd: function(callback) {
-            if (!SDK_CONFIG.showAds) {
+        // --- NEW: Timed Ad with Countdown and Frequency Control ---
+        showTimedAd: function(callback) {
+            this.adCallCount++;
+            
+            // Check if we should show the ad based on frequency
+            if (!SDK_CONFIG.showAds || (this.adCallCount % SDK_CONFIG.adFrequency !== 0)) {
+                if (SDK_CONFIG.debugMode) console.log("Kasrah SDK: Skipping ad due to frequency or config.");
                 if (callback) callback();
                 return;
             }
 
             const adOverlay = document.createElement('div');
-            adOverlay.id = 'kasrah-gameover-ad';
+            adOverlay.id = 'kasrah-timed-ad';
             adOverlay.innerHTML = `
-                <div class="kasrah-logo" style="font-size: 24px;">GAME OVER</div>
-                <div class="kasrah-ad-container" id="kasrah-gameover-ad-content">
+                <div class="kasrah-logo" style="font-size: 24px;">KASRAH</div>
+                <div class="kasrah-ad-container" id="kasrah-timed-ad-content">
                     <span class="kasrah-ad-label">Advertisement</span>
                 </div>
-                <button id="kasrah-continue-btn" class="kasrah-btn">CONTINUE</button>
+                <div class="kasrah-countdown" id="kasrah-ad-timer">Game resumes in ${SDK_CONFIG.adDuration}s...</div>
+                <button id="kasrah-skip-btn" class="kasrah-btn" disabled>PLEASE WAIT</button>
             `;
             document.body.appendChild(adOverlay);
-            this.injectAdCode('kasrah-gameover-ad-content');
+            this.injectAdCode('kasrah-timed-ad-content');
 
-            const continueBtn = document.getElementById('kasrah-continue-btn');
-            continueBtn.onclick = () => {
+            let timeLeft = SDK_CONFIG.adDuration;
+            const timerElement = document.getElementById('kasrah-ad-timer');
+            const skipBtn = document.getElementById('kasrah-skip-btn');
+
+            const countdown = setInterval(() => {
+                timeLeft--;
+                if (timerElement) timerElement.innerText = `Game resumes in ${timeLeft}s...`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    if (skipBtn) {
+                        skipBtn.innerText = "CONTINUE";
+                        skipBtn.disabled = false;
+                        // Auto-close after 1 more second if user doesn't click
+                        setTimeout(() => {
+                            if (document.getElementById('kasrah-timed-ad')) skipBtn.click();
+                        }, 1500);
+                    }
+                }
+            }, 1000);
+
+            skipBtn.onclick = () => {
+                clearInterval(countdown);
                 adOverlay.style.opacity = '0';
                 setTimeout(() => {
                     adOverlay.remove();
@@ -209,10 +236,6 @@
             badge.innerHTML = `<span style="color: ${PRIMARY_COLOR}">●</span> <span>${displayName}</span>`;
             document.body.appendChild(badge);
             setTimeout(() => badge.style.opacity = '0.4', 5000);
-        },
-
-        updateSaveStatus: function(status) {
-            // Logic for save status UI
         },
 
         saveData: function(key, value) {
