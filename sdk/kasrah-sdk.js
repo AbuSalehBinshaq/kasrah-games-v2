@@ -1,21 +1,20 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v2.3.0 (Pre-Ad Alerts & Auto-Close)
-    // Added: Pre-ad notification system and fully automatic ad closing.
+    // Kasrah Games SDK - Cloud Edition v2.3.1 (Stability Update)
+    // Optimized: Pre-ad alerts and auto-close logic for better game compatibility.
     
-    const SDK_VERSION = '2.3.0';
+    const SDK_VERSION = '2.3.1';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
 
-    // --- CENTRAL CONTROL PANEL (CONFIG) ---
     const SDK_CONFIG = {
         showAds: true,
         adKey: '49ac472dc3a5486324fd7f45c712a6ec',
         loadSpeed: 10,
         showStartButton: true,
-        adDuration: 5,              // Duration of the ad in seconds
-        preAdNoticeTime: 10,        // Time to show the "Ad coming soon" notice (seconds)
-        adFrequency: 3,             // Show ad every X times the function is called
+        adDuration: 5,
+        preAdNoticeTime: 10,
+        adFrequency: 3,
         debugMode: false
     };
     
@@ -44,8 +43,8 @@
                     transition: opacity 0.5s ease-out; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 }
                 #kasrah-pre-ad-notice {
-                    background: rgba(0, 0, 0, 0.7); height: auto; top: 20px; left: 50%;
-                    transform: translateX(-50%); width: auto; padding: 15px 30px;
+                    background: rgba(0, 0, 0, 0.8); height: auto; top: 20px; left: 50%;
+                    transform: translateX(-50%); width: auto; padding: 12px 25px;
                     border-radius: 50px; border: 1px solid ${PRIMARY_COLOR};
                     backdrop-filter: blur(10px); pointer-events: none;
                 }
@@ -79,13 +78,8 @@
                 }
                 .kasrah-start-btn { opacity: 0; transform: translateY(10px); }
                 .kasrah-start-btn.visible { opacity: 1; transform: translateY(0); }
-                
-                .kasrah-countdown {
-                    color: #888; font-size: 14px; margin-top: 10px; font-weight: bold;
-                }
-                .kasrah-notice-text {
-                    color: white; font-size: 14px; font-weight: bold;
-                }
+                .kasrah-countdown { color: #888; font-size: 14px; margin-top: 10px; font-weight: bold; }
+                .kasrah-notice-text { color: white; font-size: 14px; font-weight: bold; }
             `;
             const styleSheet = document.createElement("style");
             styleSheet.innerText = styles;
@@ -121,7 +115,6 @@
             }, 300);
         },
 
-        // --- UPDATED: Timed Ad with Pre-notice and Auto-close ---
         showTimedAd: function(callback) {
             this.adCallCount++;
             if (!SDK_CONFIG.showAds || (this.adCallCount % SDK_CONFIG.adFrequency !== 0)) {
@@ -129,7 +122,6 @@
                 return;
             }
 
-            // Step 1: Show Pre-ad Notice
             const notice = document.createElement('div');
             notice.id = 'kasrah-pre-ad-notice';
             notice.innerHTML = `<div class="kasrah-notice-text">📺 Ad starting in <span id="kasrah-notice-timer">${SDK_CONFIG.preAdNoticeTime}</span>s...</div>`;
