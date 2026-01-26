@@ -1,8 +1,9 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v1.8.0
+    // Kasrah Games SDK - Cloud Edition v1.9.0 (Ad-Integrated)
     // Fixed: Auth Logic for Admins/Users & Smart Redirect after Login
+    // Added: Pre-roll Ads in Splash Screen & Interstitial Ad Support
     
-    const SDK_VERSION = '1.8.0';
+    const SDK_VERSION = '1.9.0';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
@@ -29,11 +30,19 @@
                     background: #0f0f0f; display: flex; flex-direction: column;
                     justify-content: center; align-items: center; z-index: 999999;
                     transition: opacity 0.8s ease-out; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                    pointer-events: none;
                 }
                 .kasrah-logo {
                     font-size: 48px; font-weight: bold; color: white; margin-bottom: 20px;
                     text-shadow: 0 0 20px ${PRIMARY_COLOR}; letter-spacing: 2px;
+                }
+                .kasrah-ad-container {
+                    width: 300px; height: 250px; background: #1a1a1a; margin-bottom: 20px;
+                    border: 1px solid #333; display: flex; justify-content: center; align-items: center;
+                    position: relative; overflow: hidden; border-radius: 8px;
+                }
+                .kasrah-ad-label {
+                    position: absolute; top: 5px; right: 5px; font-size: 10px; color: #555;
+                    text-transform: uppercase; letter-spacing: 1px;
                 }
                 .kasrah-loader {
                     width: 200px; height: 4px; background: #333; border-radius: 2px; overflow: hidden;
@@ -43,6 +52,16 @@
                     box-shadow: 0 0 10px ${PRIMARY_COLOR};
                     transition: width 0.3s ease;
                 }
+                .kasrah-start-btn {
+                    margin-top: 20px; padding: 12px 40px; background: ${PRIMARY_COLOR};
+                    color: white; border: none; border-radius: 30px; cursor: pointer;
+                    font-weight: bold; font-size: 16px; letter-spacing: 1px;
+                    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+                    transition: all 0.3s; opacity: 0; transform: translateY(10px);
+                }
+                .kasrah-start-btn.visible { opacity: 1; transform: translateY(0); }
+                .kasrah-start-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5); }
+                
                 .kasrah-splash-alert {
                     margin-top: 20px; color: #ff4757; font-size: 14px; font-weight: 500;
                     opacity: 0; transition: opacity 0.5s;
@@ -83,6 +102,7 @@
                 }
                 @media (max-width: 600px) {
                     .kasrah-logo { font-size: 32px; }
+                    .kasrah-ad-container { width: 250px; height: 200px; }
                     .kasrah-guest-alert { width: 90%; font-size: 12px; justify-content: center; padding: 10px; }
                 }
             `;
@@ -96,15 +116,28 @@
             splash.id = 'kasrah-splash';
             splash.innerHTML = `
                 <div class="kasrah-logo">KASRAH</div>
+                
+                <!-- Ad Container for Pre-roll -->
+                <div class="kasrah-ad-container" id="kasrah-ad-box">
+                    <span class="kasrah-ad-label">Advertisement</span>
+                    <div id="kasrah-ad-content" style="color: #444; font-size: 12px;">Loading Ad...</div>
+                </div>
+
                 <div class="kasrah-loader"><div class="kasrah-progress" id="kasrah-p-bar"></div></div>
                 <div id="kasrah-splash-alert" class="kasrah-splash-alert">⚠️ Login to save your progress!</div>
-                <div style="color: #888; margin-top: 15px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Cloud Sync Active</div>
+                
+                <button id="kasrah-start-btn" class="kasrah-start-btn">PLAY NOW</button>
+                
+                <div style="color: #444; margin-top: 15px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px;">Cloud Sync & Ad-Network Active</div>
             `;
             document.body.appendChild(splash);
 
+            // Inject Adsterra Banner Code (Placeholder - Replace with your actual script)
+            this.injectAdCode('kasrah-ad-content');
+
             let progress = 0;
             const interval = setInterval(() => {
-                progress += Math.random() * 25;
+                progress += Math.random() * 15; // Slower progress to allow ad visibility
                 if (progress > 100) progress = 100;
                 const pBar = document.getElementById('kasrah-p-bar');
                 if (pBar) pBar.style.width = progress + '%';
@@ -112,11 +145,43 @@
                 if (progress === 100) {
                     clearInterval(interval);
                     setTimeout(() => {
-                        splash.style.opacity = '0';
-                        setTimeout(() => splash.remove(), 800);
-                    }, 1000);
+                        const startBtn = document.getElementById('kasrah-start-btn');
+                        if (startBtn) {
+                            startBtn.classList.add('visible');
+                            startBtn.onclick = () => {
+                                splash.style.opacity = '0';
+                                setTimeout(() => splash.remove(), 800);
+                            };
+                        }
+                    }, 500);
                 }
-            }, 150);
+            }, 250);
+        },
+
+        injectAdCode: function(containerId) {
+            // This function injects the Adsterra Banner
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            // Example Adsterra Banner Script (Replace with your real one)
+            // container.innerHTML = '<script type="text/javascript"> ... </script>';
+            
+            // For now, we'll just put a placeholder. 
+            // You should replace this with your actual Adsterra Banner HTML/Script.
+            container.innerHTML = `<div style="color: #666; text-align: center; padding: 20px;">
+                Your Adsterra Banner Code Goes Here<br>
+                <small>(300x250 Recommended)</small>
+            </div>`;
+        },
+
+        showInterstitial: function(callback) {
+            console.log("Kasrah SDK: Triggering Interstitial Ad...");
+            // Replace the URL below with your Adsterra Smartlink
+            const smartlink = "YOUR_ADSTERRA_SMARTLINK_HERE";
+            if (smartlink !== "YOUR_ADSTERRA_SMARTLINK_HERE") {
+                window.open(smartlink, '_blank');
+            }
+            if (callback) callback();
         },
 
         checkAuth: async function() {
@@ -125,7 +190,6 @@
                 this.isAuthChecked = true;
                 if (response.ok) {
                     const data = await response.json();
-                    // التحقق من وجود بيانات المستخدم سواء كان أدمن أو مستخدم عادي
                     if (data && (data.username || data.email)) {
                         this.user = data;
                         this.showUserBadge();
@@ -134,12 +198,9 @@
                         return;
                     }
                 }
-                
-                // إذا لم يكن مسجلاً
                 const splashAlert = document.getElementById('kasrah-splash-alert');
                 if (splashAlert) splashAlert.style.opacity = '1';
                 setTimeout(() => this.showGuestAlert(), 4000);
-                
             } catch (e) {
                 console.warn("Kasrah SDK: Connection to main platform failed.");
             }
@@ -160,7 +221,6 @@
 
         showGuestAlert: function() {
             if (this.user || document.querySelector('.kasrah-guest-alert')) return;
-            
             const alert = document.createElement('div');
             alert.className = 'kasrah-guest-alert';
             alert.innerHTML = `
@@ -168,13 +228,9 @@
                 <span>Login to save your progress in the cloud!</span>
                 <span style="text-decoration: underline; font-weight: bold; margin-left: 5px;">Login Now</span>
             `;
-            
-            // ميزة العودة التلقائية: إرسال رابط اللعبة الحالي كـ callbackUrl
             const currentGameUrl = window.location.href;
             alert.onclick = () => window.open(`${MAIN_SITE_URL}/auth/login?callbackUrl=${encodeURIComponent(currentGameUrl)}`, '_self');
-            
             document.body.appendChild(alert);
-            
             setTimeout(() => {
                 alert.style.opacity = '0';
                 setTimeout(() => alert.remove(), 600);
@@ -189,7 +245,6 @@
                 statusEl.className = 'kasrah-save-status';
                 document.body.appendChild(statusEl);
             }
-
             if (status === 'saving') {
                 statusEl.innerHTML = `<div class="kasrah-dot saving"></div> Saving...`;
                 statusEl.style.opacity = '1';
@@ -205,10 +260,8 @@
         saveData: function(key, value) {
             localStorage.setItem('kasrah_' + key, JSON.stringify(value));
             if (!this.user) return;
-            
             this.saveQueue[key] = value;
             this.updateSaveStatus('saving');
-
             if (this.saveTimeout) clearTimeout(this.saveTimeout);
             this.saveTimeout = setTimeout(() => this.syncWithCloud(), 3000);
         },
