@@ -1,0 +1,21 @@
+{"frames":[
+	{
+ 		"filename" : "obj-preloadbback.png",
+ 		"frame": {"x":0, "y":52, "w":384, "h":21},
+ 		"spriteSourceSize":{"x":0, "y":0, "w":384, "h":21},
+ 		"sourceSize": {"w":384,"h":21}
+	},
+	{
+ 		"filename" : "obj-preloadbborder.png",
+ 		"frame": {"x":0, "y":0, "w":390, "h":27},
+ 		"spriteSourceSize":{"x":0, "y":0, "w":390, "h":27},
+ 		"sourceSize": {"w":390,"h":27}
+	},
+	{
+ 		"filename" : "obj-preloadbfill.png",
+ 		"frame": {"x":0, "y":29, "w":384, "h":21},
+ 		"spriteSourceSize":{"x":0, "y":0, "w":384, "h":21},
+ 		"sourceSize": {"w":384,"h":21}
+	}
+
+]}
