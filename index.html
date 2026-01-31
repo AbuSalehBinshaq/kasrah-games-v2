@@ -96,6 +96,21 @@
             }
             h1 { font-size: 1.8rem; }
         }
+    
+        .game-thumb {
+            background-color: #1a1a1a;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
+        }
+        .game-thumb.loaded {
+            opacity: 1;
+        }
+        #loader {
+            width: 100%;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
@@ -108,11 +123,8 @@
     </div>
 </header>
 
-<div class="games-grid" id="gamesGrid">
-
-    <a href="games/1010colormatch/" class="game-card" data-name="1010colormatch">
-        <div class="game-thumb" style="background-image: url('games/1010colormatch/icon.png'), url('https://via.placeholder.com/150/1a1a1a/ff4d4d?text=1');">
-        </div>
+<div class="games-grid" id="gamesGrid"></div>
+<div id="loader" style="text-align:center; padding:20px; display:none; color:var(--primary); font-weight:bold;">جاري تحميل المزيد من الألعاب...</div>
         <div class="game-title">1010Colormatch</div>
     </a>
     <a href="games/1010deluxe/" class="game-card" data-name="1010deluxe">
@@ -1162,21 +1174,1349 @@
     </a>
 </div>
 
+
 <script>
-function filterGames() {
-    let input = document.getElementById('searchBar').value.toLowerCase();
-    let cards = document.getElementsByClassName('game-card');
-    
-    for (let i = 0; i < cards.length; i++) {
-        let name = cards[i].getAttribute('data-name');
-        if (name.includes(input)) {
-            cards[i].style.display = "";
-        } else {
-            cards[i].style.display = "none";
-        }
+const allGames = [
+    {
+        "href": "games/1010colormatch/",
+        "name": "1010colormatch",
+        "title": "1010Colormatch",
+        "thumb": "games/1010colormatch/icon.png"
+    },
+    {
+        "href": "games/1010deluxe/",
+        "name": "1010deluxe",
+        "title": "1010Deluxe",
+        "thumb": "games/1010deluxe/icon.png"
+    },
+    {
+        "href": "games/1on1soccer/",
+        "name": "1on1soccer",
+        "title": "1On1Soccer",
+        "thumb": "games/1on1soccer/icon.png"
+    },
+    {
+        "href": "games/2048/",
+        "name": "2048",
+        "title": "2048",
+        "thumb": "games/2048/icon.png"
+    },
+    {
+        "href": "games/2048fusion/",
+        "name": "2048fusion",
+        "title": "2048Fusion",
+        "thumb": "games/2048fusion/icon.png"
+    },
+    {
+        "href": "games/2048hexamergeblock/",
+        "name": "2048hexamergeblock",
+        "title": "2048Hexamergeblock",
+        "thumb": "games/2048hexamergeblock/icon.png"
+    },
+    {
+        "href": "games/3d-free-kick/",
+        "name": "3d-free-kick",
+        "title": "3D Free Kick",
+        "thumb": "games/3d-free-kick/icon.png"
+    },
+    {
+        "href": "games/3dbowling/",
+        "name": "3dbowling",
+        "title": "3Dbowling",
+        "thumb": "games/3dbowling/icon.png"
+    },
+    {
+        "href": "games/8ballbilliardsclassic/",
+        "name": "8ballbilliardsclassic",
+        "title": "8Ballbilliardsclassic",
+        "thumb": "games/8ballbilliardsclassic/icon.png"
+    },
+    {
+        "href": "games/8ballpool/",
+        "name": "8ballpool",
+        "title": "8Ballpool",
+        "thumb": "games/8ballpool/icon.png"
+    },
+    {
+        "href": "games/a-small-world-cup/",
+        "name": "a-small-world-cup",
+        "title": "A Small World Cup",
+        "thumb": "games/a-small-world-cup/icon.png"
+    },
+    {
+        "href": "games/adamandeve51/",
+        "name": "adamandeve51",
+        "title": "Adamandeve51",
+        "thumb": "games/adamandeve51/icon.png"
+    },
+    {
+        "href": "games/adamandeve52/",
+        "name": "adamandeve52",
+        "title": "Adamandeve52",
+        "thumb": "games/adamandeve52/icon.png"
+    },
+    {
+        "href": "games/adamandeve6/",
+        "name": "adamandeve6",
+        "title": "Adamandeve6",
+        "thumb": "games/adamandeve6/icon.png"
+    },
+    {
+        "href": "games/adamandeve7/",
+        "name": "adamandeve7",
+        "title": "Adamandeve7",
+        "thumb": "games/adamandeve7/icon.png"
+    },
+    {
+        "href": "games/adventuredrivers/",
+        "name": "adventuredrivers",
+        "title": "Adventuredrivers",
+        "thumb": "games/adventuredrivers/icon.png"
+    },
+    {
+        "href": "games/agar-io/",
+        "name": "agar-io",
+        "title": "Agar Io",
+        "thumb": "games/agar-io/icon.png"
+    },
+    {
+        "href": "games/alien-invasion/",
+        "name": "alien-invasion",
+        "title": "Alien Invasion",
+        "thumb": "games/alien-invasion/icon.png"
+    },
+    {
+        "href": "games/appleshooter/",
+        "name": "appleshooter",
+        "title": "Appleshooter",
+        "thumb": "games/appleshooter/icon.png"
+    },
+    {
+        "href": "games/arcanearcher/",
+        "name": "arcanearcher",
+        "title": "Arcanearcher",
+        "thumb": "games/arcanearcher/icon.png"
+    },
+    {
+        "href": "games/awesometanks2/",
+        "name": "awesometanks2",
+        "title": "Awesometanks2",
+        "thumb": "games/awesometanks2/icon.png"
+    },
+    {
+        "href": "games/bacon-may-die/",
+        "name": "bacon-may-die",
+        "title": "Bacon May Die",
+        "thumb": "games/bacon-may-die/icon.png"
+    },
+    {
+        "href": "games/ballistic/",
+        "name": "ballistic",
+        "title": "Ballistic",
+        "thumb": "games/ballistic/icon.png"
+    },
+    {
+        "href": "games/ballsorthalloween/",
+        "name": "ballsorthalloween",
+        "title": "Ballsorthalloween",
+        "thumb": "games/ballsorthalloween/icon.png"
+    },
+    {
+        "href": "games/ballsortpuzzle/",
+        "name": "ballsortpuzzle",
+        "title": "Ballsortpuzzle",
+        "thumb": "games/ballsortpuzzle/icon.png"
+    },
+    {
+        "href": "games/ballsortsoccer/",
+        "name": "ballsortsoccer",
+        "title": "Ballsortsoccer",
+        "thumb": "games/ballsortsoccer/icon.png"
+    },
+    {
+        "href": "games/basket-random/",
+        "name": "basket-random",
+        "title": "Basket Random",
+        "thumb": "games/basket-random/icon.png"
+    },
+    {
+        "href": "games/basketandball/",
+        "name": "basketandball",
+        "title": "Basketandball",
+        "thumb": "games/basketandball/icon.png"
+    },
+    {
+        "href": "games/basketballlegends2020/",
+        "name": "basketballlegends2020",
+        "title": "Basketballlegends2020",
+        "thumb": "games/basketballlegends2020/icon.png"
+    },
+    {
+        "href": "games/basketballline/",
+        "name": "basketballline",
+        "title": "Basketballline",
+        "thumb": "games/basketballline/icon.png"
+    },
+    {
+        "href": "games/basketballstars/",
+        "name": "basketballstars",
+        "title": "Basketballstars",
+        "thumb": "games/basketballstars/icon.png"
+    },
+    {
+        "href": "games/basketchamps/",
+        "name": "basketchamps",
+        "title": "Basketchamps",
+        "thumb": "games/basketchamps/icon.png"
+    },
+    {
+        "href": "games/basketrandom/",
+        "name": "basketrandom",
+        "title": "Basketrandom",
+        "thumb": "games/basketrandom/icon.png"
+    },
+    {
+        "href": "games/bigtowertinysquare/",
+        "name": "bigtowertinysquare",
+        "title": "Bigtowertinysquare",
+        "thumb": "games/bigtowertinysquare/icon.png"
+    },
+    {
+        "href": "games/bikerstreet/",
+        "name": "bikerstreet",
+        "title": "Bikerstreet",
+        "thumb": "games/bikerstreet/icon.png"
+    },
+    {
+        "href": "games/blockthepig/",
+        "name": "blockthepig",
+        "title": "Blockthepig",
+        "thumb": "games/blockthepig/icon.png"
+    },
+    {
+        "href": "games/bloxd-io/",
+        "name": "bloxd-io",
+        "title": "Bloxd Io",
+        "thumb": "games/bloxd-io/icon.png"
+    },
+    {
+        "href": "games/blumgislime/",
+        "name": "blumgislime",
+        "title": "Blumgislime",
+        "thumb": "games/blumgislime/icon.png"
+    },
+    {
+        "href": "games/bombit7/",
+        "name": "bombit7",
+        "title": "Bombit7",
+        "thumb": "games/bombit7/icon.png"
+    },
+    {
+        "href": "games/bottleflip/",
+        "name": "bottleflip",
+        "title": "Bottleflip",
+        "thumb": "games/bottleflip/icon.png"
+    },
+    {
+        "href": "games/bouncywoods/",
+        "name": "bouncywoods",
+        "title": "Bouncywoods",
+        "thumb": "games/bouncywoods/icon.png"
+    },
+    {
+        "href": "games/boxing-random/",
+        "name": "boxing-random",
+        "title": "Boxing Random",
+        "thumb": "games/boxing-random/icon.png"
+    },
+    {
+        "href": "games/boxingrandom/",
+        "name": "boxingrandom",
+        "title": "Boxingrandom",
+        "thumb": "games/boxingrandom/icon.png"
+    },
+    {
+        "href": "games/bubble-shooter-classic/",
+        "name": "bubble-shooter-classic",
+        "title": "Bubble Shooter Classic",
+        "thumb": "games/bubble-shooter-classic/icon.png"
+    },
+    {
+        "href": "games/bubblepopadventures/",
+        "name": "bubblepopadventures",
+        "title": "Bubblepopadventures",
+        "thumb": "games/bubblepopadventures/icon.png"
+    },
+    {
+        "href": "games/bubbletower3d/",
+        "name": "bubbletower3d",
+        "title": "Bubbletower3D",
+        "thumb": "games/bubbletower3d/icon.png"
+    },
+    {
+        "href": "games/carrush/",
+        "name": "carrush",
+        "title": "Carrush",
+        "thumb": "games/carrush/icon.png"
+    },
+    {
+        "href": "games/checkerslegend/",
+        "name": "checkerslegend",
+        "title": "Checkerslegend",
+        "thumb": "games/checkerslegend/icon.png"
+    },
+    {
+        "href": "games/chickenmerge/",
+        "name": "chickenmerge",
+        "title": "Chickenmerge",
+        "thumb": "games/chickenmerge/icon.png"
+    },
+    {
+        "href": "games/chrome-dino/",
+        "name": "chrome-dino",
+        "title": "Chrome Dino",
+        "thumb": "games/chrome-dino/icon.png"
+    },
+    {
+        "href": "games/circloo/",
+        "name": "circloo",
+        "title": "Circloo",
+        "thumb": "games/circloo/icon.png"
+    },
+    {
+        "href": "games/circloo2/",
+        "name": "circloo2",
+        "title": "Circloo2",
+        "thumb": "games/circloo2/icon.png"
+    },
+    {
+        "href": "games/clickerheroes/",
+        "name": "clickerheroes",
+        "title": "Clickerheroes",
+        "thumb": "games/clickerheroes/icon.png"
+    },
+    {
+        "href": "games/climboverit/",
+        "name": "climboverit",
+        "title": "Climboverit",
+        "thumb": "games/climboverit/icon.png"
+    },
+    {
+        "href": "games/cookie-clicker/",
+        "name": "cookie-clicker",
+        "title": "Cookie Clicker",
+        "thumb": "games/cookie-clicker/icon.png"
+    },
+    {
+        "href": "games/cookieclicker2/",
+        "name": "cookieclicker2",
+        "title": "Cookieclicker2",
+        "thumb": "games/cookieclicker2/icon.png"
+    },
+    {
+        "href": "games/crazycars/",
+        "name": "crazycars",
+        "title": "Crazycars",
+        "thumb": "games/crazycars/icon.png"
+    },
+    {
+        "href": "games/crossyroad/",
+        "name": "crossyroad",
+        "title": "Crossyroad",
+        "thumb": "games/crossyroad/icon.png"
+    },
+    {
+        "href": "games/cubefield/",
+        "name": "cubefield",
+        "title": "Cubefield",
+        "thumb": "games/cubefield/icon.png"
+    },
+    {
+        "href": "games/deadagain/",
+        "name": "deadagain",
+        "title": "Deadagain",
+        "thumb": "games/deadagain/icon.png"
+    },
+    {
+        "href": "games/dinobros/",
+        "name": "dinobros",
+        "title": "Dinobros",
+        "thumb": "games/dinobros/icon.png"
+    },
+    {
+        "href": "games/dinosaursmergemaster/",
+        "name": "dinosaursmergemaster",
+        "title": "Dinosaursmergemaster",
+        "thumb": "games/dinosaursmergemaster/icon.png"
+    },
+    {
+        "href": "games/doodlejump/",
+        "name": "doodlejump",
+        "title": "Doodlejump",
+        "thumb": "games/doodlejump/icon.png"
+    },
+    {
+        "href": "games/downthehill/",
+        "name": "downthehill",
+        "title": "Downthehill",
+        "thumb": "games/downthehill/icon.png"
+    },
+    {
+        "href": "games/drift-boss/",
+        "name": "drift-boss",
+        "title": "Drift Boss",
+        "thumb": "games/drift-boss/icon.png"
+    },
+    {
+        "href": "games/driftboss/",
+        "name": "driftboss",
+        "title": "Driftboss",
+        "thumb": "games/driftboss/icon.png"
+    },
+    {
+        "href": "games/drivemad/",
+        "name": "drivemad",
+        "title": "Drivemad",
+        "thumb": "games/drivemad/icon.png"
+    },
+    {
+        "href": "games/eggy-car/",
+        "name": "eggy-car",
+        "title": "Eggy Car",
+        "thumb": "games/eggy-car/icon.png"
+    },
+    {
+        "href": "games/eggycar/",
+        "name": "eggycar",
+        "title": "Eggycar",
+        "thumb": "games/eggycar/icon.png"
+    },
+    {
+        "href": "games/endlesstruck/",
+        "name": "endlesstruck",
+        "title": "Endlesstruck",
+        "thumb": "games/endlesstruck/icon.png"
+    },
+    {
+        "href": "games/farmmatchseasons/",
+        "name": "farmmatchseasons",
+        "title": "Farmmatchseasons",
+        "thumb": "games/farmmatchseasons/icon.png"
+    },
+    {
+        "href": "games/fireboy-and-watergirl-in-the-forest-temple/",
+        "name": "fireboy-and-watergirl-in-the-forest-temple",
+        "title": "Fireboy And Watergirl In The Forest Temple",
+        "thumb": "games/fireboy-and-watergirl-in-the-forest-temple/icon.png"
+    },
+    {
+        "href": "games/fishingandlines/",
+        "name": "fishingandlines",
+        "title": "Fishingandlines",
+        "thumb": "games/fishingandlines/icon.png"
+    },
+    {
+        "href": "games/fishingfrenzy/",
+        "name": "fishingfrenzy",
+        "title": "Fishingfrenzy",
+        "thumb": "games/fishingfrenzy/icon.png"
+    },
+    {
+        "href": "games/fnaf/",
+        "name": "fnaf",
+        "title": "Fnaf",
+        "thumb": "games/fnaf/icon.png"
+    },
+    {
+        "href": "games/foggyfox/",
+        "name": "foggyfox",
+        "title": "Foggyfox",
+        "thumb": "games/foggyfox/icon.png"
+    },
+    {
+        "href": "games/footballbrawl/",
+        "name": "footballbrawl",
+        "title": "Footballbrawl",
+        "thumb": "games/footballbrawl/icon.png"
+    },
+    {
+        "href": "games/footballlegends/",
+        "name": "footballlegends",
+        "title": "Footballlegends",
+        "thumb": "games/footballlegends/icon.png"
+    },
+    {
+        "href": "games/footballmasters/",
+        "name": "footballmasters",
+        "title": "Footballmasters",
+        "thumb": "games/footballmasters/icon.png"
+    },
+    {
+        "href": "games/footballstrike/",
+        "name": "footballstrike",
+        "title": "Footballstrike",
+        "thumb": "games/footballstrike/icon.png"
+    },
+    {
+        "href": "games/fruitacrush/",
+        "name": "fruitacrush",
+        "title": "Fruitacrush",
+        "thumb": "games/fruitacrush/icon.png"
+    },
+    {
+        "href": "games/geometrydash/",
+        "name": "geometrydash",
+        "title": "Geometrydash",
+        "thumb": "games/geometrydash/icon.png"
+    },
+    {
+        "href": "games/geometryjump/",
+        "name": "geometryjump",
+        "title": "Geometryjump",
+        "thumb": "games/geometryjump/icon.png"
+    },
+    {
+        "href": "games/getontop/",
+        "name": "getontop",
+        "title": "Getontop",
+        "thumb": "games/getontop/icon.png"
+    },
+    {
+        "href": "games/gettingoverit/",
+        "name": "gettingoverit",
+        "title": "Gettingoverit",
+        "thumb": "games/gettingoverit/icon.png"
+    },
+    {
+        "href": "games/gobdun/",
+        "name": "gobdun",
+        "title": "Gobdun",
+        "thumb": "games/gobdun/icon.png"
+    },
+    {
+        "href": "games/groovyski/",
+        "name": "groovyski",
+        "title": "Groovyski",
+        "thumb": "games/groovyski/icon.png"
+    },
+    {
+        "href": "games/gswitch/",
+        "name": "gswitch",
+        "title": "Gswitch",
+        "thumb": "games/gswitch/icon.png"
+    },
+    {
+        "href": "games/gswitch2/",
+        "name": "gswitch2",
+        "title": "Gswitch2",
+        "thumb": "games/gswitch2/icon.png"
+    },
+    {
+        "href": "games/gswitch3/",
+        "name": "gswitch3",
+        "title": "Gswitch3",
+        "thumb": "games/gswitch3/icon.png"
+    },
+    {
+        "href": "games/gswitch4/",
+        "name": "gswitch4",
+        "title": "Gswitch4",
+        "thumb": "games/gswitch4/icon.png"
+    },
+    {
+        "href": "games/guessthekitty/",
+        "name": "guessthekitty",
+        "title": "Guessthekitty",
+        "thumb": "games/guessthekitty/icon.png"
+    },
+    {
+        "href": "games/hanger/",
+        "name": "hanger",
+        "title": "Hanger",
+        "thumb": "games/hanger/icon.png"
+    },
+    {
+        "href": "games/happyfishing/",
+        "name": "happyfishing",
+        "title": "Happyfishing",
+        "thumb": "games/happyfishing/icon.png"
+    },
+    {
+        "href": "games/headsarenasoccerallstars/",
+        "name": "headsarenasoccerallstars",
+        "title": "Headsarenasoccerallstars",
+        "thumb": "games/headsarenasoccerallstars/icon.png"
+    },
+    {
+        "href": "games/headsoccer2023/",
+        "name": "headsoccer2023",
+        "title": "Headsoccer2023",
+        "thumb": "games/headsoccer2023/icon.png"
+    },
+    {
+        "href": "games/hideandsmash/",
+        "name": "hideandsmash",
+        "title": "Hideandsmash",
+        "thumb": "games/hideandsmash/icon.png"
+    },
+    {
+        "href": "games/hole-io/",
+        "name": "hole-io",
+        "title": "Hole Io",
+        "thumb": "games/hole-io/icon.png"
+    },
+    {
+        "href": "games/hooproyale/",
+        "name": "hooproyale",
+        "title": "Hooproyale",
+        "thumb": "games/hooproyale/icon.png"
+    },
+    {
+        "href": "games/hoppopit/",
+        "name": "hoppopit",
+        "title": "Hoppopit",
+        "thumb": "games/hoppopit/icon.png"
+    },
+    {
+        "href": "games/icypurplehead2/",
+        "name": "icypurplehead2",
+        "title": "Icypurplehead2",
+        "thumb": "games/icypurplehead2/icon.png"
+    },
+    {
+        "href": "games/icypurplehead3/",
+        "name": "icypurplehead3",
+        "title": "Icypurplehead3",
+        "thumb": "games/icypurplehead3/icon.png"
+    },
+    {
+        "href": "games/idlebreakout/",
+        "name": "idlebreakout",
+        "title": "Idlebreakout",
+        "thumb": "games/idlebreakout/icon.png"
+    },
+    {
+        "href": "games/idleminingempire/",
+        "name": "idleminingempire",
+        "title": "Idleminingempire",
+        "thumb": "games/idleminingempire/icon.png"
+    },
+    {
+        "href": "games/idlerestaurants/",
+        "name": "idlerestaurants",
+        "title": "Idlerestaurants",
+        "thumb": "games/idlerestaurants/icon.png"
+    },
+    {
+        "href": "games/infinitesoccer/",
+        "name": "infinitesoccer",
+        "title": "Infinitesoccer",
+        "thumb": "games/infinitesoccer/icon.png"
+    },
+    {
+        "href": "games/iron-snout/",
+        "name": "iron-snout",
+        "title": "Iron Snout",
+        "thumb": "games/iron-snout/icon.png"
+    },
+    {
+        "href": "games/ironsnout/",
+        "name": "ironsnout",
+        "title": "Ironsnout",
+        "thumb": "games/ironsnout/icon.png"
+    },
+    {
+        "href": "games/jewelsblitz5/",
+        "name": "jewelsblitz5",
+        "title": "Jewelsblitz5",
+        "thumb": "games/jewelsblitz5/icon.png"
+    },
+    {
+        "href": "games/linebackeralley2/",
+        "name": "linebackeralley2",
+        "title": "Linebackeralley2",
+        "thumb": "games/linebackeralley2/icon.png"
+    },
+    {
+        "href": "games/littlealchemy2/",
+        "name": "littlealchemy2",
+        "title": "Littlealchemy2",
+        "thumb": "games/littlealchemy2/icon.png"
+    },
+    {
+        "href": "games/marblessorting/",
+        "name": "marblessorting",
+        "title": "Marblessorting",
+        "thumb": "games/marblessorting/icon.png"
+    },
+    {
+        "href": "games/mergestkingdom/",
+        "name": "mergestkingdom",
+        "title": "Mergestkingdom",
+        "thumb": "games/mergestkingdom/icon.png"
+    },
+    {
+        "href": "games/minecraftcasesimulator/",
+        "name": "minecraftcasesimulator",
+        "title": "Minecraftcasesimulator",
+        "thumb": "games/minecraftcasesimulator/icon.png"
+    },
+    {
+        "href": "games/moneymovers/",
+        "name": "moneymovers",
+        "title": "Moneymovers",
+        "thumb": "games/moneymovers/icon.png"
+    },
+    {
+        "href": "games/moneymovers2/",
+        "name": "moneymovers2",
+        "title": "Moneymovers2",
+        "thumb": "games/moneymovers2/icon.png"
+    },
+    {
+        "href": "games/moneymovers3/",
+        "name": "moneymovers3",
+        "title": "Moneymovers3",
+        "thumb": "games/moneymovers3/icon.png"
+    },
+    {
+        "href": "games/monkeymart/",
+        "name": "monkeymart",
+        "title": "Monkeymart",
+        "thumb": "games/monkeymart/icon.png"
+    },
+    {
+        "href": "games/movingtruck/",
+        "name": "movingtruck",
+        "title": "Movingtruck",
+        "thumb": "games/movingtruck/icon.png"
+    },
+    {
+        "href": "games/mrbullet/",
+        "name": "mrbullet",
+        "title": "Mrbullet",
+        "thumb": "games/mrbullet/icon.png"
+    },
+    {
+        "href": "games/mrbullet3d/",
+        "name": "mrbullet3d",
+        "title": "Mrbullet3D",
+        "thumb": "games/mrbullet3d/icon.png"
+    },
+    {
+        "href": "games/mutazone/",
+        "name": "mutazone",
+        "title": "Mutazone",
+        "thumb": "games/mutazone/icon.png"
+    },
+    {
+        "href": "games/ninjacatexploit/",
+        "name": "ninjacatexploit",
+        "title": "Ninjacatexploit",
+        "thumb": "games/ninjacatexploit/icon.png"
+    },
+    {
+        "href": "games/ovo/",
+        "name": "ovo",
+        "title": "Ovo",
+        "thumb": "games/ovo/icon.png"
+    },
+    {
+        "href": "games/ovo2/",
+        "name": "ovo2",
+        "title": "Ovo2",
+        "thumb": "games/ovo2/icon.png"
+    },
+    {
+        "href": "games/pacmanhtml5/",
+        "name": "pacmanhtml5",
+        "title": "Pacmanhtml5",
+        "thumb": "games/pacmanhtml5/icon.png"
+    },
+    {
+        "href": "games/papacherrysaga/",
+        "name": "papacherrysaga",
+        "title": "Papacherrysaga",
+        "thumb": "games/papacherrysaga/icon.png"
+    },
+    {
+        "href": "games/paper-io/",
+        "name": "paper-io",
+        "title": "Paper Io",
+        "thumb": "games/paper-io/icon.png"
+    },
+    {
+        "href": "games/parkingfury/",
+        "name": "parkingfury",
+        "title": "Parkingfury",
+        "thumb": "games/parkingfury/icon.png"
+    },
+    {
+        "href": "games/parkingfury2/",
+        "name": "parkingfury2",
+        "title": "Parkingfury2",
+        "thumb": "games/parkingfury2/icon.png"
+    },
+    {
+        "href": "games/parkingfury3/",
+        "name": "parkingfury3",
+        "title": "Parkingfury3",
+        "thumb": "games/parkingfury3/icon.png"
+    },
+    {
+        "href": "games/parkout/",
+        "name": "parkout",
+        "title": "Parkout",
+        "thumb": "games/parkout/icon.png"
+    },
+    {
+        "href": "games/penalty-kick/",
+        "name": "penalty-kick",
+        "title": "Penalty Kick",
+        "thumb": "games/penalty-kick/icon.png"
+    },
+    {
+        "href": "games/penaltykickonline/",
+        "name": "penaltykickonline",
+        "title": "Penaltykickonline",
+        "thumb": "games/penaltykickonline/icon.png"
+    },
+    {
+        "href": "games/penaltyshooters3/",
+        "name": "penaltyshooters3",
+        "title": "Penaltyshooters3",
+        "thumb": "games/penaltyshooters3/icon.png"
+    },
+    {
+        "href": "games/pixelsmashduel/",
+        "name": "pixelsmashduel",
+        "title": "Pixelsmashduel",
+        "thumb": "games/pixelsmashduel/icon.png"
+    },
+    {
+        "href": "games/polyart3d/",
+        "name": "polyart3d",
+        "title": "Polyart3D",
+        "thumb": "games/polyart3d/icon.png"
+    },
+    {
+        "href": "games/pou/",
+        "name": "pou",
+        "title": "Pou",
+        "thumb": "games/pou/icon.png"
+    },
+    {
+        "href": "games/puddingmonsters/",
+        "name": "puddingmonsters",
+        "title": "Puddingmonsters",
+        "thumb": "games/puddingmonsters/icon.png"
+    },
+    {
+        "href": "games/rabbitsamurai2/",
+        "name": "rabbitsamurai2",
+        "title": "Rabbitsamurai2",
+        "thumb": "games/rabbitsamurai2/icon.png"
+    },
+    {
+        "href": "games/racingmonstertrucks/",
+        "name": "racingmonstertrucks",
+        "title": "Racingmonstertrucks",
+        "thumb": "games/racingmonstertrucks/icon.png"
+    },
+    {
+        "href": "games/raftwars/",
+        "name": "raftwars",
+        "title": "Raftwars",
+        "thumb": "games/raftwars/icon.png"
+    },
+    {
+        "href": "games/raftwars2/",
+        "name": "raftwars2",
+        "title": "Raftwars2",
+        "thumb": "games/raftwars2/icon.png"
+    },
+    {
+        "href": "games/rooftopsnipers/",
+        "name": "rooftopsnipers",
+        "title": "Rooftopsnipers",
+        "thumb": "games/rooftopsnipers/icon.png"
+    },
+    {
+        "href": "games/roper/",
+        "name": "roper",
+        "title": "Roper",
+        "thumb": "games/roper/icon.png"
+    },
+    {
+        "href": "games/run3/",
+        "name": "run3",
+        "title": "Run3",
+        "thumb": "games/run3/icon.png"
+    },
+    {
+        "href": "games/run3space/",
+        "name": "run3space",
+        "title": "Run3Space",
+        "thumb": "games/run3space/icon.png"
+    },
+    {
+        "href": "games/rushercrusher/",
+        "name": "rushercrusher",
+        "title": "Rushercrusher",
+        "thumb": "games/rushercrusher/icon.png"
+    },
+    {
+        "href": "games/savethedoge/",
+        "name": "savethedoge",
+        "title": "Savethedoge",
+        "thumb": "games/savethedoge/icon.png"
+    },
+    {
+        "href": "games/scarymaze/",
+        "name": "scarymaze",
+        "title": "Scarymaze",
+        "thumb": "games/scarymaze/icon.png"
+    },
+    {
+        "href": "games/slingtomb/",
+        "name": "slingtomb",
+        "title": "Slingtomb",
+        "thumb": "games/slingtomb/icon.png"
+    },
+    {
+        "href": "games/slope/",
+        "name": "slope",
+        "title": "Slope",
+        "thumb": "games/slope/icon.png"
+    },
+    {
+        "href": "games/slopegame/",
+        "name": "slopegame",
+        "title": "Slopegame",
+        "thumb": "games/slopegame/icon.png"
+    },
+    {
+        "href": "games/snail-bob-8/",
+        "name": "snail-bob-8",
+        "title": "Snail Bob 8",
+        "thumb": "games/snail-bob-8/icon.png"
+    },
+    {
+        "href": "games/snailbob/",
+        "name": "snailbob",
+        "title": "Snailbob",
+        "thumb": "games/snailbob/icon.png"
+    },
+    {
+        "href": "games/snailbob3/",
+        "name": "snailbob3",
+        "title": "Snailbob3",
+        "thumb": "games/snailbob3/icon.png"
+    },
+    {
+        "href": "games/snailbob4/",
+        "name": "snailbob4",
+        "title": "Snailbob4",
+        "thumb": "games/snailbob4/icon.png"
+    },
+    {
+        "href": "games/snailbob5/",
+        "name": "snailbob5",
+        "title": "Snailbob5",
+        "thumb": "games/snailbob5/icon.png"
+    },
+    {
+        "href": "games/snailbob7/",
+        "name": "snailbob7",
+        "title": "Snailbob7",
+        "thumb": "games/snailbob7/icon.png"
+    },
+    {
+        "href": "games/soccer-random/",
+        "name": "soccer-random",
+        "title": "Soccer Random",
+        "thumb": "games/soccer-random/icon.png"
+    },
+    {
+        "href": "games/soccerheads/",
+        "name": "soccerheads",
+        "title": "Soccerheads",
+        "thumb": "games/soccerheads/icon.png"
+    },
+    {
+        "href": "games/soccermasterseuro2020/",
+        "name": "soccermasterseuro2020",
+        "title": "Soccermasterseuro2020",
+        "thumb": "games/soccermasterseuro2020/icon.png"
+    },
+    {
+        "href": "games/soccerrandom/",
+        "name": "soccerrandom",
+        "title": "Soccerrandom",
+        "thumb": "games/soccerrandom/icon.png"
+    },
+    {
+        "href": "games/soldierlegend/",
+        "name": "soldierlegend",
+        "title": "Soldierlegend",
+        "thumb": "games/soldierlegend/icon.png"
+    },
+    {
+        "href": "games/solitaireclassic/",
+        "name": "solitaireclassic",
+        "title": "Solitaireclassic",
+        "thumb": "games/solitaireclassic/icon.png"
+    },
+    {
+        "href": "games/spacebarclicker/",
+        "name": "spacebarclicker",
+        "title": "Spacebarclicker",
+        "thumb": "games/spacebarclicker/icon.png"
+    },
+    {
+        "href": "games/spidersolitaire/",
+        "name": "spidersolitaire",
+        "title": "Spidersolitaire",
+        "thumb": "games/spidersolitaire/icon.png"
+    },
+    {
+        "href": "games/stickman-hook/",
+        "name": "stickman-hook",
+        "title": "Stickman Hook",
+        "thumb": "games/stickman-hook/icon.png"
+    },
+    {
+        "href": "games/stickmanhook/",
+        "name": "stickmanhook",
+        "title": "Stickmanhook",
+        "thumb": "games/stickmanhook/icon.png"
+    },
+    {
+        "href": "games/stickmerge/",
+        "name": "stickmerge",
+        "title": "Stickmerge",
+        "thumb": "games/stickmerge/icon.png"
+    },
+    {
+        "href": "games/stickmerge2/",
+        "name": "stickmerge2",
+        "title": "Stickmerge2",
+        "thumb": "games/stickmerge2/icon.png"
+    },
+    {
+        "href": "games/sudoku/",
+        "name": "sudoku",
+        "title": "Sudoku",
+        "thumb": "games/sudoku/icon.png"
+    },
+    {
+        "href": "games/superliquidsoccer/",
+        "name": "superliquidsoccer",
+        "title": "Superliquidsoccer",
+        "thumb": "games/superliquidsoccer/icon.png"
+    },
+    {
+        "href": "games/supermariowonder/",
+        "name": "supermariowonder",
+        "title": "Supermariowonder",
+        "thumb": "games/supermariowonder/icon.png"
+    },
+    {
+        "href": "games/swingo/",
+        "name": "swingo",
+        "title": "Swingo",
+        "thumb": "games/swingo/icon.png"
+    },
+    {
+        "href": "games/tag/",
+        "name": "tag",
+        "title": "Tag",
+        "thumb": "games/tag/icon.png"
+    },
+    {
+        "href": "games/tanktrouble/",
+        "name": "tanktrouble",
+        "title": "Tanktrouble",
+        "thumb": "games/tanktrouble/icon.png"
+    },
+    {
+        "href": "games/taptapshots/",
+        "name": "taptapshots",
+        "title": "Taptapshots",
+        "thumb": "games/taptapshots/icon.png"
+    },
+    {
+        "href": "games/test/",
+        "name": "test",
+        "title": "Test",
+        "thumb": "games/test/icon.png"
+    },
+    {
+        "href": "games/timberguy/",
+        "name": "timberguy",
+        "title": "Timberguy",
+        "thumb": "games/timberguy/icon.png"
+    },
+    {
+        "href": "games/tiny-fishing/",
+        "name": "tiny-fishing",
+        "title": "Tiny Fishing",
+        "thumb": "games/tiny-fishing/icon.png"
+    },
+    {
+        "href": "games/tinyfishing/",
+        "name": "tinyfishing",
+        "title": "Tinyfishing",
+        "thumb": "games/tinyfishing/icon.png"
+    },
+    {
+        "href": "games/towercrash3d/",
+        "name": "towercrash3d",
+        "title": "Towercrash3D",
+        "thumb": "games/towercrash3d/icon.png"
+    },
+    {
+        "href": "games/trafficcontrol/",
+        "name": "trafficcontrol",
+        "title": "Trafficcontrol",
+        "thumb": "games/trafficcontrol/icon.png"
+    },
+    {
+        "href": "games/tropicalmerge/",
+        "name": "tropicalmerge",
+        "title": "Tropicalmerge",
+        "thumb": "games/tropicalmerge/icon.png"
+    },
+    {
+        "href": "games/tunnelrush2/",
+        "name": "tunnelrush2",
+        "title": "Tunnelrush2",
+        "thumb": "games/tunnelrush2/icon.png"
+    },
+    {
+        "href": "games/turnturn/",
+        "name": "turnturn",
+        "title": "Turnturn",
+        "thumb": "games/turnturn/icon.png"
+    },
+    {
+        "href": "games/ubg98/",
+        "name": "ubg98",
+        "title": "Ubg98",
+        "thumb": "games/ubg98/icon.png"
+    },
+    {
+        "href": "games/vex3/",
+        "name": "vex3",
+        "title": "Vex3",
+        "thumb": "games/vex3/icon.png"
+    },
+    {
+        "href": "games/vex4/",
+        "name": "vex4",
+        "title": "Vex4",
+        "thumb": "games/vex4/icon.png"
+    },
+    {
+        "href": "games/vex5/",
+        "name": "vex5",
+        "title": "Vex5",
+        "thumb": "games/vex5/icon.png"
+    },
+    {
+        "href": "games/vex6/",
+        "name": "vex6",
+        "title": "Vex6",
+        "thumb": "games/vex6/icon.png"
+    },
+    {
+        "href": "games/vex7/",
+        "name": "vex7",
+        "title": "Vex7",
+        "thumb": "games/vex7/icon.png"
+    },
+    {
+        "href": "games/vex8/",
+        "name": "vex8",
+        "title": "Vex8",
+        "thumb": "games/vex8/icon.png"
+    },
+    {
+        "href": "games/volleyrandom/",
+        "name": "volleyrandom",
+        "title": "Volleyrandom",
+        "thumb": "games/volleyrandom/icon.png"
+    },
+    {
+        "href": "games/wheeliebike/",
+        "name": "wheeliebike",
+        "title": "Wheeliebike",
+        "thumb": "games/wheeliebike/icon.png"
+    },
+    {
+        "href": "games/wheeliebike2/",
+        "name": "wheeliebike2",
+        "title": "Wheeliebike2",
+        "thumb": "games/wheeliebike2/icon.png"
+    },
+    {
+        "href": "games/wheely2/",
+        "name": "wheely2",
+        "title": "Wheely2",
+        "thumb": "games/wheely2/icon.png"
+    },
+    {
+        "href": "games/wheely3/",
+        "name": "wheely3",
+        "title": "Wheely3",
+        "thumb": "games/wheely3/icon.png"
+    },
+    {
+        "href": "games/wheely4/",
+        "name": "wheely4",
+        "title": "Wheely4",
+        "thumb": "games/wheely4/icon.png"
+    },
+    {
+        "href": "games/wheely5/",
+        "name": "wheely5",
+        "title": "Wheely5",
+        "thumb": "games/wheely5/icon.png"
+    },
+    {
+        "href": "games/wheely6/",
+        "name": "wheely6",
+        "title": "Wheely6",
+        "thumb": "games/wheely6/icon.png"
+    },
+    {
+        "href": "games/wheely7/",
+        "name": "wheely7",
+        "title": "Wheely7",
+        "thumb": "games/wheely7/icon.png"
+    },
+    {
+        "href": "games/wheely8/",
+        "name": "wheely8",
+        "title": "Wheely8",
+        "thumb": "games/wheely8/icon.png"
+    },
+    {
+        "href": "games/wiggle/",
+        "name": "wiggle",
+        "title": "Wiggle",
+        "thumb": "games/wiggle/icon.png"
+    },
+    {
+        "href": "games/woodblockpuzzle/",
+        "name": "woodblockpuzzle",
+        "title": "Woodblockpuzzle",
+        "thumb": "games/woodblockpuzzle/icon.png"
+    },
+    {
+        "href": "games/woodventure/",
+        "name": "woodventure",
+        "title": "Woodventure",
+        "thumb": "games/woodventure/icon.png"
+    },
+    {
+        "href": "games/wordleunlimited/",
+        "name": "wordleunlimited",
+        "title": "Wordleunlimited",
+        "thumb": "games/wordleunlimited/icon.png"
+    },
+    {
+        "href": "games/wordslide/",
+        "name": "wordslide",
+        "title": "Wordslide",
+        "thumb": "games/wordslide/icon.png"
+    },
+    {
+        "href": "games/worldshardestgame/",
+        "name": "worldshardestgame",
+        "title": "Worldshardestgame",
+        "thumb": "games/worldshardestgame/icon.png"
     }
+];
+let filteredGames = [...allGames];
+let currentIndex = 0;
+const gamesPerPage = 24;
+const gamesGrid = document.getElementById('gamesGrid');
+const loader = document.getElementById('loader');
+
+function createGameCard(game) {
+    const a = document.createElement('a');
+    a.href = game.href;
+    a.className = 'game-card';
+    a.setAttribute('data-name', game.name);
+    
+    const thumb = document.createElement('div');
+    thumb.className = 'game-thumb';
+    thumb.dataset.src = game.thumb;
+    
+    const title = document.createElement('div');
+    title.className = 'game-title';
+    title.textContent = game.title;
+    
+    a.appendChild(thumb);
+    a.appendChild(title);
+    return a;
 }
+
+const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const thumb = entry.target;
+            const src = thumb.dataset.src;
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                thumb.style.backgroundImage = `url('${src}'), url('https://via.placeholder.com/150/1a1a1a/ff4d4d?text=Game')`;
+                thumb.classList.add('loaded');
+            };
+            observer.unobserve(thumb);
+        }
+    });
+}, { rootMargin: '100px' });
+
+function loadMoreGames() {
+    if (currentIndex >= filteredGames.length) return;
+    
+    loader.style.display = 'block';
+    const nextBatch = filteredGames.slice(currentIndex, currentIndex + gamesPerPage);
+    
+    nextBatch.forEach(game => {
+        const card = createGameCard(game);
+        gamesGrid.appendChild(card);
+        imageObserver.observe(card.querySelector('.game-thumb'));
+    });
+    
+    currentIndex += gamesPerPage;
+    loader.style.display = 'none';
+}
+
+window.addEventListener('scroll', () => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 800) {
+        loadMoreGames();
+    }
+});
+
+function filterGames() {
+    const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+    filteredGames = allGames.filter(game => 
+        game.name.toLowerCase().includes(searchTerm) || 
+        game.title.toLowerCase().includes(searchTerm)
+    );
+    
+    gamesGrid.innerHTML = '';
+    currentIndex = 0;
+    loadMoreGames();
+}
+
+// التشغيل الأول
+loadMoreGames();
 </script>
+
 
 </body>
 </html>
