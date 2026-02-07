@@ -164,17 +164,26 @@
         return a;
     }
 
+    const DEFAULT_THUMB = 'https://via.placeholder.com/150/1a1a1a/ff4d4d?text=Game';
+
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const thumb = entry.target;
                 const src = thumb.dataset.src;
                 const img = new Image();
-                img.src = src;
+                
                 img.onload = () => {
-                    thumb.style.backgroundImage = `url('${src}'), url('https://via.placeholder.com/150/1a1a1a/ff4d4d?text=Game')`;
+                    thumb.style.backgroundImage = `url('${src}')`;
                     thumb.classList.add('loaded');
                 };
+                
+                img.onerror = () => {
+                    thumb.style.backgroundImage = `url('${DEFAULT_THUMB}')`;
+                    thumb.classList.add('loaded');
+                };
+                
+                img.src = src;
                 observer.unobserve(thumb);
             }
         });

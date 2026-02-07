@@ -51,7 +51,7 @@
         "href": "games/8ballbilliardsclassic/",
         "name": "8ballbilliardsclassic",
         "title": "8Ballbilliardsclassic",
-        "thumb": "games/8ballbilliardsclassic/icon.png"
+        "thumb": "games/8ballbilliardsclassic/html5games/images/logo.png"
     },
     {
         "href": "games/8ballpool/",
@@ -171,7 +171,7 @@
         "href": "games/basketballlegends2020/",
         "name": "basketballlegends2020",
         "title": "Basketballlegends2020",
-        "thumb": "games/basketballlegends2020/icon.png"
+        "thumb": "games/basketballlegends2020/assets/images/logo.png"
     },
     {
         "href": "games/basketballline/",
@@ -267,13 +267,13 @@
         "href": "games/bubblepopadventures/",
         "name": "bubblepopadventures",
         "title": "Bubblepopadventures",
-        "thumb": "games/bubblepopadventures/icon.png"
+        "thumb": "games/bubblepopadventures/branding/logo.png"
     },
     {
         "href": "games/bubbletower3d/",
         "name": "bubbletower3d",
         "title": "Bubbletower3D",
-        "thumb": "games/bubbletower3d/icon.png"
+        "thumb": "games/bubbletower3d/html5games/images/logo.png"
     },
     {
         "href": "games/carrush/",
@@ -387,13 +387,13 @@
         "href": "games/drift-boss/",
         "name": "drift-boss",
         "title": "Drift Boss",
-        "thumb": "games/drift-boss/icon.png"
+        "thumb": "games/drift-boss/branding/logo.png"
     },
     {
         "href": "games/driftboss/",
         "name": "driftboss",
         "title": "Driftboss",
-        "thumb": "games/driftboss/icon.png"
+        "thumb": "games/driftboss/branding/logo.png"
     },
     {
         "href": "games/drivemad/",
@@ -447,7 +447,7 @@
         "href": "games/fnaf/",
         "name": "fnaf",
         "title": "Fnaf",
-        "thumb": "games/fnaf/icon.png"
+        "thumb": "games/fnaf/graphics/logo.png"
     },
     {
         "href": "games/foggyfox/",
@@ -579,7 +579,7 @@
         "href": "games/hideandsmash/",
         "name": "hideandsmash",
         "title": "Hideandsmash",
-        "thumb": "games/hideandsmash/icon.png"
+        "thumb": "games/hideandsmash/assets/images/preload/logo.png"
     },
     {
         "href": "games/hole-io/",
@@ -591,7 +591,7 @@
         "href": "games/hooproyale/",
         "name": "hooproyale",
         "title": "Hooproyale",
-        "thumb": "games/hooproyale/icon.png"
+        "thumb": "games/hooproyale/loader/logo.png"
     },
     {
         "href": "games/hoppopit/",
@@ -621,13 +621,13 @@
         "href": "games/idleminingempire/",
         "name": "idleminingempire",
         "title": "Idleminingempire",
-        "thumb": "games/idleminingempire/icon.png"
+        "thumb": "games/idleminingempire/branding/logo.png"
     },
     {
         "href": "games/idlerestaurants/",
         "name": "idlerestaurants",
         "title": "Idlerestaurants",
-        "thumb": "games/idlerestaurants/icon.png"
+        "thumb": "games/idlerestaurants/resources/img/gameplay/hud/events/food_blogger/icon.png"
     },
     {
         "href": "games/infinitesoccer/",
@@ -801,7 +801,7 @@
         "href": "games/penaltykickonline/",
         "name": "penaltykickonline",
         "title": "Penaltykickonline",
-        "thumb": "games/penaltykickonline/icon.png"
+        "thumb": "games/penaltykickonline/sprites/logo.png"
     },
     {
         "href": "games/penaltyshooters3/",
@@ -819,7 +819,7 @@
         "href": "games/polyart3d/",
         "name": "polyart3d",
         "title": "Polyart3D",
-        "thumb": "games/polyart3d/icon.png"
+        "thumb": "games/polyart3d/patch/unityv3/logo.png"
     },
     {
         "href": "games/pou/",
@@ -861,7 +861,7 @@
         "href": "games/rooftopsnipers/",
         "name": "rooftopsnipers",
         "title": "Rooftopsnipers",
-        "thumb": "games/rooftopsnipers/icon.png"
+        "thumb": "games/rooftopsnipers/Logo.png"
     },
     {
         "href": "games/roper/",
@@ -927,7 +927,7 @@
         "href": "games/snailbob/",
         "name": "snailbob",
         "title": "Snailbob",
-        "thumb": "games/snailbob/icon.png"
+        "thumb": "games/snailbob/images/1/credits/logo.png"
     },
     {
         "href": "games/snailbob3/",
@@ -969,19 +969,19 @@
         "href": "games/soccermasterseuro2020/",
         "name": "soccermasterseuro2020",
         "title": "Soccermasterseuro2020",
-        "thumb": "games/soccermasterseuro2020/icon.png"
+        "thumb": "games/soccermasterseuro2020/patch/unityv3/logo.png"
     },
     {
         "href": "games/soccerrandom/",
         "name": "soccerrandom",
         "title": "Soccerrandom",
-        "thumb": "games/soccerrandom/icon.png"
+        "thumb": "games/soccerrandom/patch/unityv3/logo.png"
     },
     {
         "href": "games/solitaireclassic/",
         "name": "solitaireclassic",
         "title": "Solitaireclassic",
-        "thumb": "games/solitaireclassic/icon.png"
+        "thumb": "games/solitaireclassic/html5games/images/logo.png"
     },
     {
         "href": "games/spacebarclicker/",
@@ -1023,7 +1023,7 @@
         "href": "games/sudoku/",
         "name": "sudoku",
         "title": "Sudoku",
-        "thumb": "games/sudoku/icon.png"
+        "thumb": "games/sudoku/patch/unityv3/logo.png"
     },
     {
         "href": "games/superliquidsoccer/",
@@ -1143,19 +1143,19 @@
         "href": "games/vex6/",
         "name": "vex6",
         "title": "Vex6",
-        "thumb": "games/vex6/icon.png"
+        "thumb": "games/vex6/assets/images/logo.png"
     },
     {
         "href": "games/vex7/",
         "name": "vex7",
         "title": "Vex7",
-        "thumb": "games/vex7/icon.png"
+        "thumb": "games/vex7/assets/images/logo.png"
     },
     {
         "href": "games/vex8/",
         "name": "vex8",
         "title": "Vex8",
-        "thumb": "games/vex8/icon.png"
+        "thumb": "games/vex8/assets/icon.png"
     },
     {
         "href": "games/volleyrandom/",
@@ -1179,7 +1179,7 @@
         "href": "games/wheely2/",
         "name": "wheely2",
         "title": "Wheely2",
-        "thumb": "games/wheely2/icon.png"
+        "thumb": "games/wheely2/assets/images/logo.png"
     },
     {
         "href": "games/wheely3/",
