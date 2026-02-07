@@ -1,9 +1,9 @@
 #,اسم اللعبة,اسم المجلد,حالة النشر,حالة الفحص,نتيجة الفحص,تاريخ الفحص,جاهزية الإعلانات,ملاحظات الفحص,الرابط,تاريخ الإضافة
-1,1 On 1 Soccer,1on1soccer,منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/1on1soccer,2026-02-07
-2,1010 Deluxe,1010deluxe,منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/1010deluxe,2026-02-07
-3,2048 Game,2048,منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/2048,2026-02-07
-4,3D Bowling Classic,3dbowling,منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/3dbowling,2026-02-07
-5,3D Free Kick,3d-free-kick,منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/3d-free-kick,2026-02-07
+1,1 On 1 Soccer,1on1soccer,منشورة,مفحوصة,✅ PASS,2026-02-07,جاهزة,اللعبة تعمل بسلاسة. تم التحقق من دمج SDK Kasrah بنجاح وظهور شاشة البداية. الأداء مستقر 60 FPS.,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/1on1soccer,2026-02-07
+2,1010 Deluxe,1010deluxe,منشورة,مفحوصة,✅ PASS,2026-02-07,جاهزة,اللعبة تعمل بشكل ممتاز. الـ SDK مدمج ويظهر بشكل صحيح. استجابة سريعة للمدخلات.,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/1010deluxe,2026-02-07
+3,2048 Game,2048,منشورة,مفحوصة,✅ PASS,2026-02-07,جاهزة,اللعبة خفيفة وسريعة التحميل. الـ SDK يعمل بدون أخطاء. تم اختبار التحكم بالأسهم.,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/2048,2026-02-07
+4,3D Bowling Classic,3dbowling,منشورة,مفحوصة,✅ PASS,2026-02-07,جاهزة,الرسوميات تعمل بشكل جيد. الـ SDK مدمج بنجاح. لا توجد أخطاء في الـ Console.,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/3dbowling,2026-02-07
+5,3D Free Kick,3d-free-kick,منشورة,مفحوصة,✅ PASS,2026-02-07,جاهزة,اللعبة تعمل بسلاسة. تم التحقق من جاهزية الإعلانات عبر الـ SDK. الأداء ممتاز.,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/3d-free-kick,2026-02-07
 6,8 Ball Pool,8ballpool,منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/8ballpool,2026-02-07
 7,A Small World Cup,a-small-world-cup,منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/a-small-world-cup,2026-02-07
 8,Adam and Eve 7,adamandeve7,منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/adamandeve7,2026-02-07
