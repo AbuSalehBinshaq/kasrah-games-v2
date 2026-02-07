@@ -179,8 +179,23 @@
                 };
                 
                 img.onerror = () => {
-                    thumb.style.backgroundImage = `url('${DEFAULT_THUMB}')`;
-                    thumb.classList.add('loaded');
+                    // إذا فشل تحميل icon.png، نجرب favicon.ico
+                    if (src.endsWith('icon.png')) {
+                        const fallbackSrc = src.replace('icon.png', 'favicon.ico');
+                        const fallbackImg = new Image();
+                        fallbackImg.onload = () => {
+                            thumb.style.backgroundImage = `url('${fallbackSrc}')`;
+                            thumb.classList.add('loaded');
+                        };
+                        fallbackImg.onerror = () => {
+                            thumb.style.backgroundImage = `url('${DEFAULT_THUMB}')`;
+                            thumb.classList.add('loaded');
+                        };
+                        fallbackImg.src = fallbackSrc;
+                    } else {
+                        thumb.style.backgroundImage = `url('${DEFAULT_THUMB}')`;
+                        thumb.classList.add('loaded');
+                    }
                 };
                 
                 img.src = src;
