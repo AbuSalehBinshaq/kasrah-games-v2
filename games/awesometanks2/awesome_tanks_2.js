@@ -20266,7 +20266,11 @@ function() {
 
     function i() {
         try {
-            window.localStorage.setItem("AWESOME-TANKS-2", JSON.stringify(l))
+            var dataStr = JSON.stringify(l);
+            window.localStorage.setItem("AWESOME-TANKS-2", dataStr);
+            if (typeof KasrahSDK !== "undefined") {
+                KasrahSDK.saveData("AWESOME-TANKS-2", l);
+            }
         } catch (t) {}
     }
 
@@ -23439,7 +23443,15 @@ function() {
         e.bringToTop(), this.add.tween(e.scale).to({
             x: 3,
             y: 3
-        }, 400, Phaser.Easing.Linear.None, !0), this.camera.fade(0, 250), this.camera.onFadeComplete.add(this.game.state.start.bind(this.game.state, "Level" + t, !0, !1, 1)), s.stopMusic(), s.playSound("level.mp3")
+        }, 400, Phaser.Easing.Linear.None, !0), this.camera.fade(0, 250), this.camera.onFadeComplete.add(function() {
+            if (typeof KasrahSDK !== "undefined") {
+                KasrahSDK.showTimedAd(function() {
+                    this.game.state.start("Level" + t, !0, !1, 1);
+                }.bind(this));
+            } else {
+                this.game.state.start("Level" + t, !0, !1, 1);
+            }
+        }.bind(this)), s.stopMusic(), s.playSound("level.mp3")
     }, window.AT.menu.Levels = t
 }(),
 function() {
@@ -24007,8 +24019,8 @@ function() {
 
     function o() {
         this.scale.updateScalingAndBounds = e, this.scale.setResizeCallback(t), this.stage.disableVisibilityChange = !1, this.stage.backgroundColor = 0, this.input.maxPointers = 2;
-        var i = window.location.hostname.split(".");
-        "coolmathgames" || "coolmath-games" === i[i.length - 2] && "com" === i[i.length - 1] ? (this.physics.startSystem(Phaser.Physics.BOX2D), this.physics.box2d.friction = 0, this.physics.box2d.positionIterations = 1, this.physics.box2d.velocityIterations = 1, this.state.start("MenuLoading")) : this.state.start("MenuLock")
+        // Removed Site Lock for Kasrah Games
+        this.physics.startSystem(Phaser.Physics.BOX2D), this.physics.box2d.friction = 0, this.physics.box2d.positionIterations = 1, this.physics.box2d.velocityIterations = 1, this.state.start("MenuLoading")
     }
     var s = window.AT.profile,
         n = window.AT.LEVELS,
