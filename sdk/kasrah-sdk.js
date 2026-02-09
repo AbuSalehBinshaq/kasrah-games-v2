@@ -1,22 +1,24 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v2.4.0 (Auto-Play & Ad-Fix Update)
-    // Optimized: Auto-start logic and dynamic ad container visibility.
+    // Kasrah Games SDK - Cloud Edition v2.5.0 (Pro Events & Custom Config)
+    // Optimized: Event-driven architecture for better game integration.
     
-    const SDK_VERSION = '2.4.0';
+    const SDK_VERSION = '2.5.0';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
 
-    const SDK_CONFIG = {
+    // Default configuration
+    let SDK_CONFIG = {
         showAds: true,
         adKey: '49ac472dc3a5486324fd7f45c712a6ec',
         loadSpeed: 10,
         showStartButton: true,
-        autoPlayDelay: 5000, // 5 seconds auto-play after load
+        autoPlayDelay: 5000,
         adDuration: 5,
         preAdNoticeTime: 10,
         adFrequency: 3,
-        debugMode: false
+        debugMode: false,
+        autoPause: true // Default behavior to help developers
     };
     
     const KasrahSDK = {
@@ -26,13 +28,40 @@
         saveTimeout: null,
         isAuthChecked: false,
         adCallCount: 0,
+        listeners: {}, // For event system
 
-        init: function() {
-            if (SDK_CONFIG.debugMode) console.log(`%c 🎮 ${PLATFORM_NAME} SDK v${SDK_VERSION} Active `, `background: ${PRIMARY_COLOR}; color: white; font-weight: bold; padding: 4px; border-radius: 4px;`);
+        /**
+         * Initialize the SDK with custom configuration
+         * @param {Object} customConfig - Override default SDK settings
+         */
+        init: function(customConfig = {}) {
+            // Merge custom config with defaults
+            SDK_CONFIG = { ...SDK_CONFIG, ...customConfig };
+
+            if (SDK_CONFIG.debugMode) {
+                console.log(`%c 🎮 ${PLATFORM_NAME} SDK v${SDK_VERSION} Active `, `background: ${PRIMARY_COLOR}; color: white; font-weight: bold; padding: 4px; border-radius: 4px;`);
+                console.log('[Kasrah SDK] Config:', SDK_CONFIG);
+            }
+
             this.injectStyles();
             this.createSplashScreen();
             this.checkAuth();
             this.handleUnload();
+            
+            this.emit('init', { version: SDK_VERSION });
+        },
+
+        // --- Event System ---
+        on: function(event, callback) {
+            if (!this.listeners[event]) this.listeners[event] = [];
+            this.listeners[event].push(callback);
+        },
+
+        emit: function(event, data) {
+            if (SDK_CONFIG.debugMode) console.log(`[Kasrah SDK] Event: ${event}`, data || '');
+            if (this.listeners[event]) {
+                this.listeners[event].forEach(callback => callback(data));
+            }
         },
 
         injectStyles: function() {
@@ -147,6 +176,7 @@
             splash.style.opacity = '0';
             setTimeout(() => {
                 if (splash.parentNode) splash.remove();
+                this.emit('gameStart');
             }, 500);
         },
 
@@ -156,6 +186,8 @@
                 if (callback) callback();
                 return;
             }
+
+            this.emit('adBeforeStart');
 
             const notice = document.createElement('div');
             notice.id = 'kasrah-pre-ad-notice';
@@ -177,6 +209,8 @@
         },
 
         triggerActualAd: function(callback) {
+            this.emit('adStarted');
+            
             const adOverlay = document.createElement('div');
             adOverlay.id = 'kasrah-timed-ad';
             adOverlay.innerHTML = `
@@ -188,7 +222,7 @@
             `;
             document.body.appendChild(adOverlay);
             
-            const adLoaded = this.injectAdCode('kasrah-timed-ad-content', 'kasrah-timed-ad');
+            this.injectAdCode('kasrah-timed-ad-content', 'kasrah-timed-ad');
 
             let timeLeft = SDK_CONFIG.adDuration;
             const countdown = setInterval(() => {
@@ -201,6 +235,7 @@
                     adOverlay.style.opacity = '0';
                     setTimeout(() => {
                         adOverlay.remove();
+                        this.emit('adFinished');
                         if (callback) callback();
                     }, 500);
                 }
@@ -217,7 +252,6 @@
             script.type = 'text/javascript';
             script.src = `https://www.highperformanceformat.com/${SDK_CONFIG.adKey}/invoke.js`;
             
-            // Monitor if the ad actually loads
             script.onload = function() {
                 if (parent) parent.classList.add('has-ad');
             };
@@ -228,7 +262,6 @@
 
             container.appendChild(script);
             
-            // Safety check: if no iframe appears after 3 seconds, hide it
             setTimeout(() => {
                 if (container.getElementsByTagName('iframe').length > 0) {
                     if (parent) parent.classList.add('has-ad');
@@ -248,6 +281,7 @@
                     if (data && (data.username || data.email)) {
                         this.user = data;
                         this.showUserBadge();
+                        this.emit('userLogin', data);
                     }
                 }
             } catch (e) {}
@@ -276,12 +310,13 @@
             const dataToSync = { ...this.saveQueue };
             this.saveQueue = {};
             try {
-                await fetch(`${MAIN_SITE_URL}/api/games/save-data`, {
+                const response = await fetch(`${MAIN_SITE_URL}/api/games/save-data`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
                     body: JSON.stringify({ gameId: this.gameId, data: dataToSync })
                 });
+                if (response.ok) this.emit('saveComplete', dataToSync);
             } catch (e) {}
         },
 
@@ -299,11 +334,15 @@
         }
     };
 
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        KasrahSDK.init();
-    } else {
-        document.addEventListener('DOMContentLoaded', () => KasrahSDK.init());
-    }
+    // Auto-init with defaults if not manually initialized within 1 second
+    const autoInitTimeout = setTimeout(() => {
+        if (!window.KasrahSDK_ManualInit) KasrahSDK.init();
+    }, 1000);
 
     window.KasrahSDK = KasrahSDK;
+    window.KasrahSDK.manualInit = function(config) {
+        clearTimeout(autoInitTimeout);
+        window.KasrahSDK_ManualInit = true;
+        KasrahSDK.init(config);
+    };
 })();
