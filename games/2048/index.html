@@ -17,10 +17,19 @@
 
   <script type="module" crossorigin src="./assets/index-Ck8TMyuy.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-D_FEme44.css">
+  
+  <style>
+      /* تحسين مظهر اللعبة مع الـ SDK */
+      .kasrah-paused {
+          pointer-events: none;
+          filter: blur(2px) grayscale(0.5);
+          transition: filter 0.3s;
+      }
+  </style>
 </head>
 
 <body style= "margin: 0px; padding: 0px; overflow: hidden;">
-    <div class="container">
+    <div class="container" id="game-wrapper">
         <div class="heading level-y flex">
             <h1 class="flex-1 title">
                 <button>
@@ -77,6 +86,36 @@
 
 
 <script src="/sdk/kasrah-sdk.js"></script>
+<script>
+    // ربط اللعبة بالـ SDK
+    const gameWrapper = document.getElementById('game-wrapper');
+    
+    // 1. تهيئة الـ SDK
+    KasrahSDK.manualInit({
+        debugMode: true,
+        adFrequency: 2 // إعلان كل مرتين يتم فيها طلب إعلان (مثلاً عند الخسارة أو البدء)
+    });
+
+    // 2. إيقاف اللعبة عند ظهور الإعلان
+    KasrahSDK.on('adStarted', () => {
+        console.log("Kasrah SDK: Ad started, pausing game input.");
+        gameWrapper.classList.add('kasrah-paused');
+        // بما أن اللعبة تعتمد على keydown، سنقوم بمنع التفاعل عبر CSS pointer-events
+    });
+
+    // 3. استئناف اللعبة عند انتهاء الإعلان
+    KasrahSDK.on('adFinished', () => {
+        console.log("Kasrah SDK: Ad finished, resuming game input.");
+        gameWrapper.classList.remove('kasrah-paused');
+    });
+
+    // 4. تتبع أحداث اللعبة (اختياري)
+    document.addEventListener('keydown', (e) => {
+        if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+            // يمكننا تتبع عدد الحركات مثلاً
+        }
+    });
+</script>
 </body>
 
 </html>
