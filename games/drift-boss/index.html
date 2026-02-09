@@ -4,81 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Drift Boss - Kasrah Games</title>
-    <link rel="stylesheet" href="game.css">
     <style>
-        body {
-            background-color: #000;
+        body, html {
             margin: 0;
             padding: 0;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
+            background-color: #000;
+        }
+        iframe {
             width: 100%;
             height: 100%;
+            border: none;
         }
-        #game-container {
-            position: absolute;
+        /* تحسين مظهر اللعبة وقت الإعلان */
+        #game-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-        }
-        /* تحسين مظهر اللعبة مع الـ SDK */
-        .kasrah-paused {
-            pointer-events: none !important;
-            filter: blur(3px) grayscale(0.5);
-            transition: filter 0.3s;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
         }
     </style>
 </head>
 <body>
-    <div id="game-container">
-        <!-- حاويات اللعبة المطلوبة من ملف game.css -->
-        <div id="game"></div>
-        <canvas id="canvas"></canvas>
-        <div id="webgl"></div>
-    </div>
+    <div id="game-overlay"></div>
+    <iframe id="game-frame" src="https://driftboss.ubg235.com/"></iframe>
 
-    <!-- استدعاء ملفات اللعبة المحلية -->
-    <script src="game.js"></script>
-    
-    <!-- استدعاء الـ SDK -->
     <script src="/sdk/kasrah-sdk.js"></script>
-    
     <script>
-        // ربط اللعبة بالـ SDK
-        const gameContainer = document.getElementById('game-container');
+        const overlay = document.getElementById('game-overlay');
         
-        // 1. تهيئة الـ SDK
+        // تهيئة الـ SDK
         KasrahSDK.manualInit({
             debugMode: true,
-            adFrequency: 3,
-            autoPlayDelay: 4000 // بدء اللعبة بعد 4 ثواني
+            adFrequency: 2
         });
 
-        // 2. نظام الأحداث (Events) للتحكم في اللعبة
+        // بما أننا نستخدم iframe خارجي، سنقوم بتغطية اللعبة وقت الإعلان
         KasrahSDK.on('adStarted', () => {
-            console.log("Kasrah SDK: Ad started, pausing Drift Boss.");
-            gameContainer.classList.add('kasrah-paused');
-            
-            // محاولة إيقاف الصوت برمجياً إذا كانت اللعبة تدعم ذلك
-            if (window.ig && window.ig.music) {
-                window.ig.music.pause();
-            }
+            console.log("Kasrah SDK: Ad started, covering iframe.");
+            overlay.style.display = 'block';
         });
 
         KasrahSDK.on('adFinished', () => {
-            console.log("Kasrah SDK: Ad finished, resuming Drift Boss.");
-            gameContainer.classList.remove('kasrah-paused');
-            
-            // إعادة تشغيل الصوت
-            if (window.ig && window.ig.music) {
-                window.ig.music.play();
-            }
+            console.log("Kasrah SDK: Ad finished, revealing iframe.");
+            overlay.style.display = 'none';
         });
-
-        KasrahSDK.on('gameStart', () => {
-            console.log("Kasrah SDK: Splash screen closed, game ready.");
-        });
-
-        // تتبع النقاط (اختياري - يحتاج لمعرفة المتغير الداخلي للعبة)
-        // يمكننا إضافة مستمع للحركات إذا أردنا تتبع نشاط اللاعب
     </script>
 </body>
 </html>
