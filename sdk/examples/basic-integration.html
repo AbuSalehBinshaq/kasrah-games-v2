@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مثال ربط Kasrah SDK</title>
+    <style>
+        body { background: #1a1a1a; color: white; font-family: sans-serif; text-align: center; padding-top: 50px; }
+        .status { padding: 20px; border: 1px solid #333; display: inline-block; border-radius: 10px; }
+        #game-canvas { width: 300px; height: 200px; background: #333; margin: 20px auto; display: flex; align-items: center; justify-content: center; border: 2px solid #ff4757; }
+    </style>
+</head>
+<body>
+
+    <h1>مثال دمج SDK كسرة</h1>
+    <div class="status" id="status-text">جاري تهيئة الـ SDK...</div>
+    
+    <div id="game-canvas">
+        مساحة اللعبة
+    </div>
+
+    <!-- استدعاء الـ SDK -->
+    <script src="../kasrah-sdk.js"></script>
+
+    <script>
+        // 1. تهيئة مخصصة مع تفعيل وضع التطوير
+        KasrahSDK.manualInit({
+            debugMode: true,
+            adFrequency: 1 // للإختبار فقط: إعلان في كل مرة
+        });
+
+        const statusEl = document.getElementById('status-text');
+        const gameCanvas = document.getElementById('game-canvas');
+
+        // 2. الاستماع لأحداث الإعلانات
+        KasrahSDK.on('adStarted', () => {
+            statusEl.innerText = "📺 إعلان معروض الآن... تم إيقاف اللعبة";
+            gameCanvas.style.opacity = "0.2";
+        });
+
+        KasrahSDK.on('adFinished', () => {
+            statusEl.innerText = "✅ انتهى الإعلان... استئناف اللعب";
+            gameCanvas.style.opacity = "1";
+        });
+
+        // 3. الاستماع لبدء اللعبة
+        KasrahSDK.on('gameStart', () => {
+            statusEl.innerText = "🎮 بدأت اللعبة! استمتع باللعب";
+        });
+
+        // 4. تجربة حفظ البيانات
+        function saveScore(score) {
+            KasrahSDK.saveData('user_score', score);
+        }
+
+        // الاستماع لنجاح الحفظ
+        KasrahSDK.on('saveComplete', (data) => {
+            console.log("تم حفظ البيانات سحابياً بنجاح:", data);
+        });
+    </script>
+</body>
+</html>
