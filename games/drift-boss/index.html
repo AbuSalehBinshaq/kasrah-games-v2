@@ -17,44 +17,64 @@
             width: 100%;
             height: 100%;
             border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
-        /* تحسين مظهر اللعبة وقت الإعلان */
-        #game-overlay {
+        /* غطاء الإعلانات فوق الـ iframe */
+        #kasrah-ad-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.85);
             display: none;
-            z-index: 9999;
-            backdrop-filter: blur(5px);
+            z-index: 999999;
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: sans-serif;
+            flex-direction: column;
         }
     </style>
 </head>
 <body>
-    <div id="game-overlay"></div>
+    <!-- غطاء الإعلانات -->
+    <div id="kasrah-ad-overlay">
+        <h2 style="text-shadow: 0 0 10px #ff4757;">KASRAH GAMES</h2>
+        <p>Advertisement is playing...</p>
+    </div>
+
+    <!-- اللعبة من المصدر المستقر لضمان تحميل السيارة والخريطة -->
     <iframe id="game-frame" src="https://driftboss.ubg235.com/"></iframe>
 
+    <!-- الـ SDK الاحترافي -->
     <script src="/sdk/kasrah-sdk.js"></script>
+    
     <script>
-        const overlay = document.getElementById('game-overlay');
+        const adOverlay = document.getElementById('kasrah-ad-overlay');
         
-        // تهيئة الـ SDK
+        // تهيئة الـ SDK مع وضع التصحيح لمراقبة الأداء
         KasrahSDK.manualInit({
             debugMode: true,
             adFrequency: 2
         });
 
-        // بما أننا نستخدم iframe خارجي، سنقوم بتغطية اللعبة وقت الإعلان
+        // إدارة أحداث الإعلانات لتغطية الـ iframe الخارجي
         KasrahSDK.on('adStarted', () => {
-            console.log("Kasrah SDK: Ad started, covering iframe.");
-            overlay.style.display = 'block';
+            console.log("Kasrah SDK: Ad started, covering iframe to prevent gameplay.");
+            adOverlay.style.display = 'flex';
         });
 
         KasrahSDK.on('adFinished', () => {
-            console.log("Kasrah SDK: Ad finished, revealing iframe.");
-            overlay.style.display = 'none';
+            console.log("Kasrah SDK: Ad finished, revealing gameplay.");
+            adOverlay.style.display = 'none';
+        });
+
+        KasrahSDK.on('gameStart', () => {
+            console.log("Kasrah SDK: Splash screen closed, Drift Boss ready.");
         });
     </script>
 </body>
