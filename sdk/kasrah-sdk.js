@@ -1,8 +1,8 @@
 (function() {
-    // Kasrah Games SDK - Cloud Edition v2.3.1 (Stability Update)
-    // Optimized: Pre-ad alerts and auto-close logic for better game compatibility.
+    // Kasrah Games SDK - Cloud Edition v2.4.0 (Auto-Play & Ad-Fix Update)
+    // Optimized: Auto-start logic and dynamic ad container visibility.
     
-    const SDK_VERSION = '2.3.1';
+    const SDK_VERSION = '2.4.0';
     const PLATFORM_NAME = 'Kasrah Games';
     const PRIMARY_COLOR = '#ff4757';
     const MAIN_SITE_URL = 'https://kasrah-games.onrender.com';
@@ -12,6 +12,7 @@
         adKey: '49ac472dc3a5486324fd7f45c712a6ec',
         loadSpeed: 10,
         showStartButton: true,
+        autoPlayDelay: 5000, // 5 seconds auto-play after load
         adDuration: 5,
         preAdNoticeTime: 10,
         adFrequency: 3,
@@ -54,9 +55,10 @@
                 }
                 .kasrah-ad-container {
                     width: 300px; height: 250px; background: #1a1a1a; margin-bottom: 20px;
-                    border: 1px solid #333; display: flex; justify-content: center; align-items: center;
+                    border: 1px solid #333; display: none; justify-content: center; align-items: center;
                     position: relative; overflow: hidden; border-radius: 8px;
                 }
+                .kasrah-ad-container.has-ad { display: flex; }
                 .kasrah-ad-label {
                     position: absolute; top: 5px; right: 5px; font-size: 10px; color: #555;
                     text-transform: uppercase; letter-spacing: 1px; z-index: 10;
@@ -76,10 +78,11 @@
                     box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
                     transition: all 0.3s;
                 }
-                .kasrah-start-btn { opacity: 0; transform: translateY(10px); }
-                .kasrah-start-btn.visible { opacity: 1; transform: translateY(0); }
+                .kasrah-start-btn { opacity: 0; transform: translateY(10px); pointer-events: none; }
+                .kasrah-start-btn.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
                 .kasrah-countdown { color: #888; font-size: 14px; margin-top: 10px; font-weight: bold; }
                 .kasrah-notice-text { color: white; font-size: 14px; font-weight: bold; }
+                .kasrah-auto-msg { color: #666; font-size: 12px; margin-top: 10px; }
             `;
             const styleSheet = document.createElement("style");
             styleSheet.innerText = styles;
@@ -90,29 +93,61 @@
             const splash = document.createElement('div');
             splash.id = 'kasrah-splash';
             let adHtml = SDK_CONFIG.showAds ? `<div class="kasrah-ad-container" id="kasrah-ad-box"><span class="kasrah-ad-label">Advertisement</span><div id="kasrah-ad-content"></div></div>` : '';
-            splash.innerHTML = `<div class="kasrah-logo">KASRAH</div>${adHtml}<div class="kasrah-loader"><div class="kasrah-progress" id="kasrah-p-bar"></div></div><button id="kasrah-start-btn" class="kasrah-btn kasrah-start-btn">PLAY NOW</button>`;
+            splash.innerHTML = `
+                <div class="kasrah-logo">KASRAH</div>
+                ${adHtml}
+                <div class="kasrah-loader"><div class="kasrah-progress" id="kasrah-p-bar"></div></div>
+                <button id="kasrah-start-btn" class="kasrah-btn kasrah-start-btn">PLAY NOW</button>
+                <div id="kasrah-auto-play-msg" class="kasrah-auto-msg"></div>
+            `;
             document.body.appendChild(splash);
-            if (SDK_CONFIG.showAds) this.injectAdCode('kasrah-ad-content');
+            
+            if (SDK_CONFIG.showAds) {
+                this.injectAdCode('kasrah-ad-content', 'kasrah-ad-box');
+            }
+
             let progress = 0;
             const interval = setInterval(() => {
                 progress += Math.random() * SDK_CONFIG.loadSpeed;
                 if (progress > 100) progress = 100;
                 const pBar = document.getElementById('kasrah-p-bar');
                 if (pBar) pBar.style.width = progress + '%';
+                
                 if (progress === 100) {
                     clearInterval(interval);
-                    setTimeout(() => {
-                        const startBtn = document.getElementById('kasrah-start-btn');
-                        if (startBtn) {
-                            startBtn.classList.add('visible');
-                            startBtn.onclick = () => {
-                                splash.style.opacity = '0';
-                                setTimeout(() => splash.remove(), 500);
-                            };
-                        }
-                    }, 500);
+                    this.handleLoadComplete(splash);
                 }
             }, 300);
+        },
+
+        handleLoadComplete: function(splash) {
+            const startBtn = document.getElementById('kasrah-start-btn');
+            const autoMsg = document.getElementById('kasrah-auto-play-msg');
+            
+            if (startBtn) {
+                startBtn.classList.add('visible');
+                startBtn.onclick = () => this.closeSplash(splash);
+            }
+
+            let timeLeft = Math.floor(SDK_CONFIG.autoPlayDelay / 1000);
+            if (autoMsg) autoMsg.innerText = `Starting automatically in ${timeLeft}s...`;
+
+            const autoTimer = setInterval(() => {
+                timeLeft--;
+                if (autoMsg) autoMsg.innerText = `Starting automatically in ${timeLeft}s...`;
+                if (timeLeft <= 0) {
+                    clearInterval(autoTimer);
+                    this.closeSplash(splash);
+                }
+            }, 1000);
+        },
+
+        closeSplash: function(splash) {
+            if (!splash || !splash.parentNode) return;
+            splash.style.opacity = '0';
+            setTimeout(() => {
+                if (splash.parentNode) splash.remove();
+            }, 500);
         },
 
         showTimedAd: function(callback) {
@@ -152,7 +187,8 @@
                 <div class="kasrah-countdown" id="kasrah-ad-timer">Game resumes in ${SDK_CONFIG.adDuration}s...</div>
             `;
             document.body.appendChild(adOverlay);
-            this.injectAdCode('kasrah-timed-ad-content');
+            
+            const adLoaded = this.injectAdCode('kasrah-timed-ad-content', 'kasrah-timed-ad');
 
             let timeLeft = SDK_CONFIG.adDuration;
             const countdown = setInterval(() => {
@@ -171,14 +207,37 @@
             }, 1000);
         },
 
-        injectAdCode: function(containerId) {
+        injectAdCode: function(containerId, parentId) {
             const container = document.getElementById(containerId);
-            if (!container) return;
+            const parent = document.getElementById(parentId);
+            if (!container) return false;
+
             window.atOptions = { 'key' : SDK_CONFIG.adKey, 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
             const script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = `https://www.highperformanceformat.com/${SDK_CONFIG.adKey}/invoke.js`;
+            
+            // Monitor if the ad actually loads
+            script.onload = function() {
+                if (parent) parent.classList.add('has-ad');
+            };
+            
+            script.onerror = function() {
+                if (parent) parent.style.display = 'none';
+            };
+
             container.appendChild(script);
+            
+            // Safety check: if no iframe appears after 3 seconds, hide it
+            setTimeout(() => {
+                if (container.getElementsByTagName('iframe').length > 0) {
+                    if (parent) parent.classList.add('has-ad');
+                } else {
+                    if (parent) parent.style.display = 'none';
+                }
+            }, 3000);
+            
+            return true;
         },
 
         checkAuth: async function() {
