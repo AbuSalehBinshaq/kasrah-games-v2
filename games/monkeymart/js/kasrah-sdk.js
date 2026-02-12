@@ -341,6 +341,8 @@
                 script.onerror = () => {
                     this.log('warn', 'Ad script failed to load');
                     if (parent) parent.style.display = 'none';
+                    // إذا فشل السكريبت، نعتبر الإعلان انتهى لضمان عدم تعليق اللعبة
+                    this.emit('adError');
                 };
 
                 container.appendChild(script);

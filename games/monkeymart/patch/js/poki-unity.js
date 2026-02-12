@@ -1170,28 +1170,34 @@
 , function(n, e) {
     window.initPokiBridge = function(n) {
         window.pokiReady || window.pokiAdBlock ? window.pokiReady ? window.unityGame.SendMessage(n, "ready") : window.pokiAdBlock && window.unityGame.SendMessage(n, "adblock") : window.pokiBridge = n,
-	        window.commercialBreak = function() {
-            if (window.KasrahSDK) {
-                KasrahSDK.showTimedAd(() => {
-                    window.unityGame.SendMessage(n, "commercialBreakCompleted");
-                });
-            } else {
-                PokiSDK.commercialBreak().then(function() {
-                    window.unityGame.SendMessage(n, "commercialBreakCompleted")
-                });
-            }
-        },
-        window.rewardedBreak = function() {
-            if (window.KasrahSDK) {
-                KasrahSDK.showTimedAd(() => {
-                    window.unityGame.SendMessage(n, "rewardedBreakCompleted", "true");
-                });
-            } else {
-                PokiSDK.rewardedBreak().then(function(e) {
-                    window.unityGame.SendMessage(n, "rewardedBreakCompleted", e.toString())
-                });
-            }
-        }
+		        window.commercialBreak = function() {
+	            if (window.KasrahSDK) {
+	                // إجبار ظهور الإعلان البيني
+	                KasrahSDK.adCallCount = 2; // لضمان ظهور الإعلان فوراً (adFrequency = 3)
+	                KasrahSDK.showTimedAd(() => {
+	                    window.unityGame.SendMessage(n, "commercialBreakCompleted");
+	                });
+	            } else {
+	                PokiSDK.commercialBreak().then(function() {
+	                    window.unityGame.SendMessage(n, "commercialBreakCompleted")
+	                });
+	            }
+	        },
+	        window.rewardedBreak = function() {
+	            if (window.KasrahSDK) {
+	                // إجبار ظهور إعلان المكافأة دائماً
+	                const originalFreq = KasrahSDK.adCallCount;
+	                KasrahSDK.adCallCount = 2; 
+	                
+	                KasrahSDK.showTimedAd(() => {
+	                    window.unityGame.SendMessage(n, "rewardedBreakCompleted", "true");
+	                });
+	            } else {
+	                PokiSDK.rewardedBreak().then(function(e) {
+	                    window.unityGame.SendMessage(n, "rewardedBreakCompleted", e.toString())
+	                });
+	            }
+	        }
     }
 }
 ]);
