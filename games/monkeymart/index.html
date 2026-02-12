@@ -357,10 +357,11 @@
 					KasrahSDK.init({
 						gameId: 'monkeymart',
 						showAds: true,
-						debugMode: false,
+						debugMode: true, // تفعيل وضع التصحيح لإظهار السجلات
 						enableAnalytics: true,
-						showStartButton: false // Disable SDK splash button to not block game
+						showStartButton: false
 					});
+					console.log("%c[Kasrah SDK] Integration Verified!", "background: #ff4757; color: white; padding: 5px; border-radius: 5px; font-weight: bold;");
 
 					// Wrap localStorage to sync with Kasrah Cloud
 					const originalSetItem = localStorage.setItem;
@@ -379,6 +380,16 @@
 							val = KasrahSDK.loadData(key);
 						}
 						return val;
+					};
+
+					// أدوات اختبار يدوية للمستخدم
+					window.testKasrahAd = function() {
+						console.log("Testing Kasrah Ad...");
+						KasrahSDK.showTimedAd(() => console.log("Ad Finished!"));
+					};
+					window.testKasrahSave = function() {
+						console.log("Testing Kasrah Save...");
+						localStorage.setItem("test_score", 100);
 					};
 				}
 				
