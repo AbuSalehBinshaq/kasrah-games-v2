@@ -358,7 +358,8 @@
 						gameId: 'monkeymart',
 						showAds: true,
 						debugMode: false,
-						enableAnalytics: true
+						enableAnalytics: true,
+						showStartButton: false // Disable SDK splash button to not block game
 					});
 
 					// Wrap localStorage to sync with Kasrah Cloud
@@ -366,33 +367,30 @@
 					const originalGetItem = localStorage.getItem;
 
 					localStorage.setItem = function(key, value) {
-						if (key.startsWith('kasrah_')) {
-							originalSetItem.apply(this, arguments);
-						} else {
+						originalSetItem.apply(this, arguments);
+						if (!key.startsWith('kasrah_')) {
 							KasrahSDK.saveData(key, value);
 						}
 					};
 
 					localStorage.getItem = function(key) {
-						if (key.startsWith('kasrah_')) {
-							return originalGetItem.apply(this, arguments);
-						} else {
-							return KasrahSDK.loadData(key) || originalGetItem.apply(this, arguments);
+						let val = originalGetItem.apply(this, arguments);
+						if (!val && !key.startsWith('kasrah_')) {
+							val = KasrahSDK.loadData(key);
 						}
+						return val;
 					};
-					
-					// Listen for game start from Kasrah SDK splash screen
-					KasrahSDK.on('gameStart', function() {
-						console.log('Kasrah SDK: Game Starting...');
-						Module.runApp("canvas", extra_params);
-					});
-				} else {
-					// Fallback to Poki if Kasrah is missing
+				}
+				
+				// Always run app immediately to prevent freezing
+				if (typeof PokiSDK !== 'undefined') {
 					PokiSDK.init().then(()=>{
 						Module.runApp("canvas", extra_params);
 					}).catch(()=>{
 						Module.runApp("canvas", extra_params);
 					});
+				} else {
+					Module.runApp("canvas", extra_params);
 				}
 			};
 	</script>
