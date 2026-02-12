@@ -357,7 +357,7 @@
 					KasrahSDK.init({
 						gameId: 'monkeymart',
 						showAds: true,
-						debugMode: true, // تفعيل وضع التصحيح لإظهار السجلات
+						debugMode: false, // إغلاق وضع التصحيح لتقليل الرسائل
 						enableAnalytics: true,
 						showStartButton: false
 					});
@@ -369,14 +369,15 @@
 
 					localStorage.setItem = function(key, value) {
 						originalSetItem.apply(this, arguments);
-						if (!key.startsWith('kasrah_')) {
+						// تجاهل بيانات التحليلات لمنع الازدحام
+						if (!key.startsWith('kasrah_') && !key.startsWith('GA::') && !key.startsWith('_ga')) {
 							KasrahSDK.saveData(key, value);
 						}
 					};
 
 					localStorage.getItem = function(key) {
 						let val = originalGetItem.apply(this, arguments);
-						if (!val && !key.startsWith('kasrah_')) {
+						if (!val && !key.startsWith('kasrah_') && !key.startsWith('GA::')) {
 							val = KasrahSDK.loadData(key);
 						}
 						return val;
