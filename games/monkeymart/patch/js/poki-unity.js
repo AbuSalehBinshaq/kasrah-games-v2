@@ -1170,16 +1170,27 @@
 , function(n, e) {
     window.initPokiBridge = function(n) {
         window.pokiReady || window.pokiAdBlock ? window.pokiReady ? window.unityGame.SendMessage(n, "ready") : window.pokiAdBlock && window.unityGame.SendMessage(n, "adblock") : window.pokiBridge = n,
-        window.commercialBreak = function() {
-            PokiSDK.commercialBreak().then(function() {
-                window.unityGame.SendMessage(n, "commercialBreakCompleted")
-            })
-        }
-        ,
+	        window.commercialBreak = function() {
+            if (window.KasrahSDK) {
+                KasrahSDK.showTimedAd(() => {
+                    window.unityGame.SendMessage(n, "commercialBreakCompleted");
+                });
+            } else {
+                PokiSDK.commercialBreak().then(function() {
+                    window.unityGame.SendMessage(n, "commercialBreakCompleted")
+                });
+            }
+        },
         window.rewardedBreak = function() {
-            PokiSDK.rewardedBreak().then(function(e) {
-                window.unityGame.SendMessage(n, "rewardedBreakCompleted", e.toString())
-            })
+            if (window.KasrahSDK) {
+                KasrahSDK.showTimedAd(() => {
+                    window.unityGame.SendMessage(n, "rewardedBreakCompleted", "true");
+                });
+            } else {
+                PokiSDK.rewardedBreak().then(function(e) {
+                    window.unityGame.SendMessage(n, "rewardedBreakCompleted", e.toString())
+                });
+            }
         }
     }
 }
