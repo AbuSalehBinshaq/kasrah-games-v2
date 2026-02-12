@@ -339,9 +339,24 @@
                 };
                 
                 script.onerror = () => {
-                    this.log('warn', 'Ad script failed to load');
-                    if (parent) parent.style.display = 'none';
-                    // إذا فشل السكريبت، نعتبر الإعلان انتهى لضمان عدم تعليق اللعبة
+                    this.log('warn', 'Ad script failed to load, showing fallback UI');
+                    if (container) {
+                        container.innerHTML = `
+                            <div style="color: white; text-align: center; padding: 20px; width: 100%;">
+                                <div style="font-size: 40px; margin-bottom: 10px; animation: pulse 1.5s infinite;">🎁</div>
+                                <div style="font-weight: bold; color: ${PRIMARY_COLOR}; letter-spacing: 1px;">KASRAH REWARDS</div>
+                                <div style="font-size: 12px; color: #888; margin-top: 10px;">Verifying reward eligibility...</div>
+                                <div style="width: 80%; height: 4px; background: #333; margin: 15px auto; border-radius: 10px; overflow: hidden;">
+                                    <div style="width: 100%; height: 100%; background: ${PRIMARY_COLOR}; animation: load 3s linear;"></div>
+                                </div>
+                            </div>
+                            <style>
+                                @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+                                @keyframes load { from { width: 0%; } to { width: 100%; } }
+                            </style>
+                        `;
+                        if (parent) parent.classList.add('has-ad');
+                    }
                     this.emit('adError');
                 };
 
