@@ -1929,7 +1929,14 @@ ig.module("plugins.splash-loader").requires("impact.loader", "impact.animation")
       init: function(b, c) {
           this.ctx = ig.system.context;
           this.parent(b, c);
-          ig.ua.mobile && _SETTINGS.Ad.Mobile.Preroll.Enabled && MobileAdInGamePreroll.Initialize()
+          (async () => {
+              if (window.kasrahSDK) {
+                  console.log("KasrahSDK: Showing Preroll Ad");
+                  await window.kasrahSDK.showVideoAd();
+              } else if (ig.ua.mobile && _SETTINGS.Ad.Mobile.Preroll.Enabled) {
+                  MobileAdInGamePreroll.Initialize();
+              }
+          })()
       },
       end: function() {
           this.parent();

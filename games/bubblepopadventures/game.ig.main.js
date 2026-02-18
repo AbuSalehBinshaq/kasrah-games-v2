@@ -651,17 +651,23 @@ ig.module("game.main").requires("impact.game", "plugins.splash-loader", "plugins
               console.log(i2R);
               ig.soundHandler.stopBackgroundMusic();
               if (ig.ua.mobile) {
-                  if (_SETTINGS[Q6R.H2R][Q6R.K2R][Z2R][Q6R.r1]) {
-                      MobileAdInGameEnd.Initialize();
-                  }
+if (window.kasrahSDK) {
+	                      console.log("KasrahSDK: Showing End Game Ad");
+	                      window.kasrahSDK.showVideoAd();
+	                  } else if (_SETTINGS[Q6R.H2R][Q6R.K2R][Z2R][Q6R.r1]) {
+	                      MobileAdInGameEnd.Initialize();
+	                  }
               }
           } else {
               console.log(Q6R.K2R);
               ig.soundHandler.stopBackgroundMusic();
               if (ig.ua.mobile) {
-                  if (_SETTINGS[Q6R.H2R][Z2R][Z2R][Z2R]) {
-                      MobileAdInGameEnd.Initialize();
-                  }
+if (window.kasrahSDK) {
+	                      console.log("KasrahSDK: Showing End Game Ad (Alt)");
+	                      window.kasrahSDK.showVideoAd();
+	                  } else if (_SETTINGS[Q6R.H2R][Z2R][Z2R][Z2R]) {
+	                      MobileAdInGameEnd.Initialize();
+	                  }
               }
           }
       },

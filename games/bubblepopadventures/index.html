@@ -161,6 +161,12 @@
 <script src="js/analytics_ubg_v1_4.js"></script>
 <script src="js/ubg235_client_v1_1.js"></script>
 
-<script src="/sdk/kasrah-sdk.js"></script>
+<script src="patch/js/kasrah-sdk.js"></script>
+	<script>
+		window.kasrahSDK = new KasrahSDK({ 
+			apiUrl: 'https://kasrah-games.onrender.com',
+			debug: true 
+		});
+	</script>
 </body>
 </html>
