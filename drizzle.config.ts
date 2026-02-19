@@ -1,6 +1,9 @@
 import { defineConfig } from "drizzle-kit";
+import { config } from "dotenv";
 
-const connectionString = process.env.DATABASE_URL;
+config({ path: ".env.local" });
+
+const connectionString = process.env.DATABASE_URL || "postgresql://localhost/kasrah";
 if (!connectionString) {
   throw new Error("DATABASE_URL is required to run drizzle commands");
 }
@@ -8,7 +11,7 @@ if (!connectionString) {
 export default defineConfig({
   schema: "./drizzle/schema.ts",
   out: "./drizzle",
-  dialect: "mysql",
+  dialect: "postgresql",
   dbCredentials: {
     url: connectionString,
   },
