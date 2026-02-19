@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Shooter - Test with Kasrah SDK</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .game-header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .game-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        #gameCanvas {
+            display: block;
+            margin: 0 auto;
+            background: linear-gradient(to bottom, #e0f7ff, #b3e5fc);
+            border-radius: 8px;
+            border: 3px solid #667eea;
+            cursor: crosshair;
+            width: 100%;
+            max-width: 700px;
+            height: 400px;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .sdk-info {
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .sdk-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .sdk-status.active {
+            background: #4caf50;
+            color: white;
+        }
+
+        .sdk-status.inactive {
+            background: #f44336;
+            color: white;
+        }
+
+        .ad-banner {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 12px;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>🎮 Bubble Shooter - Test</h1>
+            <p>اختبر تكامل Kasrah SDK مع اللعبة</p>
+        </div>
+
+        <div class="game-stats">
+            <div class="stat">
+                <div class="stat-label">النقاط</div>
+                <div class="stat-value" id="score">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">المستوى</div>
+                <div class="stat-value" id="level">1</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">الوقت</div>
+                <div class="stat-value" id="time">0:00</div>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <div class="controls">
+            <button class="btn-primary" onclick="startGame()">🎮 ابدأ اللعبة</button>
+            <button class="btn-secondary" onclick="pauseGame()">⏸️ توقف</button>
+            <button class="btn-primary" onclick="showAd()">📺 عرض إعلان</button>
+            <button class="btn-secondary" onclick="saveProgress()">💾 احفظ التقدم</button>
+        </div>
+
+        <div class="sdk-info">
+            <strong>حالة Kasrah SDK:</strong>
+            <span class="sdk-status inactive" id="sdkStatus">غير متصل</span>
+            <br>
+            <small id="sdkMessage">جاري تحميل SDK...</small>
+        </div>
+
+        <div class="ad-banner" id="adBanner" style="display: none;">
+            📢 إعلان من Kasrah SDK
+        </div>
+    </div>
+
+    <!-- Kasrah SDK -->
+    <script src="https://kasrah-sdk.onrender.com/sdk/kasrah-sdk.js"></script>
+
+    <script>
+        let gameState = {
+            score: 0,
+            level: 1,
+            time: 0,
+            isPlaying: false,
+            sdkReady: false
+        };
+
+        let gameTimer;
+
+        // Initialize SDK
+        window.addEventListener('load', async () => {
+            try {
+                if (window.KasrahSDK) {
+                    console.log('🚀 Initializing Kasrah SDK...');
+                    
+                    await window.KasrahSDK.init({
+                        gameId: 'bubble-shooter-test',
+                        apiUrl: 'https://kasrah-sdk.onrender.com/api/trpc'
+                    });
+
+                    gameState.sdkReady = true;
+                    updateSDKStatus(true);
+                    
+                    // Track game load event
+                    await window.KasrahSDK.trackEvent('gameLoadingFinished', {
+                        gameId: 'bubble-shooter-test',
+                        timestamp: Date.now()
+                    });
+
+                    console.log('✅ SDK initialized successfully');
+                } else {
+                    console.warn('⚠️ Kasrah SDK not found');
+                    updateSDKStatus(false);
+                }
+            } catch (error) {
+                console.error('❌ Failed to initialize SDK:', error);
+                updateSDKStatus(false);
+            }
+        });
+
+        function updateSDKStatus(isActive) {
+            const statusEl = document.getElementById('sdkStatus');
+            const messageEl = document.getElementById('sdkMessage');
+            
+            if (isActive) {
+                statusEl.textContent = '✅ متصل';
+                statusEl.className = 'sdk-status active';
+                messageEl.textContent = 'SDK متصل وجاهز للاستخدام';
+            } else {
+                statusEl.textContent = '❌ غير متصل';
+                statusEl.className = 'sdk-status inactive';
+                messageEl.textContent = 'SDK غير متصل - قد لا تعمل الإعلانات';
+            }
+        }
+
+        function startGame() {
+            if (gameState.isPlaying) return;
+            
+            gameState.isPlaying = true;
+            gameState.score = 0;
+            gameState.level = 1;
+            gameState.time = 0;
+
+            // Track game start
+            if (gameState.sdkReady && window.KasrahSDK) {
+                window.KasrahSDK.trackEvent('gameplayStart', {
+                    gameId: 'bubble-shooter-test',
+                    timestamp: Date.now()
+                }).catch(err => console.log('Event tracking failed:', err));
+            }
+
+            // Start timer
+            gameTimer = setInterval(() => {
+                gameState.time++;
+                updateUI();
+            }, 1000);
+
+            // Simulate game progress
+            simulateGameplay();
+            updateUI();
+        }
+
+        function pauseGame() {
+            gameState.isPlaying = false;
+            clearInterval(gameTimer);
+        }
+
+        function simulateGameplay() {
+            if (!gameState.isPlaying) return;
+
+            // Simulate score increase
+            gameState.score += Math.floor(Math.random() * 100) + 50;
+            
+            // Level up every 500 points
+            if (gameState.score > gameState.level * 500) {
+                gameState.level++;
+            }
+
+            updateUI();
+
+            // Continue simulation
+            setTimeout(simulateGameplay, 2000);
+        }
+
+        async function showAd() {
+            if (!gameState.sdkReady) {
+                alert('SDK غير متصل - لا يمكن عرض الإعلان');
+                return;
+            }
+
+            try {
+                console.log('📺 Requesting ad from SDK...');
+                
+                // Show banner ad
+                const bannerEl = document.getElementById('adBanner');
+                bannerEl.style.display = 'block';
+                
+                setTimeout(() => {
+                    bannerEl.style.display = 'none';
+                }, 3000);
+
+                // Track ad impression
+                if (window.KasrahSDK) {
+                    await window.KasrahSDK.trackEvent('adImpression', {
+                        gameId: 'bubble-shooter-test',
+                        adType: 'banner',
+                        timestamp: Date.now()
+                    }).catch(err => console.log('Ad tracking failed:', err));
+                }
+            } catch (error) {
+                console.error('❌ Failed to show ad:', error);
+            }
+        }
+
+        async function saveProgress() {
+            if (!gameState.sdkReady) {
+                alert('SDK غير متصل - لا يمكن حفظ التقدم');
+                return;
+            }
+
+            try {
+                console.log('💾 Saving progress to cloud...');
+                
+                const gameData = {
+                    score: gameState.score,
+                    level: gameState.level,
+                    time: gameState.time,
+                    lastSaved: new Date().toISOString()
+                };
+
+                if (window.KasrahSDK) {
+                    await window.KasrahSDK.saveData(gameData);
+                    alert('✅ تم حفظ التقدم بنجاح!');
+                    console.log('✅ Progress saved:', gameData);
+                }
+            } catch (error) {
+                console.error('❌ Failed to save progress:', error);
+                alert('❌ فشل حفظ التقدم');
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('score').textContent = gameState.score;
+            document.getElementById('level').textContent = gameState.level;
+            
+            const minutes = Math.floor(gameState.time / 60);
+            const seconds = gameState.time % 60;
+            document.getElementById('time').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', async () => {
+            if (gameState.isPlaying && gameState.sdkReady && window.KasrahSDK) {
+                try {
+                    await window.KasrahSDK.trackEvent('gameplayStop', {
+                        gameId: 'bubble-shooter-test',
+                        score: gameState.score,
+                        level: gameState.level,
+                        duration: gameState.time,
+                        timestamp: Date.now()
+                    });
+                } catch (error) {
+                    console.log('Failed to track game stop:', error);
+                }
+            }
+        });
+
+        // Initial UI update
+        updateUI();
+    </script>
+</body>
+</html>
