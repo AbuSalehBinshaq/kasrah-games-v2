@@ -1,5 +1,6 @@
 import { eq, and, gte, lte, desc } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
 import { 
   InsertUser, 
   users, 
@@ -86,9 +87,14 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       updateSet.lastSignedIn = new Date();
     }
 
-    await db.insert(users).values(values).onDuplicateKeyUpdate({
-      set: updateSet,
-    });
+    // For PostgreSQL, use insert with on conflict
+    const result = await db.insert(users).values(values);
+    // If user exists, update instead
+    if (result) {
+      await db.update(users)
+        .set(updateSet)
+        .where(eq(users.openId, values.openId));
+    }
   } catch (error) {
     console.error("[Database] Failed to upsert user:", error);
     throw error;

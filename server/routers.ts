@@ -125,7 +125,7 @@ export const appRouter = router({
             ad: {
               id: ad.id,
               title: ad.title,
-              description: ad.code || "Advertisement",
+              description: "Advertisement",
               type: ad.type,
               size: ad.size,
               imageUrl: ad.imageUrl,
@@ -155,7 +155,6 @@ export const appRouter = router({
             adId: input.adId,
             eventType: input.eventType,
             playerId: input.playerId,
-            userAgent: "SDK",
           });
 
           return { success: true };
@@ -256,10 +255,10 @@ export const appRouter = router({
             success: true,
             analytics,
             summary: {
-              totalImpressions: analytics.reduce((sum, a) => sum + a.totalImpressions, 0),
-              totalClicks: analytics.reduce((sum, a) => sum + a.totalClicks, 0),
-              totalRevenue: analytics.reduce((sum, a) => sum + parseFloat(a.totalRevenue.toString()), 0),
-              uniquePlayers: analytics.reduce((sum, a) => sum + a.uniquePlayers, 0),
+              totalImpressions: analytics.reduce((sum, a) => sum + (a.totalImpressions ?? 0), 0),
+              totalClicks: analytics.reduce((sum, a) => sum + (a.totalClicks ?? 0), 0),
+              totalRevenue: analytics.reduce((sum, a) => sum + parseFloat((a.totalRevenue ?? "0").toString()), 0),
+              uniquePlayers: analytics.reduce((sum, a) => sum + (a.uniquePlayers ?? 0), 0),
             }
           };
         } catch (error: any) {
