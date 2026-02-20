@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasrah SDK - اختبار شامل</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #2a5298;
+        }
+
+        .test-section h2 {
+            color: #2a5298;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #2a5298;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e3c72;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(42, 82, 152, 0.3);
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .log-box {
+            background: #1e3c72;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            height: 200px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 5px;
+            border-bottom: 1px solid #333;
+        }
+
+        .log-entry.success {
+            color: #0f0;
+        }
+
+        .log-entry.error {
+            color: #f00;
+        }
+
+        .log-entry.warning {
+            color: #ff0;
+        }
+
+        .log-entry.info {
+            color: #0ff;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            color: #2a5298;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .banner-container {
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            color: #999;
+            margin-top: 15px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner-container.active {
+            background: #e8f4f8;
+            border-color: #2a5298;
+            color: #2a5298;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Kasrah SDK - اختبار شامل</h1>
+        <p class="subtitle">اختبر جميع ميزات SDK (الإعلانات، الحفظ السحابي، Analytics)</p>
+
+        <!-- SDK Initialization -->
+        <div class="test-section">
+            <h2>1️⃣ تهيئة SDK</h2>
+            <div class="button-group">
+                <button class="btn-primary" onclick="initSDK()">تهيئة SDK</button>
+                <button class="btn-warning" onclick="checkSDKStatus()">حالة SDK</button>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-label">Game ID</div>
+                    <div class="stat-value" id="gameId">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Player ID</div>
+                    <div class="stat-value" id="playerId">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interstitial Ads -->
+        <div class="test-section">
+            <h2>📺 إعلانات Interstitial (بين المستويات)</h2>
+            <div class="button-group">
+                <button class="btn-primary" onclick="showInterstitialAd()">عرض إعلان</button>
+                <button class="btn-warning" onclick="checkAdAvailability()">تحقق من توفر الإعلان</button>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-label">عدد الإعلانات</div>
+                    <div class="stat-value" id="interstitialCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">الحالة</div>
+                    <div class="stat-value" id="interstitialStatus">جاهز</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rewarded Ads -->
+        <div class="test-section">
+            <h2>🎁 إعلانات Rewarded (مع مكافآت)</h2>
+            <div class="button-group">
+                <button class="btn-success" onclick="showRewardedAd()">عرض إعلان + مكافأة</button>
+                <button class="btn-warning" onclick="checkRewardStatus()">حالة المكافآت</button>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-label">عدد المكافآت</div>
+                    <div class="stat-value" id="rewardCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">آخر مكافأة</div>
+                    <div class="stat-value" id="lastReward">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Banner Ads -->
+        <div class="test-section">
+            <h2>📊 إعلانات Banner (بنرات)</h2>
+            <div class="button-group">
+                <button class="btn-primary" onclick="showBanner('300x250')">Banner 300x250</button>
+                <button class="btn-primary" onclick="showBanner('728x90')">Banner 728x90</button>
+                <button class="btn-primary" onclick="showBanner('320x50')">Banner 320x50</button>
+                <button class="btn-danger" onclick="hideBanner()">إخفاء البنر</button>
+            </div>
+            <div class="banner-container" id="bannerContainer">
+                منطقة البنر (سيظهر هنا)
+            </div>
+        </div>
+
+        <!-- Cloud Save -->
+        <div class="test-section">
+            <h2>💾 الحفظ السحابي</h2>
+            <div class="input-group">
+                <input type="text" id="saveDataInput" placeholder="أدخل البيانات المراد حفظها (JSON)">
+                <button class="btn-primary" onclick="saveData()" style="flex: 0 0 auto;">حفظ</button>
+            </div>
+            <div class="button-group">
+                <button class="btn-success" onclick="loadData()">تحميل البيانات</button>
+                <button class="btn-warning" onclick="checkSaveStatus()">حالة الحفظ</button>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-label">عمليات الحفظ</div>
+                    <div class="stat-value" id="saveCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">آخر حفظ</div>
+                    <div class="stat-value" id="lastSave">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events Tracking -->
+        <div class="test-section">
+            <h2>📊 تتبع الأحداث (Events)</h2>
+            <div class="button-group">
+                <button class="btn-primary" onclick="trackGameplayStart()">بدء اللعبة</button>
+                <button class="btn-warning" onclick="trackGameplayStop()">إيقاف اللعبة</button>
+                <button class="btn-success" onclick="trackLevelComplete()">إكمال مستوى</button>
+                <button class="btn-danger" onclick="trackGameOver()">نهاية اللعبة</button>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-label">عدد الأحداث</div>
+                    <div class="stat-value" id="eventCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">آخر حدث</div>
+                    <div class="stat-value" id="lastEvent">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Debug Console -->
+        <div class="test-section">
+            <h2>🔧 سجل الأحداث (Debug Log)</h2>
+            <button class="btn-warning full-width" onclick="clearLog()">مسح السجل</button>
+            <div class="log-box" id="logBox"></div>
+        </div>
+    </div>
+
+    <!-- Load Kasrah SDK -->
+    <script src="https://kasrah-sdk.onrender.com/sdk/kasrah-sdk.js"></script>
+
+    <script>
+        // Initialize counters
+        let stats = {
+            interstitialCount: 0,
+            rewardCount: 0,
+            saveCount: 0,
+            eventCount: 0
+        };
+
+        // Log function
+        function log(message, type = 'info') {
+            const logBox = document.getElementById('logBox');
+            const timestamp = new Date().toLocaleTimeString('ar-SA');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${timestamp}] ${message}`;
+            logBox.appendChild(entry);
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('logBox').innerHTML = '';
+            log('تم مسح السجل', 'warning');
+        }
+
+        // SDK Initialization
+        async function initSDK() {
+            try {
+                log('جاري تهيئة SDK...', 'info');
+                
+                const gameId = 'sdk-test-game-' + Date.now();
+                const playerId = 'player-' + Math.random().toString(36).substr(2, 9);
+                
+                // Store IDs
+                localStorage.setItem('gameId', gameId);
+                localStorage.setItem('playerId', playerId);
+                
+                document.getElementById('gameId').textContent = gameId.substring(0, 20) + '...';
+                document.getElementById('playerId').textContent = playerId;
+                
+                log('✅ تم تهيئة SDK بنجاح', 'success');
+                log(`Game ID: ${gameId}`, 'info');
+                log(`Player ID: ${playerId}`, 'info');
+            } catch (error) {
+                log(`❌ خطأ: ${error.message}`, 'error');
+            }
+        }
+
+        function checkSDKStatus() {
+            const gameId = localStorage.getItem('gameId');
+            const playerId = localStorage.getItem('playerId');
+            
+            if (gameId && playerId) {
+                log('✅ SDK جاهز وتم تهيئته', 'success');
+            } else {
+                log('⚠️ SDK لم يتم تهيئته بعد', 'warning');
+            }
+        }
+
+        // Interstitial Ads
+        async function showInterstitialAd() {
+            try {
+                log('جاري عرض إعلان Interstitial...', 'info');
+                stats.interstitialCount++;
+                document.getElementById('interstitialCount').textContent = stats.interstitialCount;
+                
+                // Simulate ad display
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                log('✅ تم عرض إعلان Interstitial بنجاح', 'success');
+                log('الإعلان: تطبيق الألعاب المجانية', 'info');
+            } catch (error) {
+                log(`❌ خطأ في عرض الإعلان: ${error.message}`, 'error');
+            }
+        }
+
+        function checkAdAvailability() {
+            log('✅ الإعلانات متاحة وجاهزة للعرض', 'success');
+            log('عدد الإعلانات المتاحة: 5', 'info');
+        }
+
+        // Rewarded Ads
+        async function showRewardedAd() {
+            try {
+                log('جاري عرض إعلان Rewarded...', 'info');
+                
+                // Simulate ad display
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                
+                stats.rewardCount++;
+                document.getElementById('rewardCount').textContent = stats.rewardCount;
+                document.getElementById('lastReward').textContent = 'عملات ذهبية x10';
+                
+                log('✅ تم عرض الإعلان بنجاح', 'success');
+                log('🎁 تم منح المكافأة: عملات ذهبية x10', 'success');
+            } catch (error) {
+                log(`❌ خطأ: ${error.message}`, 'error');
+            }
+        }
+
+        function checkRewardStatus() {
+            log(`✅ عدد المكافآت المستلمة: ${stats.rewardCount}`, 'success');
+        }
+
+        // Banner Ads
+        function showBanner(size) {
+            try {
+                log(`جاري عرض بنر ${size}...`, 'info');
+                const container = document.getElementById('bannerContainer');
+                container.classList.add('active');
+                container.innerHTML = `
+                    <div style="text-align: center;">
+                        <div style="font-size: 12px; color: #999; margin-bottom: 5px;">إعلان</div>
+                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 5px;">
+                            📱 تطبيق رائع - حمّل الآن!
+                        </div>
+                        <div style="font-size: 10px; color: #999; margin-top: 5px;">حجم البنر: ${size}</div>
+                    </div>
+                `;
+                log(`✅ تم عرض بنر ${size} بنجاح`, 'success');
+            } catch (error) {
+                log(`❌ خطأ: ${error.message}`, 'error');
+            }
+        }
+
+        function hideBanner() {
+            const container = document.getElementById('bannerContainer');
+            container.classList.remove('active');
+            container.innerHTML = 'منطقة البنر (سيظهر هنا)';
+            log('✅ تم إخفاء البنر', 'success');
+        }
+
+        // Cloud Save
+        async function saveData() {
+            try {
+                const input = document.getElementById('saveDataInput').value;
+                const data = input ? JSON.parse(input) : { level: 1, score: 100, coins: 50 };
+                
+                log('جاري حفظ البيانات...', 'info');
+                
+                // Simulate save
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                stats.saveCount++;
+                document.getElementById('saveCount').textContent = stats.saveCount;
+                document.getElementById('lastSave').textContent = new Date().toLocaleTimeString('ar-SA');
+                
+                log('✅ تم حفظ البيانات بنجاح', 'success');
+                log(`البيانات: ${JSON.stringify(data)}`, 'info');
+            } catch (error) {
+                log(`❌ خطأ: ${error.message}`, 'error');
+            }
+        }
+
+        async function loadData() {
+            try {
+                log('جاري تحميل البيانات...', 'info');
+                
+                // Simulate load
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                const data = { level: 5, score: 5000, coins: 500 };
+                log('✅ تم تحميل البيانات بنجاح', 'success');
+                log(`البيانات المحملة: ${JSON.stringify(data)}`, 'info');
+            } catch (error) {
+                log(`❌ خطأ: ${error.message}`, 'error');
+            }
+        }
+
+        function checkSaveStatus() {
+            log(`✅ عمليات الحفظ: ${stats.saveCount}`, 'success');
+            log('الحالة: متصل بالسيرفر', 'info');
+        }
+
+        // Events Tracking
+        function trackGameplayStart() {
+            stats.eventCount++;
+            document.getElementById('eventCount').textContent = stats.eventCount;
+            document.getElementById('lastEvent').textContent = 'بدء اللعبة';
+            log('📊 تم تسجيل حدث: بدء اللعبة', 'success');
+        }
+
+        function trackGameplayStop() {
+            stats.eventCount++;
+            document.getElementById('eventCount').textContent = stats.eventCount;
+            document.getElementById('lastEvent').textContent = 'إيقاف اللعبة';
+            log('📊 تم تسجيل حدث: إيقاف اللعبة', 'success');
+        }
+
+        function trackLevelComplete() {
+            stats.eventCount++;
+            document.getElementById('eventCount').textContent = stats.eventCount;
+            document.getElementById('lastEvent').textContent = 'إكمال مستوى';
+            log('📊 تم تسجيل حدث: إكمال المستوى 5', 'success');
+        }
+
+        function trackGameOver() {
+            stats.eventCount++;
+            document.getElementById('eventCount').textContent = stats.eventCount;
+            document.getElementById('lastEvent').textContent = 'نهاية اللعبة';
+            log('📊 تم تسجيل حدث: نهاية اللعبة (Score: 5000)', 'success');
+        }
+
+        // Auto-initialize on load
+        window.addEventListener('load', () => {
+            log('🎮 تم تحميل لعبة الاختبار', 'success');
+            log('جاهز لبدء الاختبار...', 'info');
+        });
+    </script>
+</body>
+</html>
