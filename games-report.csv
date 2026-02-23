@@ -1,4 +1,4 @@
-﻿#,اسم اللعبة,اسم المجلد,حالة النشر,حالة الفحص,نتيجة الفحص,تاريخ الفحص,جاهزية الإعلانات,ملاحظات الفحص,الرابط,تاريخ الإضافة
+#,اسم اللعبة,اسم المجلد,حالة النشر,حالة الفحص,نتيجة الفحص,تاريخ الفحص,جاهزية الإعلانات,ملاحظات الفحص,الرابط,تاريخ الإضافة
 1,1 On 1 Soccer,1on1soccer,غير منشورة,تم الفحص,FAIL,2026-02-10,,تعذر بدء اللعبة. اللعبة عالقة في شاشة اختيار الفريق.,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/1on1soccer,2026-02-07
 3,1010 Deluxe,1010deluxe,غير منشورة,تم الفحص,FAIL,2026-02-10,,تعذر بدء اللعبة. اللعبة عالقة في شاشة البداية ولا تستجيب للنقر على زر PLAY.,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/1010deluxe,2026-02-07
 3,2048 Game,2048,غير منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/2048,2026-02-07
@@ -68,7 +68,7 @@
 68,Cookie Clicker,cookie-clicker,غير منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/cookie-clicker,2026-02-07
 69,Cookieclicker2,cookieclicker2,غير منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/cookieclicker2,2026-02-07
 70,Crazycars,crazycars,غير منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/crazycars,2026-02-07
-71,Crossy Road,crossyroad,غير منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/crossyroad,2026-02-07
+71,Crossy Road,crossyroad,منشورة,تم الفحص,PASS,2026-02-23,,تم النشر بنجاح بواسطة Manus AI,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/crossyroad,2026-02-07
 72,Cubefield,cubefield,غير منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/cubefield,2026-02-07
 73,Deadagain,deadagain,غير منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/deadagain,2026-02-07
 74,Dinobros,dinobros,غير منشورة,غير مفحوصة,,,,,https://github.com/AbuSalehBinshaq/kasrah-games-v2/tree/master/games/dinobros,2026-02-07
