@@ -1,4 +1,11 @@
-# Kasrah Games SDK v2.6.0
+# Kasrah Games SDK v1.1.0 (Kasrah SDK Pro)
+
+> **تحديث مهم**: تم ترقية الـ SDK إلى نسخة جديدة متوافقة مع منصة Kasrah SDK Pro.
+> الملف الجديد `kasrah-sdk.js` يتصل مباشرة بـ https://kasrah-sdk.onrender.com
+
+---
+
+# الإصدار السابق: Kasrah Games SDK v2.6.0
 
 الـ SDK الرسمي لمنصة **ألعاب كسرة** (Kasrah Games). يوفر هذا السكربت تكاملاً سهلاً للألعاب مع المنصة، بما في ذلك شاشات التحميل، الإعلانات، حفظ البيانات سحابياً، والتحليلات.
 
