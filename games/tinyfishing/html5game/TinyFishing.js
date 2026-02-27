@@ -32447,6 +32447,7 @@ function _1g(_yn, _zn) {
 				}
 			};
 			_Mn(_yn, _zn, global._Qu)._Ru = _Mn(_yn, _zn, global._Qu)._KC;
+			if (window.sendScoreToKasrah) window.sendScoreToKasrah(_Mn(_yn, _zn, global._Qu)._Ru);
 			_A4(_yn, _zn, "bestScore", _Mn(_yn, _zn, global._Qu)._Ru);
 			_C4(_yn, _zn);
 		}

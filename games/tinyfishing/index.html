@@ -221,7 +221,21 @@
       fnSendMsg(event);
     });
   </script>
-<script src="/sdk/kasrah-sdk.js"></script>
+<script src="https://kasrah-sdk.onrender.com/sdk/kasrah-sdk.js"></script>
+  <script>
+    // Initialize Kasrah SDK
+    const kasrah = new Kasrah();
+    
+    // Function to send score to Kasrah
+    function sendScoreToKasrah(score) {
+      console.log("Kasrah SDK: Sending score:", score);
+      try {
+        kasrah.sendScore(score);
+      } catch (e) {
+        console.error("Kasrah SDK: Error sending score:", e);
+      }
+    }
+  </script>
 </body>
 
 <script type="text/javascript">
