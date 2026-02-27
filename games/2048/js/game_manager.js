@@ -94,7 +94,7 @@ GameManager.prototype.actuate = function () {
     this.storageManager.setBestScore(this.score);
     // Cloud Save Best Score
     if (typeof KasrahSDK !== 'undefined') {
-      KasrahSDK.savePlayerData({ bestScore: this.score });
+      KasrahSDK.saveData({ bestScore: this.score });
     }
   }
 
