@@ -11,7 +11,8 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta charset="utf-8"/>
 
-        <script src="./patch/poki/sdk-v2.js?//game-cdn.poki.com/scripts/v2/poki-sdk.js"></script>
+        <!-- Kasrah SDK - يحل محل Poki SDK -->
+        <script src="https://kasrah-sdk.onrender.com/sdk/kasrah-sdk.js"></script>
 
         <!-- Set the title bar of the page -->
         <title>Tiny Fishing by buyhtml5.com</title>
@@ -110,6 +111,18 @@
               width: 200px;
               height: 150px;
             }
+
+            /* Kasrah Banner Ad Container */
+            #kasrah-banner-container {
+              position: fixed;
+              bottom: 0;
+              left: 50%;
+              transform: translateX(-50%);
+              z-index: 9999;
+              width: 320px;
+              height: 50px;
+              pointer-events: auto;
+            }
         </style>
 
         <script>
@@ -128,49 +141,84 @@
             <div  id="img_loadingbar" style="border-radius: 25px; width:1px;height:1px; position:absolute; left : 0px; top : 0; background-color:#d7e0ee"></div>
             <div  id="img_loadingbaroverlay" style="border-radius: 25px; width:1px;height:1px; position:absolute; left : 0px; top : 0; background-color:#f8703a"></div>
 
+        <!-- حاوية إعلانات البانر -->
+        <div id="kasrah-banner-container"></div>
+
         <div class="gm4html5_div_class" id="gm4html5_div_id">
             <canvas id="canvas" width="1" height="1" >
                      <p>Your browser doesn't support HTML5 canvas.</p>
             </canvas>
         </div>
+
+        <!-- Kasrah-Poki Bridge: يستبدل Poki SDK بـ Kasrah SDK -->
+        <script type="text/javascript" src="html5game/kasrah-poki-bridge.js"></script>
+
         <!-- Run the game code -->
         <script type="text/javascript" src="html5game/TinyFishing.js"></script>
 
-
-
-
         <script>
+        /**
+         * Kasrah SDK Integration for Tiny Fishing
+         * =========================================
+         * تهيئة اللعبة مع Kasrah SDK بدلاً من Poki SDK
+         * 
+         * المميزات المفعّلة:
+         * - الإعلانات البينية (Interstitial Ads)
+         * - إعلانات المكافأة (Rewarded Ads)  
+         * - إعلانات البانر (Banner Ads)
+         * - الحفظ السحابي (Cloud Save)
+         * - تتبع الأحداث (Analytics)
+         */
 
-      function POKI_INIT()
-      {
+        // تعطيل POKI_INIT القديمة وتجاهلها
+        // الجسر kasrah-poki-bridge.js يتولى التهيئة تلقائياً
+        window.POKI_INIT = function() {
+          console.log('[Kasrah] POKI_INIT intercepted - Kasrah Bridge handles initialization');
+          // لا حاجة لأي شيء هنا - الجسر يتولى كل شيء
+        };
 
-        PokiSDK.init().then(
-            () => {
-                console.log("Poki SDK successfully initialized");
-                // your code to continue to game
-                PokiSDK.gameLoadingStart();
-             if(!window.AudioContext && !window.webkitAudioContext) g_WebAudioContext = {};
-                GameMaker_Init();
-             if(!window.AudioContext && !window.webkitAudioContext) g_WebAudioContext = null;
-            }   
-        ).catch(
-            () => {
-                console.log("Initialized, but the user likely has adblock");
-                // your code to continue to game
-                PokiSDK.gameLoadingStart();
-             if(!window.AudioContext && !window.webkitAudioContext) g_WebAudioContext = {};
-                GameMaker_Init();
-             if(!window.AudioContext && !window.webkitAudioContext) g_WebAudioContext = null;
-            }   
-        );
-        PokiSDK.setDebug(false);
-      }
+        // تأكد من تشغيل اللعبة عند تحميل الصفحة
+        // الجسر يتولى استدعاء GameMaker_Init بعد تهيئة SDK
+        window.onload = function() {
+          console.log('[Kasrah] Page loaded - Kasrah Bridge will handle game initialization');
+          // الجسر يستمع لـ KasrahSDK ويهيئ اللعبة تلقائياً
+        };
 
-      window.onload = POKI_INIT;
+        /**
+         * حفظ النتيجة العالية في السحابة
+         * يمكن استدعاؤها من أي مكان في اللعبة
+         */
+        window.kasrahSaveHighScore = function(score) {
+          if (window.KasrahSaveGameData) {
+            KasrahSaveGameData({
+              highScore: score,
+              lastPlayed: Date.now(),
+              gameVersion: '1.0'
+            });
+          }
+        };
+
+        /**
+         * عرض إعلان مكافأة عند طلب اللاعب جواهر مجانية
+         * يمكن ربطها بزر "احصل على جواهر مجاناً" في اللعبة
+         */
+        window.kasrahShowRewardedForGems = function(onReward) {
+          if (window.KasrahSDK && typeof KasrahSDK.showRewarded === 'function') {
+            KasrahSDK.showRewarded({
+              onReward: function() {
+                console.log('[Kasrah] Gems reward earned!');
+                if (onReward) onReward();
+              },
+              onError: function(err) {
+                console.warn('[Kasrah] Rewarded ad error:', err);
+              }
+            });
+          }
+        };
 
         </script>
 
-
+    <!-- SDK المحلي كنسخة احتياطية -->
     <script src="/sdk/kasrah-sdk.js"></script>
 </body>
 </html>
