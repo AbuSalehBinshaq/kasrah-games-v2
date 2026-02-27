@@ -11,10 +11,23 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
 
   this.setup();
+  
+  // Bind reward button
+  var self = this;
+  var rewardBtn = document.querySelector(".reward-button");
+  if (rewardBtn) {
+    rewardBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      self.showRewardedRevive();
+    });
+  }
 }
 
 // Restart the game
 GameManager.prototype.restart = function () {
+  this.adShown = false;
+  var rewardBtn = document.querySelector(".reward-button");
+  if (rewardBtn) rewardBtn.style.display = "none";
   this.storageManager.clearGameState();
   this.actuator.continueGame(); // Clear the game won/lost message
   this.setup();
@@ -79,6 +92,10 @@ GameManager.prototype.addRandomTile = function () {
 GameManager.prototype.actuate = function () {
   if (this.storageManager.getBestScore() < this.score) {
     this.storageManager.setBestScore(this.score);
+    // Cloud Save Best Score
+    if (typeof KasrahSDK !== 'undefined') {
+      KasrahSDK.savePlayerData({ bestScore: this.score });
+    }
   }
 
   // Clear the state when the game is over (game over only, not win)
@@ -96,6 +113,57 @@ GameManager.prototype.actuate = function () {
     terminated: this.isGameTerminated()
   });
 
+  // Show Ads on Game Over
+  if (this.over && !this.adShown) {
+    this.adShown = true;
+    var self = this;
+    
+    // Show Reward Button
+    var rewardBtn = document.querySelector(".reward-button");
+    if (rewardBtn) rewardBtn.style.display = "inline-block";
+    
+    if (typeof KasrahSDK !== 'undefined') {
+      KasrahSDK.showInterstitial({
+        onComplete: function() { console.log("Interstitial finished"); }
+      });
+    }
+  }
+};
+
+// Revive player after watching rewarded ad
+GameManager.prototype.showRewardedRevive = function() {
+  var self = this;
+  if (typeof KasrahSDK !== 'undefined') {
+    KasrahSDK.showRewarded({
+      onReward: function() {
+        self.revive();
+      },
+      onError: function(err) {
+        alert("Could not load ad: " + err);
+      }
+    });
+  } else {
+    alert("SDK not loaded");
+  }
+};
+
+GameManager.prototype.revive = function() {
+  this.over = false;
+  this.adShown = false;
+  var rewardBtn = document.querySelector(".reward-button");
+  if (rewardBtn) rewardBtn.style.display = "none";
+  
+  // Remove some tiles to give space
+  var tilesRemoved = 0;
+  var self = this;
+  this.grid.eachCell(function (x, y, tile) {
+    if (tile && tilesRemoved < 4) {
+      self.grid.removeTile(tile);
+      tilesRemoved++;
+    }
+  });
+  
+  this.actuate();
 };
 
 // Represent the current game as an object
