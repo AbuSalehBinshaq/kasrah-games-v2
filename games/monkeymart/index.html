@@ -29,7 +29,6 @@
   </div> 
   <div id="kasrah-banner-bottom"></div>
 
-  <!-- Engine Scripts -->
   <script id="engine-loader" type="text/javascript" src="dmloader.js"></script> 
   <script id="engine-setup" type="text/javascript">
 	var extra_params = {
@@ -43,6 +42,14 @@
 	Module["locateFile"] = function(path, scriptDirectory) {
 		if (path == "dmengine.wasm" || path == "dmengine_release.wasm" || path == "dmengine_headless.wasm") { path = "MonkeyMart.wasm"; }
 		return scriptDirectory + path;
+	};
+
+	var originalRuntimeInit = Module['onRuntimeInitialized'];
+	Module['onRuntimeInitialized'] = function() {
+		if(originalRuntimeInit) originalRuntimeInit();
+		Module.runApp("canvas", extra_params);
+		// Load SDK after game starts
+		setTimeout(loadKasrahSDK, 3000);
 	};
 
 	function resize_game_canvas() {
@@ -67,12 +74,12 @@
 	window.addEventListener('resize', resize_game_canvas, false);
 	resize_game_canvas();
 
-	// Kasrah SDK Integration Logic
+	// Kasrah SDK Integration
 	var kasrahSDK = null;
-	function initKasrah() {
-		var script = document.createElement('script');
-		script.src = "https://kasrah-sdk.onrender.com/sdk/kasrah-sdk.js";
-		script.onload = async function() {
+	function loadKasrahSDK() {
+		var s = document.createElement('script');
+		s.src = "https://kasrah-sdk.onrender.com/sdk/kasrah-sdk.js";
+		s.onload = async function() {
 			try {
 				const success = await KasrahSDK.init({
 					gameId: 'monkeymart',
@@ -93,18 +100,9 @@
 				}
 			} catch(e) { console.error('[Kasrah] Init Error', e); }
 		};
-		document.head.appendChild(script);
+		document.head.appendChild(s);
 	}
 
-	// Hook into Defold Runtime
-	var originalRuntimeInit = Module['onRuntimeInitialized'];
-	Module['onRuntimeInitialized'] = function() {
-		if(originalRuntimeInit) originalRuntimeInit();
-		console.log('[Engine] Runtime Initialized');
-		setTimeout(initKasrah, 2000); // Delay SDK to ensure game is stable
-	};
-
-	// Global Hooks for Game
 	window.KasrahGameHooks = {
 		onLevelComplete: function(d) { if(kasrahSDK) kasrahSDK.saveData(d); },
 		onGameOver: function(d) { if(kasrahSDK) { kasrahSDK.saveData(d); kasrahSDK.showInterstitial(); } },
