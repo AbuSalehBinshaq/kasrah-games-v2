@@ -659,14 +659,14 @@
       button.rel = 'noopener noreferrer';
       button.style.cssText = `
         display: block;
-        background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        background: linear-gradient(135deg, #db0000, #b30000);
         color: white;
         padding: 16px 24px;
         border-radius: 16px;
         text-decoration: none;
         font-weight: 800;
         font-size: 16px;
-        box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+        box-shadow: 0 6px 20px rgba(219, 0, 0, 0.35);
         margin: 0 28px 28px;
         cursor: pointer;
         transition: transform 0.2s, box-shadow 0.2s;
@@ -785,7 +785,7 @@
         width: 100%;
         max-width: ${dim.width};
         height: ${dim.height};
-        background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+        background: linear-gradient(135deg, #db0000 0%, #990000 100%);
         border-radius: 10px;
         display: flex;
         align-items: center;
@@ -793,7 +793,7 @@
         cursor: pointer;
         overflow: hidden;
         position: relative;
-        box-shadow: 0 4px 15px rgba(124, 58, 237, 0.25);
+        box-shadow: 0 4px 15px rgba(219, 0, 0, 0.25);
         transition: transform 0.2s;
       `;
       banner.onmouseover = () => banner.style.transform = 'scale(1.01)';
