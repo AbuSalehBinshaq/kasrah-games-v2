@@ -426,20 +426,25 @@
 	// Kasrah SDK loads AFTER the game starts via PokiSDK
 	// ============================================================
 
-	// Poki banner helpers (kept for compatibility)
+	// Poki banner helpers - Redirected to Kasrah SDK
 	function poki_showBanner(vBanner) {
-		if (typeof PokiSDK !== 'undefined') {
+		if (kasrahReady && kasrahSDK) {
+			kasrahSDK.requestBanner(vBanner, '320x50');
+		} else if (typeof PokiSDK !== 'undefined') {
 			PokiSDK.displayAd(document.getElementById(vBanner), '320x50');
 		}
 	}
 
 	function poki_showBigBanner(vBanner) {
-		if (typeof PokiSDK !== 'undefined') {
+		if (kasrahReady && kasrahSDK) {
+			kasrahSDK.requestBanner(vBanner, '728x90');
+		} else if (typeof PokiSDK !== 'undefined') {
 			PokiSDK.displayAd(document.getElementById(vBanner), '728x90');
 		}
 	}
 
 	function poki_hideBanner(vBanner) {
+		// Kasrah banners are handled via container visibility or SDK methods if available
 		if (typeof PokiSDK !== 'undefined') {
 			PokiSDK.destroyAd(document.getElementById(vBanner));
 		}
@@ -448,6 +453,36 @@
 	// PokiSDK game loading tracking + Kasrah integration
 	if (typeof PokiSDK !== 'undefined') {
 		PokiSDK.gameLoadingStart();
+		
+		// Redirect PokiSDK commercialBreak to Kasrah SDK
+		var originalCommercialBreak = PokiSDK.commercialBreak;
+		PokiSDK.commercialBreak = function() {
+			console.log('[Kasrah] Intercepted Poki commercialBreak');
+			if (kasrahReady && kasrahSDK) {
+				return new Promise(function(resolve) {
+					kasrahSDK.showInterstitial({
+						onComplete: function() { resolve(); },
+						onError: function() { resolve(); }
+					});
+				});
+			}
+			return originalCommercialBreak ? originalCommercialBreak.apply(PokiSDK, arguments) : Promise.resolve();
+		};
+
+		// Redirect PokiSDK rewardedBreak to Kasrah SDK
+		var originalRewardedBreak = PokiSDK.rewardedBreak;
+		PokiSDK.rewardedBreak = function() {
+			console.log('[Kasrah] Intercepted Poki rewardedBreak');
+			if (kasrahReady && kasrahSDK) {
+				return new Promise(function(resolve) {
+					kasrahSDK.showRewarded({
+						onReward: function() { resolve(true); },
+						onError: function() { resolve(false); }
+					});
+				});
+			}
+			return originalRewardedBreak ? originalRewardedBreak.apply(PokiSDK, arguments) : Promise.resolve(false);
+		};
 	}
 
 	var data = {};
