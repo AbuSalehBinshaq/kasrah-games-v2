@@ -13,8 +13,8 @@ function(){if(this.o)return!1;var c=u.CustomEvent,d=u.Event,g=u.dispatchEvent;if
 function(c){var d=this.j();c.s(d.resolve,d.reject)};b.prototype.D=function(c,d){var g=this.j();try{c.call(d,g.resolve,g.reject)}catch(l){g.reject(l)}};b.prototype.then=function(c,d){function g(n,q){return typeof n=="function"?function(B){try{l(n(B))}catch(C){m(C)}}:q}var l,m,D=new b(function(n,q){l=n;m=q});this.s(g(c,l),g(d,m));return D};b.prototype.catch=function(c){return this.then(void 0,c)};b.prototype.s=function(c,d){function g(){switch(l.h){case 1:c(l.i);break;case 2:d(l.i);break;default:throw Error("Unexpected state: "+
 l.h);}}var l=this;this.g==null?h.h(g):this.g.push(g);this.o=!0};b.resolve=f;b.reject=function(c){return new b(function(d,g){g(c)})};b.race=function(c){return new b(function(d,g){for(var l=x(c),m=l.next();!m.done;m=l.next())f(m.value).s(d,g)})};b.all=function(c){var d=x(c),g=d.next();return g.done?f([]):new b(function(l,m){function D(B){return function(C){n[B]=C;q--;q==0&&l(n)}}var n=[],q=0;do n.push(void 0),q++,f(g.value).s(D(n.length-1),m),g=d.next();while(!g.done)})};return b});
 function L(a,b){a instanceof String&&(a+="");var e=0,f=!1,k={next:function(){if(!f&&e<a.length){var h=e++;return{value:b(h,a[h]),done:!1}}f=!0;return{done:!0,value:void 0}}};k[Symbol.iterator]=function(){return k};return k}v("Array.prototype.keys",function(a){return a?a:function(){return L(this,function(b){return b})}});(function(){var a,b,e,f,k;return K(new J(new F(function(h){switch(h.g){case 1:if(!("serviceWorker"in navigator)){h.g=0;break}return E(h,navigator.serviceWorker.getRegistration("../.."),3);case 3:return(a=h.l)?E(h,a.unregister(),4):h.return();case 4:return window.caches==null?h.return():E(h,window.caches.keys(),5);case 5:b=h.l,e=x(b),f=e.next();case 6:if(f.done){h.g=0;break}k=f.value;return E(h,window.caches.delete(k),7);case 7:f=e.next(),h.g=6}})))})();}).call(this);
-</script><script src="https://sdks.gamesnacks.com/developer/v2/index.js" nonce="RcaU6lnWqKDAFkNpzmr6bA"></script><meta name="robots" content="noindex, nofollow"><meta charset="utf-8">
-    <title>Atomic 2048 Unblocked - ubg235 GameSnacks</title>
+</script><meta name="robots" content="noindex, nofollow"><meta charset="utf-8">
+    <title>2048 Fusion - Kasrah Games</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1">
 
     <style>
@@ -64,18 +64,30 @@ function L(a,b){a instanceof String&&(a+="");var e=0,f=!1,k={next:function(){if(
             font-family: 'PassionOne';
             src: url('assets/fonts/PassionOne-Regular.ttf');
         }
-        
-        
 
+        /* Kasrah Banner Ad Container */
+        #kasrah-banner-2048fusion {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            width: 320px;
+            height: 50px;
+            pointer-events: auto;
+        }
 
     </style>
 
-    <!-- <script src="https://embed.gamesnacks.com/assets/js/gamesnacks.js"></script> --><body style="overflow:hidden;"><!--font buffer-->
+    <body style="overflow:hidden;"><!--font buffer-->
     <div class="fonts" style="opacity: 0; position: absolute">
         <span style="font-family: 'Asap', Arial, sans-serif;">x</span>
         <span style="font-family: 'PassionOne', Arial, sans-serif;">x</span>
     </div>
     <!--/font buffer-->
+
+    <!-- حاوية إعلانات البانر -->
+    <div id="kasrah-banner-2048fusion"></div>
 
     <div id="gm4html5_div_id">
 
@@ -83,7 +95,66 @@ function L(a,b){a instanceof String&&(a+="");var e=0,f=!1,k={next:function(){if(
         </menu>
 
     </div>
+
+    <!-- Kasrah SDK - يُحمَّل أولاً -->
+    <script src="https://kasrah-sdk.onrender.com/sdk/kasrah-sdk.js"></script>
+
+    <!-- Kasrah-GameSnacks Bridge: يستبدل GameSnacks SDK بـ Kasrah SDK -->
+    <script src="js/kasrah-gamesnacks-bridge.js"></script>
+
+    <!-- ملفات اللعبة -->
     <script src="js/howler.core.min.js"></script>
     <script src="js/pixi.min.js"></script>
     <script src="js/game.js"></script>
-<script src="/sdk/kasrah-sdk.js"></script>
+
+    <!-- Kasrah SDK Inspector (أداة التطوير - Ctrl+Shift+I) -->
+    <script src="https://kasrah-sdk.onrender.com/sdk/kasrah-sdk-inspector.js"></script>
+
+    <script>
+    /**
+     * Kasrah SDK Integration for 2048 Fusion
+     * =========================================
+     * تهيئة اللعبة مع Kasrah SDK بدلاً من GameSnacks SDK
+     *
+     * المميزات المفعّلة:
+     * - الإعلانات البينية (Interstitial Ads)
+     * - إعلانات المكافأة (Rewarded Ads)
+     * - إعلانات البانر (Banner Ads) - 320x50
+     * - الحفظ السحابي (Cloud Save)
+     * - تتبع الأحداث (Analytics)
+     * - أداة Inspector للمطورين (Ctrl+Shift+I)
+     */
+
+    // تأكد من تشغيل اللعبة عند تحميل الصفحة
+    // الجسر kasrah-gamesnacks-bridge.js يتولى تهيئة SDK وربطه باللعبة
+    window.onload = function() {
+        console.log('[Kasrah] 2048 Fusion loaded - Kasrah Bridge handles SDK initialization');
+    };
+
+    /**
+     * عرض إعلان مكافأة عند طلب اللاعب power-up
+     * يمكن استدعاؤها من أي مكان في اللعبة
+     */
+    window.kasrahShowRewardedForPowerup = window.kasrahShowRewardedForPowerup || function(onReward) {
+        if (window.KasrahSDK && typeof KasrahSDK.showRewarded === 'function') {
+            KasrahSDK.showRewarded({
+                onReward: function() {
+                    console.log('[Kasrah] Power-up reward earned!');
+                    if (onReward) onReward();
+                },
+                onError: function(err) {
+                    console.warn('[Kasrah] Rewarded ad error:', err);
+                    // في حالة الخطأ، نمنح المكافأة على أي حال
+                    if (onReward) onReward();
+                }
+            });
+        } else if (onReward) {
+            onReward();
+        }
+    };
+    </script>
+
+    <!-- SDK المحلي كنسخة احتياطية -->
+    <script src="/sdk/kasrah-sdk.js"></script>
+</body>
+</html>
