@@ -317,407 +317,114 @@
 
   <!-- ============================================================ -->
   <!-- Kasrah SDK Pro v1.1.0 - Full Integration for Monkey Mart     -->
-  <!-- Features: Interstitial Ads, Rewarded Ads, Banner Ads,        -->
-  <!--           Cloud Save, Analytics, Event Tracking              -->
   <!-- ============================================================ -->
   <script type="text/javascript">
-    // ============================================================
-    // Kasrah SDK Integration - Monkey Mart
-    // ============================================================
-
-    // SDK Instance (initialized from CDN script above)
     var kasrahSDK = null;
-    var gameIsRunning = false;
     var levelCount = 0;
     var sessionStartTime = Date.now();
 
-    // ============================================================
-    // Initialize Kasrah SDK
-    // ============================================================
     async function initKasrahSDK() {
       try {
-        // Initialize SDK with full feature set
         const success = await KasrahSDK.init({
           gameId: 'monkeymart',
           callbacks: {
-            // Called when an ad starts playing
             onAdStart: function() {
-              console.log('[Kasrah] Ad started - pausing game audio');
-              // Pause game if possible
               if (typeof Module !== 'undefined' && Module.pauseMainLoop) {
                 try { Module.pauseMainLoop(); } catch(e) {}
               }
             },
-            // Called when an ad finishes
             onAdComplete: function() {
-              console.log('[Kasrah] Ad completed - resuming game');
-              // Resume game
               if (typeof Module !== 'undefined' && Module.resumeMainLoop) {
                 try { Module.resumeMainLoop(); } catch(e) {}
               }
-            },
-            // Called on ad error
-            onAdError: function(data) {
-              console.warn('[Kasrah] Ad error:', data);
-            },
-            // Called when gameplay starts
-            onGameplayStart: function() {
-              console.log('[Kasrah] Gameplay started');
-              gameIsRunning = true;
-            },
-            // Called when gameplay stops
-            onGameplayStop: function() {
-              console.log('[Kasrah] Gameplay stopped');
-              gameIsRunning = false;
-            },
-            // Called when game loading is finished
-            onGameLoadingFinished: function() {
-              console.log('[Kasrah] Game loading finished');
-            },
-            // Called on happy time (achievement moments)
-            onHappyTime: function(data) {
-              console.log('[Kasrah] Happy time!', data);
             }
           }
         });
 
         if (success) {
           kasrahSDK = KasrahSDK;
-          console.log('%c[Kasrah SDK] ✅ Monkey Mart Integration Active!', 
-            'background: #7c3aed; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
-
-          // Load saved game data from cloud
+          console.log('[Kasrah SDK] ✅ Initialized');
           await loadCloudSaveData();
-
-          // Show banner ads
           await showBannerAds();
-
-          // Fire gameplay start event
-          await kasrahSDK.fireEvent('gameplayStart', {
-            game: 'monkeymart',
-            timestamp: Date.now()
-          });
-
-          // Expose testing functions globally
-          setupTestingFunctions();
-
-        } else {
-          console.warn('[Kasrah SDK] Initialization failed, running in offline mode');
+          kasrahSDK.fireEvent('gameplayStart', { game: 'monkeymart' });
         }
       } catch (error) {
-        console.error('[Kasrah SDK] Critical error during init:', error);
+        console.error('[Kasrah SDK] Init error:', error);
       }
     }
 
-    // ============================================================
-    // Cloud Save - Load Data
-    // ============================================================
     async function loadCloudSaveData() {
       if (!kasrahSDK) return;
       try {
         const savedData = await kasrahSDK.loadData();
         if (savedData) {
-          console.log('[Kasrah] Cloud save data loaded:', savedData);
-          // Restore game progress if available
-          if (savedData.coins !== undefined) {
-            localStorage.setItem('monkeymart_coins', savedData.coins);
-          }
-          if (savedData.level !== undefined) {
-            localStorage.setItem('monkeymart_level', savedData.level);
-          }
-          if (savedData.highScore !== undefined) {
-            localStorage.setItem('monkeymart_highscore', savedData.highScore);
-          }
+          if (savedData.coins !== undefined) localStorage.setItem('monkeymart_coins', savedData.coins);
+          if (savedData.level !== undefined) localStorage.setItem('monkeymart_level', savedData.level);
         }
-      } catch (error) {
-        console.warn('[Kasrah] Cloud load failed:', error);
-      }
+      } catch (e) {}
     }
 
-    // ============================================================
-    // Cloud Save - Save Data
-    // ============================================================
     async function saveCloudData(gameData) {
       if (!kasrahSDK) return;
       try {
-        const dataToSave = {
-          coins: gameData.coins || parseInt(localStorage.getItem('monkeymart_coins')) || 0,
-          level: gameData.level || parseInt(localStorage.getItem('monkeymart_level')) || 1,
-          highScore: gameData.highScore || parseInt(localStorage.getItem('monkeymart_highscore')) || 0,
-          lastPlayed: new Date().toISOString(),
-          sessionTime: Math.floor((Date.now() - sessionStartTime) / 1000)
-        };
-        
-        const success = await kasrahSDK.saveData(dataToSave);
-        if (success) {
-          console.log('[Kasrah] Data saved to cloud:', dataToSave);
-        }
-      } catch (error) {
-        console.warn('[Kasrah] Cloud save failed:', error);
-      }
+        await kasrahSDK.saveData({
+          coins: gameData.coins || 0,
+          level: gameData.level || 1,
+          lastPlayed: new Date().toISOString()
+        });
+      } catch (e) {}
     }
 
-    // ============================================================
-    // Banner Ads - Show Top and Bottom Banners
-    // ============================================================
     async function showBannerAds() {
       if (!kasrahSDK) return;
       try {
-        // Show top banner (728x90 leaderboard)
-        const topBannerEl = document.getElementById('kasrah-banner-top');
-        if (topBannerEl) {
-          topBannerEl.style.display = 'block';
-          const topResult = await kasrahSDK.requestBanner('kasrah-banner-top', '728x90');
-          if (!topResult) {
-            topBannerEl.style.display = 'none';
-          }
+        const top = document.getElementById('kasrah-banner-top');
+        if (top) {
+          top.style.display = 'block';
+          await kasrahSDK.requestBanner('kasrah-banner-top', '728x90');
         }
-
-        // Show bottom banner (320x50 mobile banner)
-        const bottomBannerEl = document.getElementById('kasrah-banner-bottom');
-        if (bottomBannerEl) {
-          bottomBannerEl.style.display = 'block';
-          const bottomResult = await kasrahSDK.requestBanner('kasrah-banner-bottom', '320x50');
-          if (!bottomResult) {
-            bottomBannerEl.style.display = 'none';
-          }
+        const bottom = document.getElementById('kasrah-banner-bottom');
+        if (bottom) {
+          bottom.style.display = 'block';
+          await kasrahSDK.requestBanner('kasrah-banner-bottom', '320x50');
         }
-      } catch (error) {
-        console.warn('[Kasrah] Banner ads failed:', error);
-      }
+      } catch (e) {}
     }
 
-    // ============================================================
-    // Interstitial Ad - Show Between Levels
-    // ============================================================
     async function showInterstitialAd(onComplete) {
-      if (!kasrahSDK) {
-        if (onComplete) onComplete();
-        return;
-      }
+      if (!kasrahSDK) { if (onComplete) onComplete(); return; }
       try {
         await kasrahSDK.showInterstitial({
-          onComplete: function() {
-            console.log('[Kasrah] Interstitial ad completed');
-            if (onComplete) onComplete();
-          },
-          onError: function(error) {
-            console.warn('[Kasrah] Interstitial error:', error);
-            if (onComplete) onComplete();
-          }
+          onComplete: onComplete,
+          onError: onComplete
         });
-      } catch (error) {
-        console.warn('[Kasrah] Interstitial failed:', error);
-        if (onComplete) onComplete();
-      }
+      } catch (e) { if (onComplete) onComplete(); }
     }
 
-    // ============================================================
-    // Rewarded Ad - Show for Extra Rewards
-    // ============================================================
     async function showRewardedAd(onReward, onError) {
-      if (!kasrahSDK) {
-        if (onError) onError('SDK not available');
-        return;
-      }
+      if (!kasrahSDK) { if (onError) onError(); return; }
       try {
         await kasrahSDK.showRewarded({
-          onReward: function() {
-            console.log('[Kasrah] Rewarded ad - player earned reward!');
-            // Track reward event
-            kasrahSDK.fireEvent('happyTime', { 
-              reason: 'rewarded_ad_complete',
-              game: 'monkeymart'
-            });
-            if (onReward) onReward();
-          },
-          onError: function(error) {
-            console.warn('[Kasrah] Rewarded ad error:', error);
-            if (onError) onError(error);
-          }
+          onReward: onReward,
+          onError: onError
         });
-      } catch (error) {
-        console.warn('[Kasrah] Rewarded ad failed:', error);
-        if (onError) onError(error.message);
-      }
+      } catch (e) { if (onError) onError(); }
     }
 
-    // ============================================================
-    // Level Complete Handler - Show Interstitial + Save Progress
-    // ============================================================
-    async function onLevelComplete(levelData) {
-      levelCount++;
-      console.log('[Kasrah] Level complete! Level:', levelCount);
-
-      // Track level completion
-      if (kasrahSDK) {
-        await kasrahSDK.fireEvent('gameplayStop', {
-          level: levelCount,
-          score: levelData ? levelData.score : 0
-        });
-      }
-
-      // Save progress to cloud
-      await saveCloudData({
-        level: levelCount,
-        coins: levelData ? levelData.coins : 0,
-        highScore: levelData ? levelData.score : 0
-      });
-
-      // Show interstitial ad every 3 levels
-      if (levelCount % 3 === 0) {
-        await showInterstitialAd(function() {
-          // Resume gameplay after ad
-          if (kasrahSDK) {
-            kasrahSDK.fireEvent('gameplayStart', { level: levelCount + 1 });
-          }
-        });
-      }
-    }
-
-    // ============================================================
-    // Game Over Handler
-    // ============================================================
-    async function onGameOver(gameData) {
-      console.log('[Kasrah] Game over!', gameData);
-
-      // Fire gameplay stop event
-      if (kasrahSDK) {
-        await kasrahSDK.fireEvent('gameplayStop', {
-          reason: 'game_over',
-          score: gameData ? gameData.score : 0
-        });
-      }
-
-      // Save final score
-      await saveCloudData({
-        highScore: gameData ? gameData.score : 0
-      });
-
-      // Show interstitial ad on game over
-      await showInterstitialAd(null);
-    }
-
-    // ============================================================
-    // Auto-save on page unload
-    // ============================================================
-    window.addEventListener('beforeunload', function() {
-      if (kasrahSDK) {
-        kasrahSDK.fireEvent('gameplayStop', {
-          reason: 'page_unload',
-          sessionTime: Math.floor((Date.now() - sessionStartTime) / 1000)
-        });
-      }
-    });
-
-    // ============================================================
-    // Setup Testing Functions (accessible from browser console)
-    // ============================================================
-    function setupTestingFunctions() {
-      // Test interstitial ad
-      window.testKasrahInterstitial = function() {
-        console.log('[Kasrah Test] Showing interstitial ad...');
-        showInterstitialAd(function() {
-          console.log('[Kasrah Test] Interstitial complete!');
-        });
-      };
-
-      // Test rewarded ad
-      window.testKasrahRewarded = function() {
-        console.log('[Kasrah Test] Showing rewarded ad...');
-        showRewardedAd(
-          function() { console.log('[Kasrah Test] Reward earned!'); },
-          function(err) { console.log('[Kasrah Test] Reward error:', err); }
-        );
-      };
-
-      // Test banner ads
-      window.testKasrahBanners = function() {
-        console.log('[Kasrah Test] Refreshing banner ads...');
-        showBannerAds();
-      };
-
-      // Test cloud save
-      window.testKasrahSave = function(data) {
-        console.log('[Kasrah Test] Saving data to cloud...');
-        saveCloudData(data || { coins: 999, level: 5, highScore: 10000 });
-      };
-
-      // Test cloud load
-      window.testKasrahLoad = async function() {
-        console.log('[Kasrah Test] Loading data from cloud...');
-        const data = await kasrahSDK.loadData();
-        console.log('[Kasrah Test] Loaded data:', data);
-        return data;
-      };
-
-      // Test level complete
-      window.testKasrahLevelComplete = function() {
-        console.log('[Kasrah Test] Simulating level complete...');
-        onLevelComplete({ score: 5000, coins: 100 });
-      };
-
-      // Test game over
-      window.testKasrahGameOver = function() {
-        console.log('[Kasrah Test] Simulating game over...');
-        onGameOver({ score: 3000 });
-      };
-
-      // Test happy time
-      window.testKasrahHappyTime = function() {
-        console.log('[Kasrah Test] Firing happy time event...');
-        kasrahSDK.fireEvent('happyTime', { intensity: 1.0 });
-      };
-
-      // Get SDK info
-      window.kasrahInfo = function() {
-        console.log('[Kasrah Info]', {
-          version: kasrahSDK.getVersion(),
-          gameId: kasrahSDK.getGameId(),
-          playerId: kasrahSDK.getPlayerId(),
-          isInitialized: kasrahSDK.isInitialized,
-          config: kasrahSDK.config
-        });
-      };
-
-      console.log('%c[Kasrah SDK] 🎮 Testing functions available:', 
-        'color: #7c3aed; font-weight: bold;');
-      console.log('%c  testKasrahInterstitial() - Show interstitial ad', 'color: #666;');
-      console.log('%c  testKasrahRewarded()     - Show rewarded ad', 'color: #666;');
-      console.log('%c  testKasrahBanners()      - Refresh banner ads', 'color: #666;');
-      console.log('%c  testKasrahSave(data)     - Save to cloud', 'color: #666;');
-      console.log('%c  testKasrahLoad()         - Load from cloud', 'color: #666;');
-      console.log('%c  testKasrahLevelComplete()- Simulate level complete', 'color: #666;');
-      console.log('%c  testKasrahGameOver()     - Simulate game over', 'color: #666;');
-      console.log('%c  testKasrahHappyTime()    - Fire happy time event', 'color: #666;');
-      console.log('%c  kasrahInfo()             - Show SDK info', 'color: #666;');
-    }
-
-    // ============================================================
-    // Module Runtime Initialized - Start Game + SDK
-    // ============================================================
+    // Defold Runtime Hook
+    var old_onRuntimeInitialized = Module['onRuntimeInitialized'];
     Module['onRuntimeInitialized'] = function() {
-      // Run the game
-      Module.runApp("canvas", extra_params);
-
-      // Initialize Kasrah SDK after game starts
-      setTimeout(function() {
-        initKasrahSDK();
-      }, 500);
+      if (old_onRuntimeInitialized) old_onRuntimeInitialized();
+      setTimeout(initKasrahSDK, 1000);
     };
 
-    // ============================================================
-    // Expose game hooks globally for Monkey Mart integration
-    // ============================================================
+    // Global Hooks for Game
     window.KasrahGameHooks = {
-      onLevelComplete: onLevelComplete,
-      onGameOver: onGameOver,
+      onLevelComplete: function(d) { levelCount++; saveCloudData(d); if(levelCount%3===0) showInterstitialAd(); },
+      onGameOver: function(d) { saveCloudData(d); showInterstitialAd(); },
       showInterstitialAd: showInterstitialAd,
-      showRewardedAd: showRewardedAd,
-      saveCloudData: saveCloudData,
-      loadCloudSaveData: loadCloudSaveData
+      showRewardedAd: showRewardedAd
     };
-
   </script>
   <script type="text/javascript" src="GameAnalytics.js"></script>
   <script src="js/analytics_ubg_v1_4.js"></script>
